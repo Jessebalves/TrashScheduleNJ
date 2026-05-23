@@ -26,8 +26,8 @@ MySQL video: https://www.youtube.com/watch?v=5OdVJbNCSso&list=PLZPZq0r_RZOPP5Yjt
 
 PHP video: https://www.youtube.com/watch?v=zZ6vybT1HQs&list=PLZPZq0r_RZOPP5Yjt6IqgytMRY5uLt4y3&index=6 
   
-Flask tutorial (Python backend) : https://www.geeksforgeeks.org/flask-tutorial/  
--->
+Flask tutorial (Python backend) : https://www.geeksforgeeks.org/flask-tutorial/-->
+
 # TrashScheduleNJ
 
 <details>
@@ -49,7 +49,7 @@ Flask tutorial (Python backend) : https://www.geeksforgeeks.org/flask-tutorial/
 </details>
 
 ## Summary
-*Never forget your trash schedule again with https://trashschedulenj.com!*
+*Missed garbage day? Never forget your trash schedule again with https://trashschedulenj.com!*
 
 ## Features
 <!--List the standout features of your project and what makes it unique.-->
@@ -62,10 +62,14 @@ Flask tutorial (Python backend) : https://www.geeksforgeeks.org/flask-tutorial/
 *Insert images or gifs showing your project in action. Consider before/after shots, workflows, or demos.*
 
 ## Technologies
-Detail the technologies, languages, frameworks, and tools used in the project.
-- GoDot
-- GDscript
-- Pixilart
+<!--Detail the technologies, languages, frameworks, and tools used in the project.-->
+- HTML
+- CSS
+- JavaScript
+- Python
+- Flask
+- SQL
+- MySQLWorkbench
 
 ## What I Learned
 Highlight specific skills or concepts you learned or improved upon while working on this project. This section should directly address potential employer interests.
