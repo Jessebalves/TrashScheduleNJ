@@ -53,10 +53,8 @@ Flask tutorial (Python backend) : https://www.geeksforgeeks.org/flask-tutorial/-
 
 ## Features
 <!--List the standout features of your project and what makes it unique.-->
-- **Main Menu**: Scene that allows users to navigate to the save file screen, settings screen, and quitting the game.
-- **Settings Screen**: Allows for users to adjust the in game brightness, music volume, and resolution.
-- **Save File Management**: Brief description.
-- ... and so on.
+- **Garbage Check**: Enter address followed by zipcode to check trashschedule.
+- **Holiday Check**: System accounts for holidays and garbage pickup date changes due to holidays.
 
 ## Visuals
 *Insert images or gifs showing your project in action. Consider before/after shots, workflows, or demos.*
@@ -73,9 +71,10 @@ Flask tutorial (Python backend) : https://www.geeksforgeeks.org/flask-tutorial/-
 
 ## What I Learned
 Highlight specific skills or concepts you learned or improved upon while working on this project. This section should directly address potential employer interests.
-- **Skill or Concept 1**: How you applied it in the project.
+- **Flask**: Connected our frontend to our backend using a web framework and Python.
 - **Skill or Concept 2**: Challenges you overcame.
-- **Skill or Concept 3**: Any particular achievements or insights.
+- **Server Deployment and Configuration**: Setting up a Linux cloud server using Digital Ocean to serve web contents to clients.
+- **Assigning a Domain Name**: Using CloudFlare to claim and assign a domain name to a specified Internet Protocol Address.
 
 ## Setup and Installation
 *Provide a clear, step-by-step guide to set up the project locally.*
