@@ -77,10 +77,9 @@ Highlight specific skills or concepts you learned or improved upon while working
 - **Assigning a Domain Name**: Using CloudFlare to claim and assign a domain name to a specified Internet Protocol Address.
 
 ## Setup and Installation
-*Provide a clear, step-by-step guide to set up the project locally.*
-1. Clone the repo: `git clone [URL]`
-2. Install dependencies: `[Example Command]`
-3. Additional steps...
+<!--*Provide a clear, step-by-step guide to set up the project locally.*-->
+1. Clone the repo: `git clone https://github.com/Jessebalves/TrashScheduleNJ.git`
+2. Install Visual Studio Code and the extension Live Server.
 
 ## Usage
 *Guide on how to use the project, include example commands or scripts.*
