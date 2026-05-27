@@ -72,7 +72,7 @@ Flask tutorial (Python backend) : https://www.geeksforgeeks.org/flask-tutorial/-
 ## What I Learned
 Highlight specific skills or concepts you learned or improved upon while working on this project. This section should directly address potential employer interests.
 - **Flask**: Connected our frontend to our backend using a web framework and Python.
-- **Skill or Concept 2**: Challenges you overcame.
+- **Database Connectivity**: Setting up and connecting a database that allows for data retrieval from the frontend.
 - **Server Deployment and Configuration**: Setting up a Linux cloud server using Digital Ocean to serve web contents to clients.
 - **Assigning a Domain Name**: Using CloudFlare to claim and assign a domain name to a specified Internet Protocol Address.
 
