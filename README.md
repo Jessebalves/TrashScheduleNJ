@@ -57,7 +57,9 @@ Flask tutorial (Python backend) : https://www.geeksforgeeks.org/flask-tutorial/-
 - **Holiday Check**: System accounts for holidays and garbage pickup date changes due to holidays.
 
 ## Visuals
-*Insert images or gifs showing your project in action. Consider before/after shots, workflows, or demos.*
+<!--*Insert images or gifs showing your project in action. Consider before/after shots, workflows, or demos.*-->
+<img width="1096" height="612" alt="traaaash" src="https://github.com/user-attachments/assets/2d44d0b0-54e4-42f0-a29c-56a12c24d355" />
+
 
 ## Technologies
 <!--Detail the technologies, languages, frameworks, and tools used in the project.-->
