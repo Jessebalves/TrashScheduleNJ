@@ -69,7 +69,9 @@ Flask tutorial (Python backend) : https://www.geeksforgeeks.org/flask-tutorial/-
 - Python
 - Flask
 - SQL
-- MySQLWorkbench
+- MySQL Workbench
+- DigitalOcean
+- CloudFlare
 
 ## What I Learned
 Highlight specific skills or concepts you learned or improved upon while working on this project. This section should directly address potential employer interests.
