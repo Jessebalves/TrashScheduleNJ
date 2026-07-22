@@ -42,7 +42,6 @@ Flask tutorial (Python backend) : https://www.geeksforgeeks.org/flask-tutorial/-
 - [Usage](#usage)
 - [Code Examples](#code-examples)
 - [How to Contribute](#how-to-contribute)
-- [License](#license)
 - [Contact](#contact)
 - [Acknowledgments](#acknowledgments)
 
@@ -94,8 +93,6 @@ Highlight specific skills or concepts you learned or improved upon while working
 ## How to Contribute
 *Encourage contributions and provide guidelines for how others can help.*
 
-## License
-*State the license under which your project is available.*
 
 ## Contact
 <!--- *First and last name* - *Email address*-->
