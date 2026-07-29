@@ -82,7 +82,8 @@ Highlight specific skills or concepts you learned or improved upon while working
 ## Setup and Installation
 <!--*Provide a clear, step-by-step guide to set up the project locally.*-->
 1. Clone the repo: `git clone https://github.com/Jessebalves/TrashScheduleNJ.git`
-2. Install Visual Studio Code and the extension Live Server.
+2. Install Visual Studio Code.
+3. Once installed, navigate to extensions. Download the extension named Live Server to view live changes made to the code base.
 
 ## Usage
 *Guide on how to use the project, include example commands or scripts.*
