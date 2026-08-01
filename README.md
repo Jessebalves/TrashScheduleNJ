@@ -86,7 +86,7 @@ Highlight specific skills or concepts you learned or improved upon while working
 3. Once installed, navigate to extensions. Download the extension named Live Server to view live changes made to the code base.
 
 ## Usage
-*Guide on how to use the project, include example commands or scripts.*
+*This project has limited usage due to restricted API keys and security behind our own database. Users can connect their own database through the python file running flask.*
 
 ## Code Examples
 *Show small, but significant snippets of code from your project.*
