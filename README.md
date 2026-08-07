@@ -89,7 +89,9 @@ Highlight specific skills or concepts you learned or improved upon while working
 *This project has limited usage due to restricted API keys and security behind our own database. Users can connect their own database through the python file running flask.*
 
 ## Code Examples
-*Show small, but significant snippets of code from your project.*
+<!-- *Show small, but significant snippets of code from your project.* -->
+<img width="598" height="812" alt="Screenshot 2026-08-07 131721" src="https://github.com/user-attachments/assets/360b9c12-0eaf-4b01-9e45-fbe4ffc56df0" />
+
 
 ## How to Contribute
 *Encourage contributions and provide guidelines for how others can help.*
