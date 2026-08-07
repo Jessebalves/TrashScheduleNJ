@@ -84,6 +84,7 @@ Highlight specific skills or concepts you learned or improved upon while working
 1. Clone the repo: `git clone https://github.com/Jessebalves/TrashScheduleNJ.git`
 2. Install Visual Studio Code.
 3. Once installed, navigate to extensions. Download the extension named Live Server to view live changes made to the code base.
+4. Right click on the file you want to open with Live Server, then select the Live Server option to view live changes. 
 
 ## Usage
 *This project has limited usage due to restricted API keys and security behind our own database. Users can connect their own database through the python file running flask.*
