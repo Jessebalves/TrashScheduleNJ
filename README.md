@@ -94,7 +94,7 @@ Flask tutorial (Python backend) : https://www.geeksforgeeks.org/flask-tutorial/-
 2. Run the installer: `cd TrashScheduleNJ && sudo ./install.sh`
 3. If MySQL root already has a password, pass it in: `sudo MYSQL_ROOT_PASSWORD='...' ./install.sh`
 
-The installer can be run again after every `git pull` to update the server. It keeps the existing address data unless `REIMPORT=1` is set.
+To update the server later, run `./update.sh` from the checkout. It pulls the latest commits for the current branch and runs the installer again. It keeps the existing address data unless `REIMPORT=1` is set.
 
 Not automated: DNS records and the TLS certificate. Place the certificate and key at `/etc/ssl/cert.pem` and `/etc/ssl/key.pem`, then run `install.sh` again to switch nginx to HTTPS. Until then the site is served over HTTP.
 
