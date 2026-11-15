@@ -453,6 +453,20 @@ if (currentWeekInYear == 1) {
 console.log("Checking if this Week has a holiday: "+isHoliday);
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
 
+//Paper and metal/plastic are picked up on alternating weeks. The weeks are
+//counted from one fixed Sunday instead of from January 1st, so the pattern
+//does not skip or repeat a week when a new year starts.
+//The week of Sunday December 31st 2023 was a metal/plastic week (2024 calendar).
+const firstMetalWeek = new Date(2023, 11, 31);
+const sundayOfThisWeek = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
+const weeksSinceFirstMetalWeek = Math.round((sundayOfThisWeek - firstMetalWeek) / (7 * 24 * 60 * 60 * 1000));
+const isPaperWeek = weeksSinceFirstMetalWeek % 2 != 0;
+
+//Shows a message under the form, pass "" to clear it
+function showMessage(text){
+    document.getElementById("com2").textContent = text;
+}
+
 //Variables associated elements within the rows in the Trash Table
 let garbageTable = document.getElementsByClassName("Garbage");
 let paperTable = document.getElementsByClassName("Paper")
@@ -476,11 +490,18 @@ document.getElementById('test_server').addEventListener('submit', async (a) => {
         },
         body: JSON.stringify({ key: street_address })
     })
-    .then(response => response.json())
-    .then(data => {
+    .then(response => response.json().then(data => ({ok: response.ok, data: data})))
+    .then(answer => {
+        const data = answer.data;
+        showMessage("");
 
-        if(data == "error"){
-            console.log("Error occured")
+        //The server did not accept the address as typed and says why
+        if(!answer.ok){
+            showMessage(data.error || "Something went wrong, please try again later.");
+        }
+
+        else if(data == "error"){
+            showMessage("We could not find that address. Check the house number, street name and ZIP code. Only addresses in Elizabeth, NJ are covered.");
         }
 
         else{
@@ -489,7 +510,7 @@ document.getElementById('test_server').addEventListener('submit', async (a) => {
         console.log("Ward number recieved from back end: ", testo);
 
         //Paper and Metal Check
-        if (currentWeekInYear%2==0){ // if-statement checks for an even or odd week. 2024 calendar says odd weeks are metal/plastic
+        if (isPaperWeek){ // paper and metal/plastic alternate every week, see isPaperWeek above
             if(paperTable[3].innerHTML != "H"){
                 paperTable[3].innerHTML = "X";
             }
@@ -562,8 +583,9 @@ document.getElementById('test_server').addEventListener('submit', async (a) => {
         }
     })
     .catch(error => {
-       // console.error('Error:', error);
-	console.log("error");
+        //The server could not be reached or did not send back a usable answer
+        console.log("error", error);
+        showMessage("Something went wrong, please try again later.");
     });
 
 })
@@ -582,6 +604,7 @@ document.getElementById("test_server").addEventListener('reset', async(b) =>{
             metalTable[i].innerHTML = "-";
         }
         }
+    showMessage("");
     let consto = document.getElementById("address").value = "";
     console.log(consto); 
 })
