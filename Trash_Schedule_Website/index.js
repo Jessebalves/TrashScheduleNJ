@@ -467,6 +467,25 @@ function showMessage(text){
     document.getElementById("com2").textContent = text;
 }
 
+//Tells the visitor their address could not be used: clears any marks left on
+//the table by an earlier lookup, shows the reason under the form and opens a
+//browser pop-up window
+function showAddressError(reason){
+    clearMarks();
+    showMessage(reason);
+    window.alert("There was an error processing the address you entered.\n\n" + reason);
+}
+
+//Puts every cell of the table back to "-", holidays (H) are left alone
+function clearMarks(){
+    const cells = document.querySelectorAll(".Paper, .Metal, .Garbage");
+    cells.forEach(cell => {
+        if(cell.innerHTML != "H"){
+            cell.innerHTML = "-";
+        }
+    })
+}
+
 //Variables associated elements within the rows in the Trash Table
 let garbageTable = document.getElementsByClassName("Garbage");
 let paperTable = document.getElementsByClassName("Paper")
@@ -497,14 +516,16 @@ document.getElementById('test_server').addEventListener('submit', async (a) => {
 
         //The server did not accept the address as typed and says why
         if(!answer.ok){
-            showMessage(data.error || "Something went wrong, please try again later.");
+            showAddressError(data.error || "Something went wrong, please try again later.");
         }
 
         else if(data == "error"){
-            showMessage("We could not find that address. Check the house number, street name and ZIP code. Only addresses in Elizabeth, NJ are covered.");
+            showAddressError("We could not find that address. Check the house number, street name and ZIP code. Only addresses in Elizabeth, NJ are covered.");
         }
 
         else{
+        //Start from an empty table so marks from an earlier lookup do not stay
+        clearMarks();
         console.log('Successful',data);
         let testo = data;
         console.log("Ward number recieved from back end: ", testo);
@@ -585,7 +606,7 @@ document.getElementById('test_server').addEventListener('submit', async (a) => {
     .catch(error => {
         //The server could not be reached or did not send back a usable answer
         console.log("error", error);
-        showMessage("Something went wrong, please try again later.");
+        showAddressError("Something went wrong, please try again later.");
     });
 
 })
