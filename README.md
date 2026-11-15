@@ -87,6 +87,19 @@ Flask tutorial (Python backend) : https://www.geeksforgeeks.org/flask-tutorial/-
 3. Once installed, navigate to extensions. Download the extension named Live Server to view live changes made to the code base.
 4. Right click on the file you want to open with Live Server, then select the Live Server option to view live changes. 
 
+### Server install (Ubuntu)
+`install.sh` sets up everything the live site needs on a fresh Ubuntu server (tested on 26.04 LTS): the system packages, a Python virtual environment, the MySQL database and address table, the `python_server` service and the nginx site.
+
+1. Clone the repo on the server: `git clone https://github.com/Jessebalves/TrashScheduleNJ.git`
+2. Run the installer: `cd TrashScheduleNJ && sudo ./install.sh`
+3. If MySQL root already has a password, pass it in: `sudo MYSQL_ROOT_PASSWORD='...' ./install.sh`
+
+The installer can be run again after every `git pull` to update the server. It keeps the existing address data unless `REIMPORT=1` is set.
+
+Not automated: DNS records and the TLS certificate. Place the certificate and key at `/etc/ssl/cert.pem` and `/etc/ssl/key.pem`, then run `install.sh` again to switch nginx to HTTPS. Until then the site is served over HTTP.
+
+Database credentials are never stored in the repo. The installer creates a read-only MySQL user for the web server and writes its password to `/etc/trashschedulenj/trashschedule.env`. To run `test_server.py` by hand for development, set `DB_USER`, `DB_PASSWORD` and `DB_NAME` in your shell first.
+
 ## Usage
 *This project has limited usage due to restricted API keys and security behind our own database. Users can connect their own database through the python file running flask.*
 

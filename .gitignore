@@ -1,1 +1,8 @@
+python-venv/
+venv/
+__pycache__/
+*.pyc
+.env
+*.env
 Trash_Schedule_Website/secrets.py
+secrets.py

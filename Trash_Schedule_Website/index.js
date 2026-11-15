@@ -42,7 +42,8 @@ function getCurrentWeekNumber(datePassedIn){
 }
 //Variable associated with current date
 const date = new Date(); 
-let isHoliday = false; 
+let isHoliday = false;
+console.log("Lets see"); 
 
 //Variable associated with current week in the year, ex Jun 17 is the 25th week in the year
 currentWeekInYear = getCurrentWeekNumber(date);
@@ -468,7 +469,7 @@ document.getElementById('test_server').addEventListener('submit', async (a) => {
     //console.log("Request should be sent now");
 
 
-    fetch('http://localhost:5000/data', {
+    fetch('/data', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -492,7 +493,7 @@ document.getElementById('test_server').addEventListener('submit', async (a) => {
             if(paperTable[3].innerHTML != "H"){
                 paperTable[3].innerHTML = "X";
             }
-            if(paperTable[3].innerHTML == "H"){
+            else if(paperTable[3].innerHTML == "H"){
                 paperTable[4].innerHTML = "X";
             }
         }
@@ -500,7 +501,7 @@ document.getElementById('test_server').addEventListener('submit', async (a) => {
            if(metalTable[3].innerHTML != "H"){ //odd weeks are paper even weeks are metals/plastic next week (1/1/2024) should be week 1 and should X on metal
                 metalTable[3].innerHTML = "X";
             } 
-            if(metalTable[3].innerHTML != "H"){ //odd weeks are paper even weeks are metals/plastic next week (1/1/2024) should be week 1 and should X on metal
+            else if(metalTable[3].innerHTML == "H"){ //odd weeks are paper even weeks are metals/plastic next week (1/1/2024) should be week 1 and should X on metal
                 metalTable[4].innerHTML = "X";
             } 
         }
@@ -561,7 +562,8 @@ document.getElementById('test_server').addEventListener('submit', async (a) => {
         }
     })
     .catch(error => {
-        console.error('Error:', error);
+       // console.error('Error:', error);
+	console.log("error");
     });
 
 })

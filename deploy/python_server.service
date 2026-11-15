@@ -1,0 +1,19 @@
+[Unit]
+Description=TrashScheduleNJ Python server (answers /data from the MySQL address table)
+After=network.target mysql.service
+Wants=mysql.service
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=@APP_DIR@
+EnvironmentFile=@ENV_FILE@
+Environment=PYTHONUNBUFFERED=1
+ExecStart=@VENV_DIR@/bin/python @APP_DIR@/test_server.py
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,5 @@
+Flask>=3.1,<4
+flask-cors>=6.0,<7
+waitress>=3.0,<4
+# 9.5 is the first release that supports Python 3.14 (Ubuntu 26.04)
+mysql-connector-python>=9.5,<10
