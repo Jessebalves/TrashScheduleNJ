@@ -20,8 +20,12 @@
 
                 <!--Main-->
                 <main>
+                        <!--Town and ward or route, filled in by index.js after a lookup-->
+                        <h3 style="text-align: center;" id = "found_place"></h3>
+
                         <!--Table-->
                         <table id = "trash_table" align="center">
+                            <thead>
                             <!--Table Row-->
                             <tr align="center" style = "background-color: lightblue;">
                                 <!--Table Header-->
@@ -35,53 +39,55 @@
                                 <th width= "150">Friday</th>
                                 <th width ="150">Saturday</th>
                             </tr>
-                            <tr style = "background-color: aliceblue;">
-                                <!--Paper Table Row-->
-                                <th>Paper</th>
-                                <th class = "Paper" id = "Sunday">-</th>
-                                <th class = "Paper" id ="Monday">-</th>
-                                <th class = "Paper" id ="Tuesday">-</th>
-                                <th class = "Paper" id ="Wednesday">-</th>
-                                <th class = "Paper" id = "Thursday">-</th>
-                                <th class = "Paper" id = "Friday">-</th>
-                                <th class = "Paper" id = "Saturday">-</th>
-                            </tr>
-                            <tr style = "background-color: aliceblue;">
-                                <!--Metal Table Row-->
-                                <th>Metal</th>
-                                <th class = "Metal" id ="Sunday">-</th>
-                                <th class = "Metal" id ="Monday">-</th>
-                                <th class = "Metal" id ="Tuesday">-</th>
-                                <th class = "Metal" id ="Wednesday">-</th>
-                                <th class = "Metal" id ="Thursday">-</th>
-                                <th class = "Metal" id = "Friday">-</th>
-                                <th class = "Metal" id = "Saturday">-</th>
-                            </tr>
-                            <tr style = "background-color: aliceblue;">
-                                <!--Garbage Table Row-->
-                                <th>Garbage</th>
-                                <th class = "Garbage" id = "Sunday">-</th>
-                                <th class = "Garbage" id ="Monday">-</th>
-                                <th class = "Garbage" id ="Tuesday">-</th>
-                                <th class = "Garbage" id ="Wednesday">-</th>
-                                <th class = "Garbage" id = "Thursday">-</th>
-                                <th class = "Garbage" id = "Friday">-</th>
-                                <th class = "Garbage" id = "Saturday">-</th>
-                            </tr>
-                            <tr>
-                                
-                            </tr>
-                        </table>         
+                            </thead>
+                            <!--One row for each kind of pickup. The rows are different from
+                                town to town, so index.js builds them from the server's answer-->
+                            <tbody id = "schedule_rows"></tbody>
+                        </table>
+
+                        <!--Lets the visitor look at another week, for example to see what a
+                            holiday next week does. index.js shows these after a lookup-->
+                        <div id = "week_buttons" hidden>
+                            <button type = "button" id = "previous_week">&lt; Previous week</button>
+                            <button type = "button" id = "this_week">This week</button>
+                            <button type = "button" id = "next_week">Next week &gt;</button>
+                        </div>
             <br>
 
             <!--Form that is sent to test_server.py-->
-            <form id = "test_server">
+            <form id = "test_server" autocomplete="off">
 
-                <div id = "testo2">
-                <label  for = "address"><b>Street Address: </b> </label>
-                <!--<br> stands for line break, or next line. Similar to \n in python and c-->
-                <input type = "text" id = "address" placeholder="132 Elm Street 07208" name = "address" required><br></br>
+                <!--Address search box from Google Maps. index.js shows this part when the
+                    server has a Google Maps key, and puts the search box inside google_search-->
+                <div id = "google_box" hidden>
+                    <p><b>Start typing your address, then pick it from the list:</b></p>
+                    <!--Filled in by index.js when Google's address search is not working-->
+                    <p id = "search_notice" hidden></p>
+                    <div id = "google_search"></div>
+                    <p><a href = "#" id = "show_typing">Can't find it? Type the address in yourself</a></p>
                 </div>
+
+                <!--The address typed in piece by piece. Used when there is no Google Maps
+                    key, when Google cannot be reached, or when the visitor asks for it-->
+                <div id = "typing_box" class = "address_fields">
+                    <span>
+                        <label for = "house_number"><b>House number</b></label>
+                        <input type = "text" id = "house_number" inputmode = "numeric" size = "6" placeholder = "132">
+                    </span>
+                    <span>
+                        <label for = "street"><b>Street</b></label>
+                        <input type = "text" id = "street" size = "22" placeholder = "Elm Street">
+                    </span>
+                    <span>
+                        <label for = "town"><b>Town</b></label>
+                        <select id = "town"></select>
+                    </span>
+                    <span>
+                        <label for = "zip"><b>ZIP code</b></label>
+                        <input type = "text" id = "zip" inputmode = "numeric" size = "6" maxlength = "5" placeholder = "optional">
+                    </span>
+                </div>
+                <br>
 
                 <div id = "table_buttons">
                 <!--Submit button-->
@@ -95,10 +101,12 @@
                 <h3 style="text-align: center;" id = "displayed_date"></h3>
                 <h3 style = "text-align: center" id = "com3"></h3>
                 <h3 style = "text-align: center" id = "com2"></h3>
+                <!--Reminders from the town, such as when to put the cans out-->
+                <ul id = "town_notes"></ul>
             </form>
             <hr>
             </main>
-            
+
             <!--Footer-->
             <footer style = "text-align: center;">
             <a href="mailto:jessebalves@gmail.com">Jessebalves@gmail.com</a><br>

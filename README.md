@@ -48,11 +48,12 @@ Flask tutorial (Python backend) : https://www.geeksforgeeks.org/flask-tutorial/-
 </details>
 
 ## Summary
-*Missed garbage day? Never forget your trash schedule again with https://trashschedulenj.com! This project is for residents of Elizabeth, New Jersey to check their trash schedule depending upon the week and ward the user resides in.*
+*Missed garbage day? Never forget your trash schedule again with https://trashschedulenj.com! This project is for residents of Union County, New Jersey to check their trash schedule for the week. Elizabeth and Kenilworth are covered so far, more towns are being added.*
 
 ## Features
 <!--List the standout features of your project and what makes it unique.-->
-- **Garbage Check**: Enter address followed by zipcode to check trashschedule.
+- **Garbage Check**: Start typing your address and pick it from the Google Maps list, or type it in yourself, to check your trash schedule.
+- **More than one town**: Each town has its own pickup types, days and holiday rules.
 - **Holiday Check**: System accounts for holidays and garbage pickup date changes due to holidays.
 - **Reset Table**: Reset the entire table to the initial state using the reset button.
 
@@ -94,11 +95,36 @@ Flask tutorial (Python backend) : https://www.geeksforgeeks.org/flask-tutorial/-
 2. Run the installer: `cd TrashScheduleNJ && sudo ./install.sh`
 3. If MySQL root already has a password, pass it in: `sudo MYSQL_ROOT_PASSWORD='...' ./install.sh`
 
-To update the server later, run `./update.sh` from the checkout. It pulls the latest commits for the current branch and runs the installer again. It keeps the existing address data unless `REIMPORT=1` is set. When running `./update.sh` you will be prompted for the MySQL Root password.
+To update the server later, run `./update.sh` from the checkout. It pulls the latest commits for the current branch and runs the installer again. It builds the address table again only when the files in `data/` have changed (or `REIMPORT=1` is set). When running `./update.sh` you will be prompted for the MySQL Root password.
 
 Not automated: DNS records and the TLS certificate. Place the certificate and key at `/etc/ssl/cert.pem` and `/etc/ssl/key.pem`, then run `install.sh` again to switch nginx to HTTPS. Until then the site is served over HTTP.
 
-Database credentials are never stored in the repo. The installer creates a read-only MySQL user for the web server and writes its password to `/etc/trashschedulenj/trashschedule.env`. To run `test_server.py` by hand for development, set `DB_USER`, `DB_PASSWORD` and `DB_NAME` in your shell first.
+Database credentials are never stored in the repo. The installer creates a read-only MySQL user for the web server and writes its password to `/etc/trashschedulenj/trashschedule.env`. 
+
+### Google Maps address search
+The home page lets visitors pick their address from a Google Maps list. This needs a Google Maps API key:
+
+1. In the Google Cloud console, create a key and turn on **Maps JavaScript API** and **Places API (New)** for it.
+2. Restrict the key to your website (HTTP referrer `https://trashschedulenj.com/*`) and to those two APIs. The key is sent to every visitor's browser, the restriction is what stops other websites from using it.
+3. Give it to the installer once, it is remembered after that: `sudo GOOGLE_MAPS_API_KEY='...' ./install.sh`
+
+The key is stored in `/etc/trashschedulenj/trashschedule.env`, not in the repo. Without a key the page shows boxes to type the house number, street and town in instead.
+
+### Running it on your own computer
+No database is needed for development. This reads the addresses straight from the `data/` folder:
+
+```
+pip install -r requirements.txt
+ADDRESS_SOURCE=csv python3 test_server.py
+```
+
+Then open http://127.0.0.1:5000 in your browser. Run the tests with `python3 -m unittest discover tests`.
+
+### Adding a town
+A town is two files and no code, see [towns/README.md](towns/README.md):
+
+- `towns/<town>.json`: the pickup types, days, holidays and notes
+- `data/<town>.csv`: the streets and which ward or route each one is on
 
 ## Usage
 *This project has limited usage due to restricted API keys and security behind our own database. Users can connect their own database through the python file running flask.*
@@ -110,7 +136,7 @@ Database credentials are never stored in the repo. The installer creates a read-
 
 ## How to Contribute
 <!--*Encourage contributions and provide guidelines for how others can help.*-->
-Our system uses Flask on the backend, feel free to connect your own database through the python file as we do not offer public access to the database for this project. If you would like to connect your own database, keep in mind that the ward look up and the process which data is passed from the backend to the frontend will have to be reworked. The main table will have to be reworked if you would like to add a new pick up type, such as grass and leaves. 
+Our system uses Flask on the backend. The easiest way to help is to add your town: write its rules in `towns/<town>.json` and its street list in `data/<town>.csv`, as described in [towns/README.md](towns/README.md). A new pickup type, such as grass and leaves, is one more entry in the town's file and shows up as its own row in the table.
 
 ## Contact
 <!--- *First and last name* - *Email address*-->
@@ -121,4 +147,7 @@ Our system uses Flask on the backend, feel free to connect your own database thr
 ## Acknowledgments
 <!--*Credits to individuals or resources that helped you during the project.*-->
 - elizabethnj.org : https://www.elizabethnj.org/288/Garbage-and-Recycling-Calendar
+- Borough of Kenilworth, 2026 Information Guide DPW : https://kenilworthborough.com/188/Public-Works
+- Union County Board of Elections, "Find your Ward and District" street list : https://ucnj.org/boe/where-do-i-vote/
+- US Census Bureau, TIGER/Line address ranges and town boundaries : https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html
 ---

@@ -14,7 +14,8 @@
 #   - the code in        $INSTALL_DIR/app
 #   - a Python venv in   $INSTALL_DIR/venv
 #   - MySQL database `trashschedule`, the `addresses` table (imported from the
-#     county CSV if empty) and a read-only MySQL user for the web server
+#     files in data/ whenever they have changed) and a read-only MySQL user
+#     for the web server
 #   - the database credentials in /etc/trashschedulenj/trashschedule.env
 #   - the python_server systemd service
 #   - the nginx site
@@ -28,11 +29,15 @@
 # asked:
 #   sudo MYSQL_ROOT_PASSWORD='...' ./install.sh
 #
+# Google Maps address search: pass the key once, it is remembered after that.
+# Without a key the website shows boxes to type the address in instead.
+#   sudo GOOGLE_MAPS_API_KEY='...' ./install.sh
+#
 # Other settings (all optional, shown with their defaults):
 #   INSTALL_DIR=/trashschedulenj
 #   SERVER_NAME="trashschedulenj.com www.trashschedulenj.com"
 #   SSL_CERT=/etc/ssl/cert.pem  SSL_KEY=/etc/ssl/key.pem
-#   REIMPORT=1    replace the address table with the CSV even if it has rows
+#   REIMPORT=1    build the address table again even if data/ has not changed
 
 set -euo pipefail
 umask 022
@@ -61,7 +66,8 @@ cleanup() { [ -n "$TMP_DIR" ] && rm -rf "$TMP_DIR"; return 0; }
 trap cleanup EXIT
 
 [ "$(id -u)" -eq 0 ] || fail "Run this script with sudo: sudo ./install.sh"
-for f in test_server.py importcsvtoDatabase.py requirements.txt countystreetlist04032017.csv \
+for f in test_server.py address_lookup.py pickup_schedule.py importcsvtoDatabase.py requirements.txt \
+         data/elizabeth.csv towns/elizabeth.json \
          Trash_Schedule_Website/index.html deploy/python_server.service; do
     [ -e "$SRC_DIR/$f" ] || fail "$f is missing from $SRC_DIR. Run install.sh from a full checkout."
 done
@@ -81,7 +87,7 @@ render() {
 # ---------------------------------------------------------------- packages
 step "Installing system packages"
 export DEBIAN_FRONTEND=noninteractive
-PACKAGES=(python3 python3-venv nginx mysql-server curl openssl ca-certificates)
+PACKAGES=(python3 python3-venv nginx mysql-server curl openssl ca-certificates tzdata)
 apt-get update -q || echo "WARNING: apt-get update reported a problem, continuing."
 if ! apt-get install -y -q "${PACKAGES[@]}"; then
     # apt also fails when an unrelated package on the system is broken (for
@@ -106,9 +112,14 @@ if [ "$SRC_DIR" != "$APP_DIR" ]; then
     mkdir -p "$APP_DIR.new"
     cp -r "$SRC_DIR/Trash_Schedule_Website" \
           "$SRC_DIR/test_server.py" \
+          "$SRC_DIR/address_lookup.py" \
+          "$SRC_DIR/pickup_schedule.py" \
           "$SRC_DIR/importcsvtoDatabase.py" \
-          "$SRC_DIR/countystreetlist04032017.csv" \
+          "$SRC_DIR/towns" \
           "$SRC_DIR/requirements.txt" "$APP_DIR.new/"
+    #Only the address files themselves, not the reference material under data/
+    mkdir "$APP_DIR.new/data"
+    cp "$SRC_DIR"/data/*.csv "$APP_DIR.new/data/"
     rm -rf "$APP_DIR"
     mv "$APP_DIR.new" "$APP_DIR"
 fi
@@ -139,8 +150,11 @@ fi
 
 # Keep the web server's database password across runs; make one the first time
 DB_PASSWORD=""
+MAPS_KEY="${GOOGLE_MAPS_API_KEY:-}"
 if [ -f "$ENV_FILE" ]; then
     DB_PASSWORD="$(sed -n 's/^DB_PASSWORD=//p' "$ENV_FILE" | head -n 1)"
+    # The Google Maps key is kept too, unless a new one was passed in
+    [ -n "$MAPS_KEY" ] || MAPS_KEY="$(sed -n 's/^GOOGLE_MAPS_API_KEY=//p' "$ENV_FILE" | head -n 1)"
 fi
 [ -n "$DB_PASSWORD" ] || DB_PASSWORD="$(openssl rand -hex 24)"
 
@@ -151,18 +165,26 @@ ALTER USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASSWORD';
 GRANT SELECT ON \`$DB_NAME\`.* TO '$DB_USER'@'localhost';
 SQL
 
-has_table="$("${MYSQL[@]}" -N -B -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='$DB_NAME' AND table_name='addresses'")"
+# The address table is built from the files in data/. It is built again when
+# those files have changed since the last import (or the table is missing, or
+# still has the columns from before more towns were added).
+mkdir -p "$ENV_DIR"
+DATA_SUM_FILE="$ENV_DIR/addresses.sha256"
+data_sum="$(cat "$APP_DIR"/data/*.csv | sha256sum | cut -d' ' -f1)"
+has_zone="$("${MYSQL[@]}" -N -B -e "SELECT COUNT(*) FROM information_schema.columns WHERE table_schema='$DB_NAME' AND table_name='addresses' AND column_name='Zone'")"
 row_count=0
-[ "$has_table" = "1" ] && row_count="$("${MYSQL[@]}" -N -B -e "SELECT COUNT(*) FROM \`$DB_NAME\`.addresses")"
-if [ "$row_count" = "0" ] || [ "$REIMPORT" = "1" ]; then
-    echo "Importing addresses from countystreetlist04032017.csv"
+[ "$has_zone" = "1" ] && row_count="$("${MYSQL[@]}" -N -B -e "SELECT COUNT(*) FROM \`$DB_NAME\`.addresses")"
+if [ "$row_count" = "0" ] || [ "$REIMPORT" = "1" ] || [ "$(cat "$DATA_SUM_FILE" 2>/dev/null)" != "$data_sum" ]; then
+    echo "Importing addresses from the data folder"
     python3 "$APP_DIR/importcsvtoDatabase.py" > "$TMP_DIR/addresses.sql"
     "${MYSQL[@]}" "$DB_NAME" < "$TMP_DIR/addresses.sql"
     row_count="$("${MYSQL[@]}" -N -B -e "SELECT COUNT(*) FROM \`$DB_NAME\`.addresses")"
+    echo "$data_sum" > "$DATA_SUM_FILE"
 else
-    echo "Keeping the existing addresses table (set REIMPORT=1 to replace it from the CSV)"
+    echo "The address files have not changed, keeping the addresses table (set REIMPORT=1 to build it again)"
 fi
 echo "Rows in addresses: $row_count"
+"${MYSQL[@]}" -N -B -e "SELECT CONCAT('  ', Municipality, ': ', COUNT(*)) FROM \`$DB_NAME\`.addresses GROUP BY Municipality ORDER BY Municipality"
 
 mkdir -p "$ENV_DIR"
 (umask 077; cat > "$ENV_FILE" <<ENV
@@ -172,6 +194,7 @@ DB_NAME=$DB_NAME
 DB_USER=$DB_USER
 DB_PASSWORD=$DB_PASSWORD
 PORT=5000
+GOOGLE_MAPS_API_KEY=$MAPS_KEY
 ENV
 )
 chown root:root "$ENV_FILE"
@@ -234,5 +257,15 @@ echo "nginx home page status: $site_code"
 echo "nginx /data answered:   $proxy_answer"
 [ "$site_code" = "200" ] || fail "nginx did not serve the home page. See: /var/log/nginx/error.log"
 [ "$proxy_answer" = "$answer" ] || fail "nginx did not pass /data through to the Python server."
+config_answer="$(curl -sk -m 5 "$scheme://127.0.0.1/config" || true)"
+case "$config_answer" in
+    *'"towns"'*) echo "nginx /config answered:  ok" ;;
+    *) fail "nginx did not pass /config through to the Python server." ;;
+esac
+if [ -n "$MAPS_KEY" ]; then
+    echo "Google Maps address search: on"
+else
+    echo "Google Maps address search: off (no key). To turn it on: sudo GOOGLE_MAPS_API_KEY='...' ./install.sh"
+fi
 
 printf '\nTrashScheduleNJ is installed and running (%s).\n' "$scheme"

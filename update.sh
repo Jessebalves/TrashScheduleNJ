@@ -30,7 +30,7 @@ if [ "$(id -u)" -eq 0 ]; then
     INSTALL=()
 else
     GIT=(git)
-    INSTALL=(sudo --preserve-env=MYSQL_ROOT_PASSWORD,REIMPORT,INSTALL_DIR,SERVER_NAME,SSL_CERT,SSL_KEY)
+    INSTALL=(sudo --preserve-env=MYSQL_ROOT_PASSWORD,GOOGLE_MAPS_API_KEY,REIMPORT,INSTALL_DIR,SERVER_NAME,SSL_CERT,SSL_KEY)
 fi
 
 branch="$("${GIT[@]}" rev-parse --abbrev-ref HEAD)"

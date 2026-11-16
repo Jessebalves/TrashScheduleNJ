@@ -140,3 +140,56 @@ html {
         display: block;
   }
 }
+/* Address form on the home page ------------------------------------- */
+/* An element with the hidden attribute stays hidden, whatever its display style is */
+[hidden]{
+    display: none !important;
+}
+
+#google_box{
+    text-align: center;
+}
+
+/* The Google Maps search box */
+#google_search{
+    width: 50%;
+    margin: auto;
+}
+
+/* The boxes for typing an address in by hand, side by side and centred */
+.address_fields{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.address_fields label{
+    padding-left: 0;
+}
+
+#town_notes{
+    width: 50%;
+    margin: auto;
+}
+
+@media screen and (max-width:650px){
+    #google_search, #town_notes{
+        width: 90%;
+    }
+    #trash_table{
+        width: 98%;
+    }
+}
+
+/* Previous week / This week / Next week, under the table */
+#week_buttons{
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Shown above the search box when Google's address search is not working */
+#search_notice{
+    font-weight: bold;
+    color: darkred;
+}

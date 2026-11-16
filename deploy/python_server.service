@@ -1,5 +1,5 @@
 [Unit]
-Description=TrashScheduleNJ Python server (answers /data from the MySQL address table)
+Description=TrashScheduleNJ Python server (pickup schedules by address)
 After=network.target mysql.service
 Wants=mysql.service
 
