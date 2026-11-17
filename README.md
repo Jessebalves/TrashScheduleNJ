@@ -101,6 +101,8 @@ Not automated: DNS records and the TLS certificate. Place the certificate and ke
 
 Database credentials are never stored in the repo. The installer creates a read-only MySQL user for the web server and writes its password to `/etc/trashschedulenj/trashschedule.env`. 
 
+To remove the site, run `sudo ./uninstall.sh` (it lists what it will remove and asks first; `sudo DRY_RUN=1 ./uninstall.sh` only shows it). It removes the service, the nginx site, the code, the venv, `/etc/trashschedulenj`, and the MySQL database and user (`KEEP_DATABASE=1` keeps them). nginx and MySQL themselves stay installed unless `REMOVE_PACKAGES=1` is set. That option purges every MySQL database and nginx site on the server.
+
 ### Google Maps address search
 The home page lets visitors pick their address from a Google Maps list. This needs a Google Maps API key:
 
