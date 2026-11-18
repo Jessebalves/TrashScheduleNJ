@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B1F1D">
+<title>TrashScheduleNJ - Settings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="app.css">
+<!--Browser tab icon: a wastebin-->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="32x32 48x48">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!--The "Site design: New | Classic" bar, shared with the classic pages-->
+<script src="design-switch.js" data-ui="new"></script>
+</head>
+<body data-page="settings">
+<a class="skip-link" href="#main">Skip to content</a>
+<main id="main" class="single">
+    <h1 class="page-title">Settings</h1>
+    <section class="card setup" aria-labelledby="addr-title">
+        <h2 class="card-title" id="addr-title">Saved addresses</h2>
+        <p class="small muted">Pick one to show its schedule. Up to 5 are kept on this device.</p>
+        <ul class="saved-list" id="settings-addresses" aria-labelledby="addr-title"></ul>
+        <div class="button-row">
+            <button type="button" class="button" id="change-address">Add a new address</button>
+            <button type="button" class="button" id="forget" hidden>Forget all addresses</button>
+        </div>
+        <p class="small muted" role="status" id="forget-done"></p>
+    </section>
+    <section class="card remind" id="remind-card" aria-label="Reminders"><div id="remind"></div></section>
+    <section class="card card-pad" aria-labelledby="design-title">
+        <h2 class="card-title" id="design-title">Site design</h2>
+        <p class="muted small" style="margin-top:6px">Switch between the new and the classic design with the dark bar at the top of every page. Your choice is saved on this device.</p>
+    </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

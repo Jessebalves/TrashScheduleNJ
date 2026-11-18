@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B1F1D">
+<title>TrashScheduleNJ - Calendar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="app.css">
+<!--Browser tab icon: a wastebin-->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="32x32 48x48">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!--The "Site design: New | Classic" bar, shared with the classic pages-->
+<script src="design-switch.js" data-ui="new"></script>
+</head>
+<body data-page="calendar">
+<a class="skip-link" href="#main">Skip to content</a>
+<main id="main">
+    <!--On a phone the cards are one list in the order of the cal- classes in app.css,
+        which puts the month view above the Next pickups list-->
+    <div class="col">
+        <div class="cal-title">
+            <h1 class="page-title">Calendar</h1>
+            <p class="page-lead" id="calendar-place"></p>
+        </div>
+        <section class="card status-card cal-status" id="calendar-status" hidden></section>
+        <div class="notice cal-holiday" id="holiday" role="status" hidden></div>
+        <section class="coming cal-list" id="coming" aria-labelledby="coming-title" hidden>
+            <div class="section-head"><h2 class="card-title" id="coming-title">Next pickups</h2></div>
+            <div class="card"><ul class="pickup-list" id="coming-list"></ul></div>
+        </section>
+    </div>
+    <div class="col">
+        <!--PLACEHOLDER: a month view is a future feature-->
+        <section class="card card-pad cal-month" aria-labelledby="month-title">
+            <h2 class="card-title" id="month-title">Month view</h2>
+            <p class="muted small" style="margin-top:6px">Coming soon. A full month calendar will show here. For now, the list shows your next pickups.</p>
+        </section>
+        <section class="card addcal cal-add" id="addcal" hidden></section>
+    </div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

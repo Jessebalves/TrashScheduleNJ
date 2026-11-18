@@ -1,0 +1,11 @@
+<!-- The site logo, the same drawing as the green mark next to "Trash & Recycling" in the
+     header: a 36px square with 10px rounded corners in the site's green (#1F6F4A, the accent color in app.css)
+     and the "trash" line icon from app.js (24-unit paths, stroke 2) drawn 20px wide in the
+     middle. Original artwork, no third-party license. If the header logo changes, change
+     this too and rebuild favicon.ico and apple-touch-icon.png from it. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+  <rect width="36" height="36" rx="10" fill="#1F6F4A"/>
+  <g transform="translate(8 8) scale(0.8333333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/>
+  </g>
+</svg>

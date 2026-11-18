@@ -102,7 +102,7 @@ class KenilworthAddresses(unittest.TestCase):
                 (100, 'N 22nd St', 'WED_SAT'),        #east of N 18th St
         ):
             self.assertEqual(self.book.find('kenilworth', number, street, '07033'),
-                             {'zone': zone, 'needs_check': False}, (number, street))
+                             {'zone': zone, 'needs_check': False, 'zip': '07033'}, (number, street))
 
     def test_a_street_on_the_border_is_marked_to_check(self):
         #S 20th St is the line between Tuesday & Friday and Monday & Thursday

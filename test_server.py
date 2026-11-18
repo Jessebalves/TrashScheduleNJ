@@ -4,7 +4,7 @@ import datetime
 import os
 from zoneinfo import ZoneInfo
 #used to send recieve requests and send back data
-from flask import Flask, request, jsonify # type: ignore
+from flask import Flask, request, jsonify, redirect # type: ignore
 from flask_cors import CORS # type: ignore
 from waitress import serve #type: ignore
 
@@ -106,6 +106,22 @@ def home_page():
     return app.send_static_file('index.html')
 
 
+#The new design is at the root (index.html above); it was under /new/ for a day, so those
+#links go to the same page at the root. nginx does the same, see deploy/nginx-*.conf
+@app.route('/new/')
+@app.route('/new/<path:page>')
+def old_new_design_link(page=''):
+    return redirect('/' + ('' if page == 'index.html' else page), code=301)
+
+
+#The classic design. nginx finds classic/index.html by itself, Flask needs to be told
+
+
+@app.route('/classic/')
+def classic_home_page():
+    return app.send_static_file('classic/index.html')
+
+
 #The web page asks for this when it opens
 @app.route('/config', methods=['GET'])
 def handle_config():
@@ -189,10 +205,20 @@ def handle_data():
         notes.insert(0, "We have not checked %s's schedule past %s yet. Please confirm your days with %s." % (
             town['name'], town['checked_through'][:4], contact))
 
+    #The new design also asks how many of the next pickups to list (1 to 60, 4 if not given)
+    wanted = data.get('upcoming', 4)
+    if isinstance(wanted, bool) or not isinstance(wanted, int) or not 1 <= wanted <= 60:
+        return problem("upcoming must be a whole number from 1 to 60.")
+
     answer = schedule.week_schedule(town, found['zone'], shown_date)
+    #Counted from the real date, not from the week shown
+    answer['upcoming'] = schedule.upcoming(town, found['zone'], today, wanted)
     #today stays the real date, the days in the answer carry the dates of the week shown
     answer['today'] = today.isoformat()
     answer['town'] = {'id': town['id'], 'name': town['name']}
+    #The full address as found, so the new design can show "Kenilworth, NJ 07033" even
+    #when the visitor left the ZIP code out. Every town covered is in New Jersey.
+    answer['address'] = {'zip': found['zip'] or zip_code, 'state': 'NJ'}
     answer['zone'] = {'id': found['zone'], 'word': town['zone_word'], 'label': town['zones'].get(found['zone'], found['zone'])}
     answer['notes'] = notes
     return jsonify(answer)

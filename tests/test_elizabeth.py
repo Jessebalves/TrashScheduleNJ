@@ -72,7 +72,7 @@ class ElizabethAddresses(unittest.TestCase):
         for row in rows:
             for number in (int(row['Low_Range']), int(row['High_Range'])):
                 found = book.find('elizabeth', number, row['Street_Name'], row['ZIP'])
-                self.assertEqual(found, {'zone': row['Zone'], 'needs_check': False}, row)
+                self.assertEqual(found, {'zone': row['Zone'], 'needs_check': False, 'zip': row['ZIP']}, row)
 
     def test_street_names_can_be_written_in_different_ways(self):
         book, _ = load_book()

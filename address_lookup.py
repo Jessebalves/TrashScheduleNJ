@@ -98,6 +98,7 @@ class AddressBook:
             needs_check  True when the answer is a best guess the visitor should confirm:
                          the address is on the border between two zones, or the house
                          number is not in the table and its street is split between zones
+            zip          the ZIP code of the stretch of street that matched ('' if the table has none)
         """
         rows = self.streets.get((town_id, normalize_street(street)))
         if not rows:
@@ -111,9 +112,9 @@ class AddressBook:
                 return None
 
         side = 'E' if house_number % 2 == 0 else 'O'
-        for low, high, row_side, _, zone, needs_check in rows:
+        for low, high, row_side, row_zip, zone, needs_check in rows:
             if low <= house_number <= high and row_side in (side, 'B'):
-                return {'zone': zone, 'needs_check': needs_check}
+                return {'zone': zone, 'needs_check': needs_check, 'zip': row_zip}
 
         #The house number is not in the table. Lists of house numbers always have
         #gaps, so use the nearest stretch of the same street and say it is a guess.
@@ -128,4 +129,4 @@ class AddressBook:
             return None
         #When the whole street is in one zone the nearest stretch is a safe answer
         sure = whole_street_is_one_zone and not any(row[5] for row in rows)
-        return {'zone': nearest[4], 'needs_check': not sure}
+        return {'zone': nearest[4], 'needs_check': not sure, 'zip': nearest[3]}
