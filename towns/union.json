@@ -1,0 +1,166 @@
+{
+    "id": "union",
+    "name": "Union",
+    "other_names": [
+        "Union Township",
+        "Township of Union",
+        "Union Twp",
+        "Vauxhall"
+    ],
+    "zip_codes": [
+        "07083",
+        "07088"
+    ],
+    "zone_word": "Zone",
+    "zones": {
+        "WEST": "West Zone (Monday & Thursday)",
+        "EAST": "East Zone (Tuesday & Friday)"
+    },
+    "street_names": {
+        "ROUTE 22": "US 22",
+        "RT 22": "US 22",
+        "US-22": "US 22",
+        "U.S 22": "US 22",
+        "US HWY 22": "US 22",
+        "US HIGHWAY 22": "US 22",
+        "HIGHWAY 22": "US 22",
+        "UNION CO PKWY": "UNION COUNTY PKWY"
+    },
+    "holidays": [
+        {
+            "name": "New Year's Day",
+            "month": 1,
+            "day": 1
+        },
+        {
+            "name": "Memorial Day",
+            "month": 5,
+            "weekday": "Monday",
+            "nth": -1
+        },
+        {
+            "name": "Labor Day",
+            "month": 9,
+            "weekday": "Monday",
+            "nth": 1
+        },
+        {
+            "name": "Thanksgiving Day",
+            "month": 11,
+            "weekday": "Thursday",
+            "nth": 4
+        },
+        {
+            "name": "Christmas Day",
+            "month": 12,
+            "day": 25
+        }
+    ],
+    "streams": [
+        {
+            "id": "garbage",
+            "label": "Trash",
+            "days_by_zone": {
+                "WEST": [
+                    "Monday",
+                    "Thursday"
+                ],
+                "EAST": [
+                    "Tuesday",
+                    "Friday"
+                ]
+            },
+            "on_holiday": "skip"
+        },
+        {
+            "id": "bulk",
+            "label": "Bulk",
+            "days_by_zone": {
+                "WEST": [
+                    "Monday"
+                ],
+                "EAST": [
+                    "Tuesday"
+                ]
+            },
+            "on_holiday": "skip"
+        },
+        {
+            "id": "containers",
+            "label": "Commingled (Glass, Plastic, Tin)",
+            "days": [
+                "Wednesday"
+            ],
+            "every_other_week_from": "2026-01-07",
+            "on_holiday": "skip"
+        },
+        {
+            "id": "paper",
+            "label": "Brown Goods (Newspaper, Paper, Cardboard)",
+            "days": [
+                "Wednesday"
+            ],
+            "every_other_week_from": "2026-01-14",
+            "on_holiday": "skip"
+        },
+        {
+            "id": "spring_leaves",
+            "label": "Special Spring Collection (Leaves Only)",
+            "days_by_zone": {
+                "WEST": [
+                    "Thursday"
+                ],
+                "EAST": [
+                    "Friday"
+                ]
+            },
+            "first_date": "2026-03-26",
+            "last_date": "2026-04-03",
+            "on_holiday": "skip"
+        },
+        {
+            "id": "yard",
+            "label": "Grass",
+            "days_by_zone": {
+                "WEST": [
+                    "Thursday"
+                ],
+                "EAST": [
+                    "Friday"
+                ]
+            },
+            "first_date": "2026-04-09",
+            "last_date": "2026-10-30",
+            "on_holiday": "skip"
+        },
+        {
+            "id": "leaves",
+            "label": "Leaves",
+            "days_by_zone": {
+                "WEST": [
+                    "Thursday"
+                ],
+                "EAST": [
+                    "Friday"
+                ]
+            },
+            "first_date": "2026-10-01",
+            "last_date": "2026-12-31",
+            "moved_dates": {"2026-11-26": "2026-11-28"},
+            "on_holiday": "skip"
+        }
+    ],
+    "checked_through": "2026-12-31",
+    "contact": "Union DPW, 908-686-1922",
+    "notes": [
+        "Put trash and bulk at the curb the day before collection, no earlier than 6 pm.",
+        "Grass and leaves go in an open container or a biodegradable paper bag, no plastic bags. They are only picked up on Thursday (West Zone) and Friday (East Zone).",
+        "Recyclables must not be put out in plastic bags. Tie and bundle newspaper, paper and cardboard.",
+        "There are no make-up bulk days after a holiday. Appliances: call the DPW."
+    ],
+    "sources": [
+        "2026 Township of Union Recycling Collection Calendar: https://www.uniontownship.com/DocumentCenter/View/140/recycling-collection-schedule",
+        "Street Listings for Collection (Collection Routes 2015): https://www.uniontownship.com/631/Street-Listings-for-Collection, saved as data/reference/union_township_routes_2015.csv",
+        "Address table: data/reference/union_county_street_list_2025.csv and the route list, by tools/build_union.py"
+    ]
+}

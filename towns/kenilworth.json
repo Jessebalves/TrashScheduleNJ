@@ -1,0 +1,124 @@
+{
+    "id": "kenilworth",
+    "name": "Kenilworth",
+    "other_names": [
+        "Kenilworth Borough",
+        "Borough of Kenilworth"
+    ],
+    "zip_codes": [
+        "07033"
+    ],
+    "zone_word": "Garbage route",
+    "zones": {
+        "MON_THU": "Monday & Thursday",
+        "TUE_FRI": "Tuesday & Friday",
+        "WED_SAT": "Wednesday & Saturday"
+    },
+    "street_names": {
+        "KENILWORTH BLVD": "BOULEVARD",
+        "THE BLVD": "BOULEVARD",
+        "BLVD": "BOULEVARD"
+    },
+    "holidays": [
+        {
+            "name": "New Year's Day",
+            "month": 1,
+            "day": 1
+        },
+        {
+            "name": "Martin Luther King Jr. Day",
+            "month": 1,
+            "weekday": "Monday",
+            "nth": 3
+        },
+        {
+            "name": "Memorial Day",
+            "month": 5,
+            "weekday": "Monday",
+            "nth": -1
+        },
+        {
+            "name": "Independence Day",
+            "month": 7,
+            "day": 4
+        },
+        {
+            "name": "Labor Day",
+            "month": 9,
+            "weekday": "Monday",
+            "nth": 1
+        },
+        {
+            "name": "Thanksgiving Day",
+            "month": 11,
+            "weekday": "Thursday",
+            "nth": 4
+        },
+        {
+            "name": "Christmas Day",
+            "month": 12,
+            "day": 25
+        }
+    ],
+    "streams": [
+        {
+            "id": "garbage",
+            "label": "Garbage",
+            "days_by_zone": {
+                "MON_THU": [
+                    "Monday",
+                    "Thursday"
+                ],
+                "TUE_FRI": [
+                    "Tuesday",
+                    "Friday"
+                ],
+                "WED_SAT": [
+                    "Wednesday",
+                    "Saturday"
+                ]
+            },
+            "on_holiday": "skip"
+        },
+        {
+            "id": "paper",
+            "label": "Cardboard & Paper",
+            "days": [
+                "Tuesday"
+            ],
+            "every_other_week_from": "2026-01-13",
+            "moved_dates": {"2026-11-03": "2026-11-04"},
+            "on_holiday": "skip"
+        },
+        {
+            "id": "containers",
+            "label": "Bottles, Cans & Plastics",
+            "days": [
+                "Tuesday"
+            ],
+            "every_other_week_from": "2026-01-06",
+            "on_holiday": "skip"
+        },
+        {
+            "id": "yard",
+            "label": "Vegetative Waste",
+            "days": [
+                "Thursday"
+            ],
+            "first_date": "2026-01-08",
+            "last_date": "2026-10-22",
+            "on_holiday": "skip"
+        }
+    ],
+    "checked_through": "2026-12-31",
+    "contact": "Kenilworth DPW, 908-276-5073",
+    "notes": [
+        "Put everything at the curb after 5 pm the night before pickup.",
+        "Vegetative waste is not picked up during leaf collection, from late October to the end of the year."
+    ],
+    "sources": [
+        "2026 Information Guide DPW: https://kenilworthborough.com/DocumentCenter/View/1413/2026-Information-Guide-DPW",
+        "Recycling page: https://kenilworthborough.com/304/Recycling",
+        "Garbage routes: the Sanitation Routes Map in the guide, turned into a street list by tools/build_kenilworth.py"
+    ]
+}

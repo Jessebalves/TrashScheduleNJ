@@ -1,0 +1,49 @@
+{
+    "id": "elizabeth",
+    "name": "Elizabeth",
+    "other_names": ["Elizabeth City", "City of Elizabeth"],
+    "zip_codes": ["07201", "07202", "07206", "07207", "07208"],
+    "zone_word": "Ward",
+    "zones": {
+        "1": "Ward 1", "2": "Ward 2", "3": "Ward 3",
+        "4": "Ward 4", "5": "Ward 5", "6": "Ward 6"
+    },
+    "holidays": [
+        {"name": "New Year's Day", "month": 1, "day": 1},
+        {"name": "Memorial Day", "month": 5, "weekday": "Monday", "nth": -1},
+        {"name": "Independence Day", "month": 7, "day": 4},
+        {"name": "Labor Day", "month": 9, "weekday": "Monday", "nth": 1},
+        {"name": "Thanksgiving", "month": 11, "weekday": "Thursday", "nth": 4},
+        {"name": "Christmas", "month": 12, "day": 25}
+    ],
+    "streams": [
+        {
+            "id": "paper",
+            "label": "Paper",
+            "days": ["Wednesday"],
+            "every_other_week_from": "2024-01-10",
+            "on_holiday": "next_day"
+        },
+        {
+            "id": "metal",
+            "label": "Metal",
+            "days": ["Wednesday"],
+            "every_other_week_from": "2024-01-03",
+            "on_holiday": "next_day"
+        },
+        {
+            "id": "garbage",
+            "label": "Garbage",
+            "days_by_zone": {
+                "1": ["Monday", "Thursday"], "2": ["Monday", "Thursday"], "3": ["Monday", "Thursday"],
+                "4": ["Tuesday", "Friday"], "5": ["Tuesday", "Friday"], "6": ["Tuesday", "Friday"]
+            },
+            "on_holiday": "next_day"
+        }
+    ],
+    "notes": [],
+    "sources": [
+        "Rules carried over unchanged from the first version of the website (index.js), which was written from the City of Elizabeth's printed schedule.",
+        "Address table: Union County street list of 4/3/2017, wards as they were then."
+    ]
+}

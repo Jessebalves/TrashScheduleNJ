@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name = "viewport" content="width=device-width, initial-scale =1.0">
+        <title>TrashScheduleNJ - Home</title>
+        <link rel="stylesheet" href="style.css">
+        <!--Browser tab icon: a wastebin-->
+        <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+        <link rel="icon" href="../favicon.ico" sizes="32x32 48x48">
+        <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+        <!--The "Site design: New | Classic" bar, see design-switch.js-->
+        <script src="../design-switch.js" data-ui="classic"></script>
+        </head>
+        <body>
+
+            <!--Header-->
+            <header style="text-align: center;font-size: large;">
+            <h1>TrashScheduleNJ</h1>
+            <h2>Home</h2>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact Us</a>
+            <hr>
+            </header>
+
+                <!--Main-->
+                <main>
+                        <!--Table-->
+                        <table id = "trash_table" align="center">
+                            <!--Table Row-->
+                            <tr align="center" style = "background-color: lightblue;">
+                                <!--Table Header-->
+                                <!--Days of the week-->
+                                <th ></th>
+                                <th width= "150">Sunday</th>
+                                <th width= "150">Monday</th>
+                                <th width= "150">Tuesday</th>
+                                <th width= "150">Wednesday</th>
+                                <th width= "150">Thursday</th>
+                                <th width= "150">Friday</th>
+                                <th width ="150">Saturday</th>
+                            </tr>
+                            <tr style = "background-color: aliceblue;">
+                                <!--Paper Table Row-->
+                                <th>Paper</th>
+                                <th class = "Paper" id = "Sunday">-</th>
+                                <th class = "Paper" id ="Monday">-</th>
+                                <th class = "Paper" id ="Tuesday">-</th>
+                                <th class = "Paper" id ="Wednesday">-</th>
+                                <th class = "Paper" id = "Thursday">-</th>
+                                <th class = "Paper" id = "Friday">-</th>
+                                <th class = "Paper" id = "Saturday">-</th>
+                            </tr>
+                            <tr style = "background-color: aliceblue;">
+                                <!--Metal Table Row-->
+                                <th>Metal</th>
+                                <th class = "Metal" id ="Sunday">-</th>
+                                <th class = "Metal" id ="Monday">-</th>
+                                <th class = "Metal" id ="Tuesday">-</th>
+                                <th class = "Metal" id ="Wednesday">-</th>
+                                <th class = "Metal" id ="Thursday">-</th>
+                                <th class = "Metal" id = "Friday">-</th>
+                                <th class = "Metal" id = "Saturday">-</th>
+                            </tr>
+                            <tr style = "background-color: aliceblue;">
+                                <!--Garbage Table Row-->
+                                <th>Garbage</th>
+                                <th class = "Garbage" id = "Sunday">-</th>
+                                <th class = "Garbage" id ="Monday">-</th>
+                                <th class = "Garbage" id ="Tuesday">-</th>
+                                <th class = "Garbage" id ="Wednesday">-</th>
+                                <th class = "Garbage" id = "Thursday">-</th>
+                                <th class = "Garbage" id = "Friday">-</th>
+                                <th class = "Garbage" id = "Saturday">-</th>
+                            </tr>
+                            <tr>
+                                
+                            </tr>
+                        </table>         
+            <br>
+
+            <!--Form that is sent to test_server.py-->
+            <form id = "test_server">
+
+                <div id = "testo2">
+                <label  for = "address"><b>Street Address: </b> </label>
+                <!--<br> stands for line break, or next line. Similar to \n in python and c-->
+                <input type = "text" id = "address" placeholder="132 Elm Street 07208" name = "address" required><br></br>
+                </div>
+
+                <div id = "table_buttons">
+                <!--Submit button-->
+                <button type="submit">Check Trash</button><br>
+                <!--Reset button-->
+                <button id = "reset" type="reset">Reset</button>
+                </div>
+
+
+                <h3 style ="text-align: center" id = "cmon"></h3>
+                <h3 style="text-align: center;" id = "displayed_date"></h3>
+                <h3 style = "text-align: center" id = "com3"></h3>
+                <h3 style = "text-align: center" id = "com2"></h3>
+            </form>
+            <hr>
+            </main>
+            
+            <!--Footer-->
+            <footer style = "text-align: center;">
+            <a href="mailto:jessebalves@gmail.com">Jessebalves@gmail.com</a><br>
+            <a href="mailto:daniellordelo@gmail.com">Daniel.lordelo@yahoo.com</a><br>
+            Authors: Jesse Alves, Daniel Lordelo<br>
+            &copy; Copyright reserved<br>
+            </footer>
+
+            <!--Linking HTML document to javascript file-->
+            <script src="index.js"></script>
+            </body>
+</html>

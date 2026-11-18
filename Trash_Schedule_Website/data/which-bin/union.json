@@ -1,0 +1,17 @@
+{
+    "_about": "Which bin search for Union County. category is a category id from counties/union.json; towns.<town id> gives a different category for one town.",
+    "sample": true,
+    "_todo": "SAMPLE DATA. These answers were not checked against any town's recycling rules. Replace them with the towns' real lists before relying on them.",
+    "items": [
+        {"name": "Pizza box (greasy)", "aliases": ["pizza", "pizza box"], "category": "garbage"},
+        {"name": "Cardboard box", "aliases": ["cardboard", "box", "amazon box"], "category": "paper"},
+        {"name": "Newspaper", "aliases": ["newspapers", "magazine", "junk mail"], "category": "paper"},
+        {"name": "Soda can", "aliases": ["can", "aluminum can", "soup can"], "category": "metal", "towns": {"hillside": "containers", "kenilworth": "containers", "union": "containers"}},
+        {"name": "Plastic bottle", "aliases": ["water bottle", "plastic"], "category": "metal", "towns": {"hillside": "containers", "kenilworth": "containers", "union": "containers"}},
+        {"name": "Glass jar", "aliases": ["jar", "glass", "glass bottle"], "category": "metal", "towns": {"hillside": "containers", "kenilworth": "containers", "union": "containers"}},
+        {"name": "Grass clippings", "aliases": ["grass", "leaves", "branches"], "category": "yard"},
+        {"name": "Food scraps", "aliases": ["food", "leftovers"], "category": "garbage"},
+        {"name": "Battery", "aliases": ["batteries"], "category": "dropoff"},
+        {"name": "Paint can", "aliases": ["paint"], "category": "dropoff"}
+    ]
+}

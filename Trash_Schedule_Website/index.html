@@ -1,113 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name = "viewport" content="width=device-width, initial-scale =1.0">
-        <title>TrashScheduleNJ - Home</title>
-        <link rel="stylesheet" href="style.css">
-        </head>
-        <body>
-
-            <!--Header-->
-            <header style="text-align: center;font-size: large;">
-            <h1>TrashScheduleNJ</h1>
-            <h2>Home</h2>
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact Us</a>
-            <hr>
-            </header>
-
-                <!--Main-->
-                <main>
-                        <!--Table-->
-                        <table id = "trash_table" align="center">
-                            <!--Table Row-->
-                            <tr align="center" style = "background-color: lightblue;">
-                                <!--Table Header-->
-                                <!--Days of the week-->
-                                <th ></th>
-                                <th width= "150">Sunday</th>
-                                <th width= "150">Monday</th>
-                                <th width= "150">Tuesday</th>
-                                <th width= "150">Wednesday</th>
-                                <th width= "150">Thursday</th>
-                                <th width= "150">Friday</th>
-                                <th width ="150">Saturday</th>
-                            </tr>
-                            <tr style = "background-color: aliceblue;">
-                                <!--Paper Table Row-->
-                                <th>Paper</th>
-                                <th class = "Paper" id = "Sunday">-</th>
-                                <th class = "Paper" id ="Monday">-</th>
-                                <th class = "Paper" id ="Tuesday">-</th>
-                                <th class = "Paper" id ="Wednesday">-</th>
-                                <th class = "Paper" id = "Thursday">-</th>
-                                <th class = "Paper" id = "Friday">-</th>
-                                <th class = "Paper" id = "Saturday">-</th>
-                            </tr>
-                            <tr style = "background-color: aliceblue;">
-                                <!--Metal Table Row-->
-                                <th>Metal</th>
-                                <th class = "Metal" id ="Sunday">-</th>
-                                <th class = "Metal" id ="Monday">-</th>
-                                <th class = "Metal" id ="Tuesday">-</th>
-                                <th class = "Metal" id ="Wednesday">-</th>
-                                <th class = "Metal" id ="Thursday">-</th>
-                                <th class = "Metal" id = "Friday">-</th>
-                                <th class = "Metal" id = "Saturday">-</th>
-                            </tr>
-                            <tr style = "background-color: aliceblue;">
-                                <!--Garbage Table Row-->
-                                <th>Garbage</th>
-                                <th class = "Garbage" id = "Sunday">-</th>
-                                <th class = "Garbage" id ="Monday">-</th>
-                                <th class = "Garbage" id ="Tuesday">-</th>
-                                <th class = "Garbage" id ="Wednesday">-</th>
-                                <th class = "Garbage" id = "Thursday">-</th>
-                                <th class = "Garbage" id = "Friday">-</th>
-                                <th class = "Garbage" id = "Saturday">-</th>
-                            </tr>
-                            <tr>
-                                
-                            </tr>
-                        </table>         
-            <br>
-
-            <!--Form that is sent to test_server.py-->
-            <form id = "test_server">
-
-                <div id = "testo2">
-                <label  for = "address"><b>Street Address: </b> </label>
-                <!--<br> stands for line break, or next line. Similar to \n in python and c-->
-                <input type = "text" id = "address" placeholder="132 Elm Street 07208" name = "address" required><br></br>
-                </div>
-
-                <div id = "table_buttons">
-                <!--Submit button-->
-                <button type="submit">Check Trash</button><br>
-                <!--Reset button-->
-                <button id = "reset" type="reset">Reset</button>
-                </div>
-
-
-                <h3 style ="text-align: center" id = "cmon"></h3>
-                <h3 style="text-align: center;" id = "displayed_date"></h3>
-                <h3 style = "text-align: center" id = "com3"></h3>
-                <h3 style = "text-align: center" id = "com2"></h3>
-            </form>
-            <hr>
-            </main>
-            
-            <!--Footer-->
-            <footer style = "text-align: center;">
-            <a href="mailto:jessebalves@gmail.com">Jessebalves@gmail.com</a><br>
-            <a href="mailto:daniellordelo@gmail.com">Daniel.lordelo@yahoo.com</a><br>
-            Authors: Jesse Alves, Daniel Lordelo<br>
-            &copy; Copyright reserved<br>
-            </footer>
-
-            <!--Linking HTML document to javascript file-->
-            <script src="index.js"></script>
-            </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B1F1D">
+<title>TrashScheduleNJ - Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="app.css">
+<!--Browser tab icon: a wastebin-->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="32x32 48x48">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!--The "Site design: New | Classic" bar, shared with the classic pages. data-home: this is
+    the site's landing page, a visitor who picked Classic is sent on to classic/-->
+<script src="design-switch.js" data-ui="new" data-home></script>
+</head>
+<body data-page="home">
+<a class="skip-link" href="#main">Skip to content</a>
+<noscript><p style="padding:16px">This page needs JavaScript. The <a href="classic/">classic design</a> is also available.</p></noscript>
+<!--The header, menus and footer are added by app.js-->
+<main id="main">
+    <h1 class="visually-hidden">Your trash and recycling pickups</h1>
+    <!--Left column on desktop. On a phone all cards are one list, see the o- classes in app.css-->
+    <div class="col">
+        <section class="next o-next" id="next" aria-labelledby="next-title"></section>
+        <div class="notice o-holiday" id="holiday" role="status" hidden></div>
+        <section class="card card-pad o-notes" id="notes" hidden></section>
+        <section class="which o-bin" id="which"></section>
+    </div>
+    <!--Right column on desktop-->
+    <div class="col">
+        <section class="coming o-coming" id="coming" aria-labelledby="coming-title" hidden>
+            <div class="section-head">
+                <h2 class="card-title" id="coming-title">Coming up</h2>
+                <a href="calendar.html">See calendar</a>
+            </div>
+            <div class="card"><ul class="pickup-list" id="coming-list"></ul></div>
+        </section>
+        <section class="card remind o-remind" id="remind" aria-label="Reminders"></section>
+        <!--Desktop only on the home page, the Calendar page has it on phones-->
+        <section class="card addcal o-cal desktop-only" id="addcal" hidden></section>
+    </div>
+</main>
+<script src="app.js"></script>
+</body>
 </html>

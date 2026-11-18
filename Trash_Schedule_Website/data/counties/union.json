@@ -1,0 +1,40 @@
+{
+    "_about": "How the new design shows each pickup category in Union County. A category id is a stream id from towns/<town>.json. The schedule shows the town's own label for a stream; name is used where there is no town label, such as the Which bin answers. icon is one of: trash, paper, can, bottle, leaf, recycle, dropoff, bin. A town can change any field under towns.<town id>.categories. A stream with no entry here gets default_category.",
+    "_todo": "Colors and short labels are display choices, not each town's real bin colors. Replace them once the towns' bin colors are confirmed.",
+    "county": "Union County",
+    "_pickup_hours": "Pickup day messages, New Jersey time. Before start: put your bins out now. Between start and end: the truck may be on its way. After end: the pickup has most likely come by. A town can set its own under towns.<town id>.pickup_hours. These hours are the site owner's estimate, not taken from the towns.",
+    "pickup_hours": {"start": "06:00", "end": "08:00"},
+    "default_category": {"color": "#5A615D", "icon": "bin", "short": "Curbside pickup"},
+    "categories": {
+        "garbage":    {"name": "Garbage",                  "color": "#3D4246", "icon": "trash",   "short": "Household trash"},
+        "paper":      {"name": "Paper",                    "color": "#1D5FBF", "icon": "paper",   "short": "Recycling"},
+        "metal":      {"name": "Metal",                    "color": "#6A4C93", "icon": "can",     "short": "Recycling"},
+        "containers": {"name": "Bottles, Cans & Plastics", "color": "#8F4A14", "icon": "bottle",  "short": "Recycling"},
+        "bulk":       {"name": "Bulk items",               "color": "#7A5230", "icon": "bin",     "short": "Bulk pickup"},
+        "yard":       {"name": "Yard waste",               "color": "#2F6B22", "icon": "leaf",    "short": "Seasonal"},
+        "leaves":     {"name": "Leaves",                   "color": "#B4530F", "icon": "leaf",    "short": "Seasonal"},
+        "dropoff":    {"name": "Not curbside",             "color": "#5A615D", "icon": "dropoff", "short": "Drop-off only"}
+    },
+    "towns": {
+        "hillside": {
+            "categories": {
+                "paper":      {"name": "Newspaper & Cardboard"},
+                "containers": {"name": "Glass, Aluminum, Plastic & Cans"}
+            }
+        },
+        "kenilworth": {
+            "categories": {
+                "paper": {"name": "Cardboard & Paper"},
+                "yard":  {"name": "Vegetative Waste"}
+            }
+        },
+        "union": {
+            "categories": {
+                "containers":    {"name": "Commingled"},
+                "paper":         {"name": "Brown Goods"},
+                "yard":          {"name": "Grass"},
+                "spring_leaves": {"name": "Spring leaves", "color": "#B0306A", "icon": "leaf", "short": "Seasonal"}
+            }
+        }
+    }
+}

@@ -1,0 +1,356 @@
+/* The new design of TrashScheduleNJ. Mobile first: one column, bottom menu.
+   From 900px wide: top menu and two columns. Change the main color with --accent. */
+:root{
+    --accent: #1F6F4A;
+    --accent-dark: #16533A;
+    --accent-soft: #E8F1EC;
+    --page: #F5F6F2;
+    --card: #FFFFFF;
+    --text: #1B1F1D;
+    --text-2: #5A615D;
+    --text-nav: #3F4642;
+    --line: #E4E7E2;
+    --line-soft: #EDEFEB;
+    --field-line: #C9CEC8;
+    --button-line: #DDE1DC;
+    --warn-bg: #FFF4DE;
+    --warn-line: #F0C978;
+    --warn-text: #5C3800;
+    --warn-icon: #8A5300;
+    --error: #A3261B;
+    --switch-off: #8A918C;
+    --radius-xl: 24px;
+    --radius-l: 20px;
+    --radius-m: 16px;
+    --radius-s: 12px;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+[hidden]{ display: none !important; }
+
+html{ -webkit-text-size-adjust: 100%; }
+body{
+    margin: 0;
+    background: var(--page);
+    color: var(--text);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 15px;
+    line-height: 1.4;
+    /* Room for the bottom menu */
+    padding-bottom: calc(84px + env(safe-area-inset-bottom));
+}
+a{ color: var(--accent); }
+a:hover{ color: var(--accent-dark); }
+h1, h2, h3, p{ margin: 0; }
+button, input, select{ font: inherit; color: inherit; }
+button{ cursor: pointer; }
+:focus-visible{ outline: 3px solid var(--accent); outline-offset: 2px; }
+.next :focus-visible{ outline-color: #FFFFFF; }
+svg{ flex-shrink: 0; }
+
+.visually-hidden{
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.skip-link{
+    position: absolute; left: 16px; top: -100px; z-index: 20;
+    background: var(--card); padding: 12px 16px; border-radius: var(--radius-s); font-weight: 700;
+}
+.skip-link:focus{ top: 64px; }
+
+/* ------------------------------------------------------------------ header */
+.site-header{ background: transparent; }
+.header-inner{
+    max-width: 1200px; margin: 0 auto; padding: 20px 20px 0;
+    display: flex; align-items: center; gap: 12px;
+}
+.brand{ display: none; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; color: var(--text); }
+.brand-mark{
+    width: 36px; height: 36px; border-radius: 10px; background: var(--accent); color: #FFFFFF;
+    display: flex; align-items: center; justify-content: center;
+}
+.brand-name{ font-size: 18px; font-weight: 800; }
+.top-nav{ display: none; }
+.address-block{ display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; position: relative; }
+.address-caption{ font-size: 13px; font-weight: 500; color: var(--text-2); }
+.address-button{
+    display: flex; align-items: center; gap: 6px; padding: 0; border: none; background: none;
+    font-size: 18px; font-weight: 700; color: var(--text); min-height: 44px; text-align: left; max-width: 100%;
+}
+.address-button .pin{ display: none; }
+.address-text{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.icon-button{
+    width: 44px; height: 44px; border-radius: 22px; border: 1px solid var(--button-line); background: var(--card);
+    display: flex; align-items: center; justify-content: center; color: var(--text); text-decoration: none;
+}
+.icon-button:hover{ color: var(--text); background: var(--page); }
+
+/* ---------------------------------------------------------------- layout */
+main{
+    max-width: 1200px; margin: 0 auto; padding: 20px;
+    display: flex; flex-direction: column; gap: 20px;
+}
+.col{ display: contents; }
+.page-title{ font-size: 26px; font-weight: 800; letter-spacing: -0.01em; }
+.page-lead{ color: var(--text-2); margin-top: 4px; }
+
+/* On a phone the cards are one list in this order, as in the mobile mockup */
+.o-setup{ order: 0; } .o-next{ order: 1; } .o-holiday{ order: 2; } .o-notes{ order: 3; }
+.o-coming{ order: 4; } .o-remind{ order: 5; } .o-bin{ order: 6; } .o-cal{ order: 7; }
+/* Calendar page on a phone: the month view above the Next pickups list. On desktop each
+   column keeps this same order, so the two columns do not change */
+.cal-title{ order: 1; } .cal-status{ order: 2; } .cal-holiday{ order: 3; }
+.cal-month{ order: 4; } .cal-list{ order: 5; } .cal-add{ order: 6; }
+
+.desktop-only{ display: none !important; }
+.card{ background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-l); }
+.card-pad{ padding: 16px; }
+.card-title{ font-size: 17px; font-weight: 700; }
+.muted{ color: var(--text-2); }
+.small{ font-size: 13px; }
+
+/* --------------------------------------------------------- next pickup card */
+.next{
+    background: var(--accent); color: #FFFFFF; border-radius: var(--radius-xl); padding: 22px;
+    display: flex; flex-direction: column; gap: 18px;
+}
+.next-top{ display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.next-heading{ display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.eyebrow{ font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.next-day{ font-size: 40px; font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; }
+.next-date{ font-size: 16px; font-weight: 500; }
+.countdown{
+    background: #FFFFFF; color: var(--accent); border-radius: var(--radius-m); padding: 10px 14px;
+    display: flex; flex-direction: column; align-items: center; min-width: 56px;
+}
+.countdown-num{ font-size: 28px; font-weight: 800; line-height: 1; }
+.countdown-unit{ font-size: 12px; font-weight: 600; }
+.bins{
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px;
+}
+.bin{
+    background: #FFFFFF; border-radius: var(--radius-m); padding: 12px;
+    display: flex; align-items: center; gap: 10px; color: var(--text); min-width: 0;
+}
+.bin-icon{
+    width: 40px; height: 40px; border-radius: var(--radius-s); color: #FFFFFF;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.bin-text{ display: flex; flex-direction: column; min-width: 0; }
+.bin-name{ font-size: 15px; font-weight: 700; line-height: 1.25; }
+.bin-short{ font-size: 12px; font-weight: 500; color: var(--text-2); }
+.bin-moved{ font-size: 12px; font-weight: 600; color: var(--warn-icon); }
+.curb{ font-size: 14px; font-weight: 500; display: flex; gap: 10px; align-items: flex-start; }
+/* After the pickup hours: a gentle note, not an alarm */
+.curb-missed{ background: rgba(255, 255, 255, 0.10); border-radius: var(--radius-s); padding: 12px 14px; line-height: 1.45; }
+.place{ font-size: 13px; font-weight: 500; opacity: 0.95; }
+.next-message{ font-size: 16px; font-weight: 500; }
+
+/* ----------------------------------------------------------- holiday notice */
+.notice{
+    background: var(--warn-bg); border: 1px solid var(--warn-line); border-radius: var(--radius-m);
+    padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; color: var(--warn-text);
+}
+.notice-body{ display: flex; flex-direction: column; gap: 4px; }
+.notice-title{ font-size: 14px; font-weight: 700; }
+.notice-body p{ font-size: 14px; line-height: 1.4; }
+
+.notes-list{ margin: 8px 0 0; padding-left: 20px; color: var(--text-2); font-size: 14px; }
+.notes-list li + li{ margin-top: 4px; }
+
+/* -------------------------------------------------------------- coming up */
+.section-head{ display: flex; justify-content: space-between; align-items: center; }
+.section-head a{ font-size: 14px; font-weight: 600; text-decoration: none; padding: 12px 0; min-height: 44px; display: inline-flex; align-items: center; }
+.coming{ display: flex; flex-direction: column; gap: 10px; }
+.coming .section-head h2{ font-size: 20px; font-weight: 800; }
+.pickup-list{ list-style: none; margin: 0; padding: 0; }
+.pickup-row{ display: flex; align-items: center; gap: 14px; padding: 14px 16px; }
+.pickup-row + .pickup-row{ border-top: 1px solid var(--line-soft); }
+.pickup-when{ width: 48px; display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+.pickup-dow{ font-size: 12px; font-weight: 600; color: var(--text-2); text-transform: uppercase; }
+.pickup-dom{ font-size: 20px; font-weight: 800; line-height: 1.2; }
+.pickup-what{ flex: 1; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.pickup-title{ font-size: 15px; font-weight: 600; }
+.tags{ display: flex; flex-wrap: wrap; gap: 6px; }
+.tag{ font-size: 12px; font-weight: 600; color: #FFFFFF; border-radius: 8px; padding: 3px 8px; }
+.moved{ font-size: 12px; font-weight: 600; color: var(--warn-icon); }
+.empty-row{ padding: 16px; color: var(--text-2); }
+
+/* -------------------------------------------------------------- reminder */
+.remind{ padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
+.remind-row{ display: flex; align-items: center; gap: 14px; }
+.remind-text{ flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.remind-title{ font-size: 15px; font-weight: 600; }
+.switch{
+    width: 56px; height: 44px; padding: 0; border: none; background: none;
+    display: flex; align-items: center; justify-content: center; border-radius: 22px;
+}
+.switch-track{
+    width: 52px; height: 32px; border-radius: 16px; background: var(--switch-off);
+    display: flex; align-items: center; padding: 3px; justify-content: flex-start; transition: background .15s;
+}
+.switch[aria-pressed="true"] .switch-track{ background: var(--accent); justify-content: flex-end; }
+.switch-knob{ width: 26px; height: 26px; border-radius: 13px; background: #FFFFFF; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+
+/* ------------------------------------------------------------- which bin */
+.which{ display: flex; flex-direction: column; gap: 8px; }
+.which label{ font-size: 17px; font-weight: 700; }
+.search-box{
+    display: flex; align-items: center; gap: 10px; background: var(--card);
+    border: 1px solid var(--field-line); border-radius: 14px; padding: 0 14px; height: 50px;
+}
+.search-box:focus-within{ border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.search-box input{
+    flex: 1; border: none; outline: none; font-size: 16px; background: transparent; height: 100%; min-width: 0;
+}
+.which-results{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.which-result{
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-m);
+    padding: 12px; display: flex; align-items: center; gap: 12px;
+}
+.which-result .bin-icon{ width: 36px; height: 36px; border-radius: 10px; }
+.which-none{ font-size: 14px; color: var(--text); }
+.sample-note{ font-size: 12px; color: var(--text-2); }
+
+/* ------------------------------------------------------- add to calendar */
+.addcal{ padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.button-row{ display: flex; flex-wrap: wrap; gap: 8px; }
+.button{
+    min-height: 44px; display: inline-flex; align-items: center; gap: 8px; padding: 0 14px;
+    border-radius: 10px; border: 1px solid var(--field-line); background: var(--card);
+    text-decoration: none; font-size: 14px; font-weight: 600; color: var(--text);
+}
+.button:hover{ color: var(--text); background: var(--page); }
+.button[aria-disabled="true"], .button:disabled{ opacity: .55; cursor: not-allowed; }
+.button-primary{ background: var(--accent); border-color: var(--accent); color: #FFFFFF; }
+.button-primary:hover{ background: var(--accent-dark); color: #FFFFFF; }
+
+/* --------------------------------------------------------- address form */
+.setup{ padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+.setup h2{ font-size: 20px; font-weight: 800; }
+.fields{ display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+.field{ display: flex; flex-direction: column; gap: 4px; }
+.field-wide{ grid-column: span 2; }
+.field label{ font-size: 13px; font-weight: 600; color: var(--text-2); }
+.field input, .field select{
+    min-height: 44px; border: 1px solid var(--field-line); border-radius: 10px; padding: 0 12px;
+    background: var(--card); font-size: 16px; width: 100%;
+}
+.google-search gmp-place-autocomplete{ width: 100%; }
+.link-button{
+    border: none; background: none; padding: 0; min-height: 44px; color: var(--accent);
+    font-weight: 600; text-decoration: underline; text-align: left;
+}
+.form-error{ color: var(--error); font-weight: 600; font-size: 14px; }
+.form-error:empty{ display: none; }
+
+.status-card{ padding: 20px; color: var(--text-2); }
+
+/* ------------------------------------------------------------ bottom menu */
+.bottom-nav{
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+    background: var(--card); border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+}
+.bottom-nav a{
+    display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 0; min-height: 44px;
+    text-decoration: none; color: var(--text-2); font-size: 12px; font-weight: 600;
+}
+.bottom-nav a[aria-current="page"]{ color: var(--accent); font-weight: 700; }
+
+.site-footer{ max-width: 1200px; margin: 0 auto; padding: 8px 20px 24px; font-size: 13px; color: var(--text-2); }
+
+/* ================================================================ desktop */
+@media (min-width: 900px){
+    body{ padding-bottom: 0; font-size: 16px; }
+    .bottom-nav{ display: none; }
+    .site-header{ background: var(--card); border-bottom: 1px solid var(--line); }
+    .header-inner{ padding: 14px 32px; gap: 24px; flex-wrap: wrap; }
+    .brand{ display: flex; }
+    .top-nav{ display: flex; flex-wrap: wrap; gap: 4px; flex: 1; }
+    .top-nav a{
+        padding: 12px 14px; border-radius: 10px; text-decoration: none;
+        font-size: 15px; font-weight: 600; color: var(--text-nav);
+    }
+    .top-nav a:hover{ background: var(--page); }
+    .top-nav a[aria-current="page"]{ color: var(--accent); background: var(--accent-soft); font-weight: 700; }
+    .address-block{ flex: 0 1 auto; }
+    .address-menu{ left: auto; right: 0; }
+    .address-caption{ display: none; }
+    .address-button{
+        font-size: 15px; font-weight: 600; padding: 0 14px; gap: 8px;
+        border: 1px solid var(--button-line); border-radius: var(--radius-s); background: var(--card);
+    }
+    .address-button .pin{ display: block; }
+    .bell{ display: none; }
+
+    main{ padding: 32px; display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 24px; align-items: start; }
+    main.single{ grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+    .col{ display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+    .desktop-only:not([hidden]){ display: flex !important; }
+    .full{ grid-column: 1 / -1; }
+
+    .next{ border-radius: 28px; padding: 32px; gap: 24px; }
+    .eyebrow{ font-size: 14px; }
+    .next-day{ font-size: 64px; line-height: 1; }
+    .next-date{ font-size: 20px; }
+    .countdown{ border-radius: var(--radius-l); padding: 14px 22px; }
+    .countdown-num{ font-size: 44px; }
+    .countdown-unit{ font-size: 14px; }
+    .bins{ gap: 12px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    .bin{ border-radius: 18px; padding: 16px; gap: 14px; }
+    .bin-icon{ width: 52px; height: 52px; border-radius: 14px; }
+    .bin-name{ font-size: 18px; }
+    .bin-short{ font-size: 14px; }
+    .curb{ font-size: 16px; }
+    .notice{ border-radius: 18px; padding: 16px 20px; }
+    .notice-title, .notice-body p{ font-size: 15px; }
+    .which label{ font-size: 20px; }
+    .search-box{ height: 56px; border-radius: var(--radius-m); padding: 0 18px; }
+
+    /* Coming up is a card of its own on desktop, with the heading inside */
+    .coming{ background: var(--card); border: 1px solid var(--line); border-radius: 22px; gap: 0; }
+    .coming .section-head{ padding: 8px 20px; border-bottom: 1px solid var(--line-soft); }
+    .coming .section-head h2{ font-size: 22px; }
+    .coming .card{ border: none; border-radius: 0 0 22px 22px; }
+    .pickup-row{ padding: 16px 20px; }
+    .pickup-dom{ font-size: 22px; }
+    .remind, .addcal, .card{ border-radius: 22px; }
+    .remind{ padding: 16px 20px; }
+    .addcal{ padding: 16px 20px; }
+    .site-footer{ padding: 0 32px 32px; }
+}
+
+/* ----------------------------------------------- saved addresses drop-down */
+.address-menu{
+    position: absolute; top: calc(100% + 6px); left: 0; z-index: 30;
+    width: min(340px, calc(100vw - 40px));
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-m);
+    box-shadow: 0 12px 32px rgba(27, 31, 29, 0.16); padding: 8px;
+}
+.menu-label{ font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-2); padding: 8px 8px 4px; }
+.menu-status{ font-size: 13px; color: var(--text-2); padding: 6px 8px 0; }
+.saved-list{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.saved-row{ display: flex; align-items: stretch; gap: 2px; }
+.saved-use{
+    flex: 1; min-width: 0; min-height: 52px; display: flex; align-items: center; gap: 8px;
+    padding: 6px 8px; border: none; border-radius: 10px; background: none; text-align: left;
+}
+.saved-use:hover, .saved-remove:hover, .menu-add:hover{ background: var(--page); }
+.saved-use[aria-current="true"]{ background: var(--accent-soft); }
+.saved-check{ width: 20px; display: flex; justify-content: center; color: var(--accent); }
+.saved-text{ display: flex; flex-direction: column; min-width: 0; }
+.saved-line{ font-size: 15px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.saved-town{ font-size: 13px; color: var(--text-2); }
+.saved-remove{
+    width: 44px; min-height: 44px; border: none; border-radius: 10px; background: none; color: var(--text-2);
+    display: flex; align-items: center; justify-content: center;
+}
+.menu-add{
+    width: 100%; min-height: 48px; margin-top: 6px; padding: 0 10px; display: flex; align-items: center; gap: 8px;
+    border: none; border-top: 1px solid var(--line-soft); border-radius: 0 0 10px 10px; background: none;
+    color: var(--accent); font-weight: 700; text-align: left;
+}
+.setup .saved-list{ margin: 4px 0; }
