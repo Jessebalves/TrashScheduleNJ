@@ -1,0 +1,126 @@
+{
+    "id": "hillside",
+    "name": "Hillside",
+    "other_names": [
+        "Hillside Township",
+        "Township of Hillside"
+    ],
+    "zip_codes": [
+        "07205"
+    ],
+    "zone_word": "District",
+    "zones": {
+        "1": "District 1 (Monday & Thursday)",
+        "2": "District 2 (Tuesday & Friday)"
+    },
+    "street_names": {
+        "SAINT LOUIS AVE": "ST LOUIS AVE",
+        "MC LEAN PL": "MCLEAN PL",
+        "MC MICHAEL PL": "MCMICHAEL PL",
+        "GATE WAY": "GATEWAY ST",
+        "BAYVIEW TER": "BAYVIEW AVE",
+        "WINDSOR AVE": "WINDSOR WAY",
+        "BROAD ST": "N BROAD ST",
+        "US 22": "US HIGHWAY 22",
+        "US HWY 22": "US HIGHWAY 22",
+        "US-22": "US HIGHWAY 22",
+        "U.S 22": "US HIGHWAY 22",
+        "ROUTE 22": "US HIGHWAY 22",
+        "RT 22": "US HIGHWAY 22",
+        "HIGHWAY 22": "US HIGHWAY 22"
+    },
+    "holidays": [
+        {
+            "name": "New Year's Day",
+            "month": 1,
+            "day": 1
+        },
+        {
+            "name": "Memorial Day",
+            "month": 5,
+            "weekday": "Monday",
+            "nth": -1
+        },
+        {
+            "name": "Labor Day",
+            "month": 9,
+            "weekday": "Monday",
+            "nth": 1
+        },
+        {
+            "name": "Thanksgiving Day",
+            "month": 11,
+            "weekday": "Thursday",
+            "nth": 4
+        },
+        {
+            "name": "Christmas Day",
+            "month": 12,
+            "day": 25
+        },
+        {
+            "name": "Christmas Eve",
+            "date": "2027-12-24"
+        }
+    ],
+    "streams": [
+        {
+            "id": "garbage",
+            "label": "Household Trash",
+            "days_by_zone": {
+                "1": [
+                    "Monday",
+                    "Thursday"
+                ],
+                "2": [
+                    "Tuesday",
+                    "Friday"
+                ]
+            },
+            "on_holiday": "skip"
+        },
+        {
+            "id": "bulk",
+            "label": "Bulk Items (up to 3)",
+            "days_by_zone": {
+                "1": [
+                    "Thursday"
+                ],
+                "2": [
+                    "Friday"
+                ]
+            },
+            "on_holiday": "skip"
+        },
+        {
+            "id": "paper",
+            "label": "Newspaper & Cardboard",
+            "days": [
+                "Wednesday"
+            ],
+            "every_other_week_from": "2026-01-07",
+            "on_holiday": "skip"
+        },
+        {
+            "id": "containers",
+            "label": "Glass, Aluminum, Plastic & Cans",
+            "days": [
+                "Wednesday"
+            ],
+            "every_other_week_from": "2026-01-14",
+            "on_holiday": "skip"
+        }
+    ],
+    "checked_through": "2027-12-31",
+    "contact": "Hillside DPW, 973-926-1110",
+    "notes": [
+        "Put bins and bulk items out after 6 pm the night before pickup, and take them in by 7 pm on collection day.",
+        "Bulk items go out on your second trash day of the week, three pieces at most. Mattresses and box springs must be wrapped in plastic; call the DPW first.",
+        "Recycling: no plastic bags. Tie or bundle cardboard and paper."
+    ],
+    "sources": [
+        "2026-2027 Solid Waste/Recycling Collection Schedule (Hillside DPW): https://hillsidenj.us/external-6494",
+        "Solid Waste & Recycling District Schedule: https://www.hillsidenj.us/css/hillsidenj/attachments/22989/5ebb26e447b13_Solid_Waste__Recycling_District_Schedule.pdf",
+        "Address table: data/reference/union_county_street_list_2025.csv and the district street lists, by tools/build_hillside.py"
+    ]
+}

@@ -7,7 +7,7 @@ Every town the website covers has two files:
 | `towns/<town>.json` | The rules: pickup types, days, holidays, notes |
 | `data/<town>.csv` | The addresses: which zone each stretch of each street is in |
 
-A **zone** is whatever the town uses to decide pickup days. Elizabeth uses its six wards, Kenilworth uses three garbage routes. A town with one schedule for everybody has a single zone.
+A **zone** is whatever the town uses to decide pickup days. Elizabeth uses its six wards, Hillside its two districts, Kenilworth three garbage routes, Union an East and a West zone. A town with one schedule for everybody has a single zone.
 
 After changing either file, run the tests (`python3 -m unittest discover tests`) and then `sudo ./install.sh` to put the change on the server.
 
@@ -45,6 +45,12 @@ A date that is the same every year, or the nth weekday of a month (`-1` is the l
 {"name": "Christmas Day", "month": 12, "day": 25},
 {"name": "Labor Day", "month": 9, "weekday": "Monday", "nth": 1},
 {"name": "Memorial Day", "month": 5, "weekday": "Monday", "nth": -1}
+```
+
+A holiday that is only on one year's calendar, like Christmas Eve when Christmas falls on a Saturday:
+
+```json
+{"name": "Christmas Eve", "date": "2027-12-24"}
 ```
 
 ### Streams
@@ -96,4 +102,6 @@ Street names can be written any way (`Elm Street`, `ELM ST`), they are tidied wh
 ## Where to get the addresses
 
 - `data/reference/union_county_street_list_2025.csv` has every street in all 21 Union County towns with its ward and election district. It was made from the Board of Elections' "Find your Ward and District" PDF with `tools/county_pdf_to_csv.py`. For a town that collects by ward, or that has one schedule for everybody, this list is all that is needed.
+- A town that prints a street list for each zone, like Hillside, needs the county list plus that street list. `tools/build_hillside.py` is the example; it also cuts streets that are split between two zones.
+- A town whose street list is old or incomplete, like Union's 2015 route list, can use the Census map to fill the gaps: `tools/build_union.py` gives unlisted streets the zone of their neighbors and marks listed streets whose neighbors disagree, both as `Needs_Check`.
 - A town that only publishes a map of its routes needs the map turned into a street list. `tools/build_kenilworth.py` does this for Kenilworth from US Census street data and is the example to copy.

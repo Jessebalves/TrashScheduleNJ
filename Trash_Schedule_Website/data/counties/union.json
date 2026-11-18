@@ -10,14 +10,30 @@
         "paper":      {"name": "Paper",                    "color": "#1D5FBF", "icon": "paper",   "short": "Recycling"},
         "metal":      {"name": "Metal",                    "color": "#6A4C93", "icon": "can",     "short": "Recycling"},
         "containers": {"name": "Bottles, Cans & Plastics", "color": "#8F4A14", "icon": "bottle",  "short": "Recycling"},
+        "bulk":       {"name": "Bulk items",               "color": "#7A5230", "icon": "bin",     "short": "Bulk pickup"},
         "yard":       {"name": "Yard waste",               "color": "#2F6B22", "icon": "leaf",    "short": "Seasonal"},
+        "leaves":     {"name": "Leaves",                   "color": "#B4530F", "icon": "leaf",    "short": "Seasonal"},
         "dropoff":    {"name": "Not curbside",             "color": "#5A615D", "icon": "dropoff", "short": "Drop-off only"}
     },
     "towns": {
+        "hillside": {
+            "categories": {
+                "paper":      {"name": "Newspaper & Cardboard"},
+                "containers": {"name": "Glass, Aluminum, Plastic & Cans"}
+            }
+        },
         "kenilworth": {
             "categories": {
                 "paper": {"name": "Cardboard & Paper"},
                 "yard":  {"name": "Vegetative Waste"}
+            }
+        },
+        "union": {
+            "categories": {
+                "containers":    {"name": "Commingled"},
+                "paper":         {"name": "Brown Goods"},
+                "yard":          {"name": "Grass"},
+                "spring_leaves": {"name": "Spring leaves", "color": "#B0306A", "icon": "leaf", "short": "Seasonal"}
             }
         }
     }

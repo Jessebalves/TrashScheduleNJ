@@ -74,7 +74,7 @@ class WebsiteAnswers(unittest.TestCase):
     def test_town_that_is_not_covered(self):
         status, answer = self.ask(house_number='10', street='Main St', town='Cranford', zip='07016')
         self.assertEqual(status, 404)
-        self.assertEqual(answer['error'], 'Cranford is not covered yet. The towns we cover are: Elizabeth, Kenilworth.')
+        self.assertEqual(answer['error'], 'Cranford is not covered yet. The towns we cover are: Elizabeth, Hillside, Kenilworth, Union.')
 
     def test_address_that_is_not_found(self):
         status, answer = self.ask(house_number='10', street='No Such Street', town='Elizabeth')
@@ -95,7 +95,8 @@ class WebsiteAnswers(unittest.TestCase):
 
     def test_config_lists_the_towns(self):
         answer = self.client.get('/config').get_json()
-        self.assertEqual(answer['towns'], [{'id': 'elizabeth', 'name': 'Elizabeth'}, {'id': 'kenilworth', 'name': 'Kenilworth'}])
+        self.assertEqual(answer['towns'], [{'id': 'elizabeth', 'name': 'Elizabeth'}, {'id': 'hillside', 'name': 'Hillside'},
+                                          {'id': 'kenilworth', 'name': 'Kenilworth'}, {'id': 'union', 'name': 'Union'}])
         self.assertEqual(answer['googleMapsKey'], os.environ.get('GOOGLE_MAPS_API_KEY', ''))
 
 

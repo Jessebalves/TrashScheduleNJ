@@ -62,13 +62,19 @@ def find_town(towns, name='', zip_code=''):
 def holidays_in_year(town, year):
     """Return the town's holidays for one year as a dictionary of date -> name.
 
-    A holiday is written in the town file in one of two ways:
+    A holiday is written in the town file in one of three ways:
         {"name": "Christmas Day", "month": 12, "day": 25}
         {"name": "Labor Day", "month": 9, "weekday": "Monday", "nth": 1}
+        {"name": "Christmas Eve", "date": "2027-12-24"}      (one year only)
     nth counts from the start of the month, -1 means the last one of the month.
     """
     holidays = {}
     for holiday in town.get('holidays', []):
+        if 'date' in holiday:
+            date = parse_date(holiday['date'])
+            if date.year == year:
+                holidays[date] = holiday['name']
+            continue
         month = holiday['month']
         if 'day' in holiday:
             date = datetime.date(year, month, holiday['day'])

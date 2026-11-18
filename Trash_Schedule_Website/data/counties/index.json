@@ -3,6 +3,8 @@
     "default_county": "union",
     "towns": {
         "elizabeth": "union",
-        "kenilworth": "union"
+        "hillside": "union",
+        "kenilworth": "union",
+        "union": "union"
     }
 }
