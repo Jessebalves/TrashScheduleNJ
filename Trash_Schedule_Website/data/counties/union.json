@@ -28,6 +28,16 @@
                 "yard":  {"name": "Vegetative Waste"}
             }
         },
+        "linden": {
+            "categories": {
+                "containers":      {"name": "Bottles & Cans", "color": "#1D5FBF"},
+                "paper":           {"name": "Paper & Cardboard"},
+                "bulk":            {"name": "Bulk Trash & Yard Waste"},
+                "yard":            {"name": "Grass"},
+                "leaves":          {"name": "Bagged Leaves"},
+                "christmas_trees": {"name": "Christmas Trees", "color": "#0E5E5A", "icon": "leaf", "short": "Seasonal"}
+            }
+        },
         "roselle": {
             "categories": {
                 "containers": {"name": "Bottles, Cans & Paper"},

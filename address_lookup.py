@@ -60,6 +60,13 @@ def normalize_street(name):
     if len(words) >= 3:
         words[0] = DIRECTIONS.get(words[0], words[0])
     words[-1] = STREET_TYPES.get(words[-1], words[-1])
+    #"St Georges Ave" and "Saint Georges Ave" (Census), "Mc Kinley St" and "McKinley St"
+    #(Google): a name never starts with "Street", so a first ST is Saint
+    first = 1 if len(words) >= 3 and words[0] in DIRECTIONS.values() else 0
+    if len(words) - first >= 3 and words[first] == 'ST':
+        words[first] = 'SAINT'
+    if len(words) - first >= 3 and words[first] in ('MC', 'MAC'):
+        words[first:first + 2] = [words[first] + words[first + 1]]
     return ' '.join(words)
 
 

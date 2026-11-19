@@ -527,7 +527,7 @@ function buildAddressForm(panel, options){
             fields.town.appendChild(option);
         });
         if(config.towns.length){
-            $("#address-lead", panel).textContent = "We cover " + config.towns.map(t => t.name).join(" and ") + " so far.";
+            $("#address-lead", panel).textContent = "We cover " + andList(config.towns.map(t => t.name)) + " so far.";
         }
         if(config.offline){
             error.textContent = "The server could not be reached, please try again later.";

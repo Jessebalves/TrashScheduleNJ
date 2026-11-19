@@ -7,7 +7,7 @@ Every town the website covers has two files:
 | `towns/<town>.json` | The rules: pickup types, days, holidays, notes |
 | `data/<town>.csv` | The addresses: which zone each stretch of each street is in |
 
-A **zone** is whatever the town uses to decide pickup days. Elizabeth uses its six wards, Hillside its two districts, Kenilworth three garbage routes, Union an East and a West zone. Roselle splits two ways, garbage by the side of Chestnut St and recycling by ward, so its zones are both together (`E3` is east of Chestnut St in the 3rd Ward). Aberdeen (Monmouth County) has two sections. A town with one schedule for everybody has a single zone.
+A **zone** is whatever the town uses to decide pickup days. Elizabeth uses its six wards, Hillside its two districts, Kenilworth three garbage routes, Union an East and a West zone. Roselle splits two ways, garbage by the side of Chestnut St and recycling by ward, so its zones are both together (`E3` is east of Chestnut St in the 3rd Ward). Aberdeen (Monmouth County) has two sections. Linden has ten DPW collection districts, which are not its wards. A town with one schedule for everybody has a single zone.
 
 After changing either file, run the tests (`python3 -m unittest discover tests`) and then `sudo ./install.sh` to put the change on the server.
 
@@ -92,6 +92,9 @@ One entry for each row of the table, in the order they should be shown.
 | `nth_in_month` | Optional. Only these weeks of the month: `[1]` is the first of `days` in the month, `[1, 3]` the first and third, `[-1]` the last |
 | `nth_in_month_by_zone` | The same for each zone, use this instead of `nth_in_month` |
 | `moved_dates` | Optional. Single pickups the town moved to another date |
+| `moved_dates_by_zone` | The same for each zone, when a holiday moves pickups differently in each zone, like Linden (some a day earlier, some a day later). The visitor is told which holiday of that week caused it |
+| `dates` | A list of the exact pickup dates, instead of `days`, for a stream with no pattern, like Linden's grass and leaf weeks. Holidays are not looked at: the dates are the real ones |
+| `dates_by_zone` | The same for each zone, like Linden's four bulk days a year |
 | `on_holiday` | `"next_day"`: the pickup moves to the day after (past any holiday right after it, and never to a Sunday). `"skip"`: no pickup, it waits for the next regular day |
 
 ## The address file
@@ -117,4 +120,5 @@ Street names can be written any way (`Elm Street`, `ELM ST`), they are tidied wh
 - A town whose street list is old or incomplete, like Union's 2015 route list, can use the Census map to fill the gaps: `tools/build_union.py` gives unlisted streets the zone of their neighbors and marks listed streets whose neighbors disagree, both as `Needs_Check`.
 - A town that splits on a street, like Roselle (east and west of Chestnut St), can use the Census map to put each house on its side of that street: `tools/build_roselle.py`.
 - A town outside Union County has no county street list. `tools/build_aberdeen.py` takes the house numbers from the Census address ranges inside the town's Census boundary, and the zones from streets checked in the town's own lookup (Recycle Coach), Census neighborhood places and the nearest checked streets.
+- A town whose zones are only on a map with filled areas, like Linden's DPW collection districts, can use the map itself: `tools/build_linden.py` reads the colored areas out of the PDF, lines the map up with the Census streets by the street names printed on it, and gives each side of each block the zone it is in.
 - A town that only publishes a map of its routes needs the map turned into a street list. `tools/build_kenilworth.py` does this for Kenilworth from US Census street data and is the example to copy.

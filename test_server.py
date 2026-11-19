@@ -82,6 +82,11 @@ def load_everything():
     else:
         load_addresses_from_mysql()
     print("Address rows loaded:", addresses.row_count)
+    #A town whose rules are written but whose addresses are not in yet (Linden, Nov 2026)
+    #is not offered: every lookup there would fail
+    with_addresses = {town_id for town_id, street in addresses.streets}
+    for town_id in [t for t in towns if t not in with_addresses]:
+        print("Not offered yet, no addresses:", towns.pop(town_id)['name'])
 
 
 def problem(message, status=400):
