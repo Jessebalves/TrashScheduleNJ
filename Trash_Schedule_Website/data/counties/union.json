@@ -28,6 +28,12 @@
                 "yard":  {"name": "Vegetative Waste"}
             }
         },
+        "roselle": {
+            "categories": {
+                "containers": {"name": "Bottles, Cans & Paper"},
+                "yard":       {"name": "Vegetative Waste"}
+            }
+        },
         "union": {
             "categories": {
                 "containers":    {"name": "Commingled"},

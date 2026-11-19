@@ -7,6 +7,7 @@ every week or every other week, and what happens on a holiday.
 
 Nothing in this file talks to MySQL or to Flask, so it can be tested on its own.
 """
+import calendar
 import datetime
 import json
 import os
@@ -110,6 +111,22 @@ def is_scheduled(stream, zone_id, date):
         return False
     if 'last_date' in stream and date > parse_date(stream['last_date']):
         return False
+    #Some streams skip months every year, like Roselle's bulk pickup in winter
+    if 'months' in stream and date.month not in stream['months']:
+        return False
+
+    #Some streams run on one week of the month only, like Roselle's bulk pickup on the
+    #first or third Wednesday. 1 is the first one of the month, -1 the last one.
+    if 'nth_in_month_by_zone' in stream:
+        nth = stream['nth_in_month_by_zone'].get(zone_id, [])
+    else:
+        nth = stream.get('nth_in_month')
+    if nth is not None:
+        from_start = (date.day - 1) // 7 + 1
+        days_in_month = calendar.monthrange(date.year, date.month)[1]
+        from_end = -((days_in_month - date.day) // 7 + 1)
+        if from_start not in nth and from_end not in nth:
+            return False
 
     #Every other week: count whole weeks from a date that is known to be a pickup
     #day. Counting from one fixed date keeps the pattern right across New Year.
@@ -138,7 +155,8 @@ def resolve_pickup(town, stream, date):
         return date, None
     if stream.get('on_holiday') == 'next_day':
         moved = date + datetime.timedelta(days=1)
-        while holiday_name(town, moved) is not None:
+        #Past any holiday right after it, and never onto a Sunday (no town collects then)
+        while holiday_name(town, moved) is not None or day_name(moved) == 'Sunday':
             moved += datetime.timedelta(days=1)
         return moved, holiday
     return None, holiday

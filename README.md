@@ -150,6 +150,7 @@ Our system uses Flask on the backend. The easiest way to help is to add your tow
 <!--*Credits to individuals or resources that helped you during the project.*-->
 - elizabethnj.org : https://www.elizabethnj.org/288/Garbage-and-Recycling-Calendar
 - Borough of Kenilworth, 2026 Information Guide DPW : https://kenilworthborough.com/188/Public-Works
+- Borough of Roselle, 2026/2027 Sanitation/Recycling Schedule (DPW) : https://www.boroughofroselle.com/departments/public_works/index.php
 - Union County Board of Elections, "Find your Ward and District" street list : https://ucnj.org/boe/where-do-i-vote/
 - US Census Bureau, TIGER/Line address ranges and town boundaries : https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html
 ---

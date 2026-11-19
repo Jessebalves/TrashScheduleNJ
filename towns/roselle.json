@@ -1,0 +1,317 @@
+{
+    "id": "roselle",
+    "name": "Roselle",
+    "other_names": [
+        "Roselle Borough",
+        "Borough of Roselle"
+    ],
+    "zip_codes": [
+        "07203"
+    ],
+    "zone_word": "Zone",
+    "zones": {
+        "E1": "East of Chestnut St, 1st Ward (garbage Monday & Thursday, recycling Monday)",
+        "E2": "East of Chestnut St, 2nd Ward (garbage Monday & Thursday, recycling Tuesday)",
+        "E3": "East of Chestnut St, 3rd Ward (garbage Monday & Thursday, recycling Wednesday)",
+        "W3": "West of Chestnut St, 3rd Ward (garbage Tuesday & Friday, recycling Wednesday)",
+        "W4": "West of Chestnut St, 4th Ward (garbage Tuesday & Friday, recycling Thursday)",
+        "W5": "West of Chestnut St, 5th Ward (garbage Tuesday & Friday, recycling Friday)"
+    },
+    "street_names": {
+        "ST GEORGES AVE": "SAINT GEORGES AVE",
+        "ST GEORGE AVE": "SAINT GEORGES AVE",
+        "SAINT GEORGE AVE": "SAINT GEORGES AVE",
+        "E ST GEORGES AVE": "E SAINT GEORGES AVE",
+        "E ST GEORGE AVE": "E SAINT GEORGES AVE",
+        "E SAINT GEORGE AVE": "E SAINT GEORGES AVE",
+        "PARK VIEW DR": "PARKVIEW DR",
+        "LILLY CT": "LILY CT",
+        "SHAEFER AVE": "SHAFFER AVE"
+    },
+    "holidays": [
+        {
+            "name": "New Year's Day",
+            "month": 1,
+            "day": 1
+        },
+        {
+            "name": "Martin Luther King Day",
+            "month": 1,
+            "weekday": "Monday",
+            "nth": 3
+        },
+        {
+            "name": "Lincoln's Birthday",
+            "month": 2,
+            "day": 12
+        },
+        {
+            "name": "Presidents' Day",
+            "month": 2,
+            "weekday": "Monday",
+            "nth": 3
+        },
+        {
+            "name": "Good Friday",
+            "date": "2026-04-03"
+        },
+        {
+            "name": "Good Friday",
+            "date": "2027-03-26"
+        },
+        {
+            "name": "Memorial Day",
+            "month": 5,
+            "weekday": "Monday",
+            "nth": -1
+        },
+        {
+            "name": "Juneteenth",
+            "month": 6,
+            "day": 19
+        },
+        {
+            "name": "Juneteenth (observed)",
+            "date": "2027-06-18"
+        },
+        {
+            "name": "Independence Day",
+            "date": "2026-07-03"
+        },
+        {
+            "name": "Independence Day (observed)",
+            "date": "2027-07-05"
+        },
+        {
+            "name": "Labor Day",
+            "month": 9,
+            "weekday": "Monday",
+            "nth": 1
+        },
+        {
+            "name": "Columbus Day",
+            "month": 10,
+            "weekday": "Monday",
+            "nth": 2
+        },
+        {
+            "name": "Election Day",
+            "date": "2026-11-03"
+        },
+        {
+            "name": "Election Day",
+            "date": "2027-11-02"
+        },
+        {
+            "name": "Veterans Day",
+            "month": 11,
+            "day": 11
+        },
+        {
+            "name": "Thanksgiving Day",
+            "month": 11,
+            "weekday": "Thursday",
+            "nth": 4
+        },
+        {
+            "name": "Day after Thanksgiving",
+            "date": "2026-11-27"
+        },
+        {
+            "name": "Day after Thanksgiving",
+            "date": "2027-11-26"
+        },
+        {
+            "name": "Christmas Day",
+            "month": 12,
+            "day": 25
+        },
+        {
+            "name": "Christmas Day (observed)",
+            "date": "2027-12-24"
+        }
+    ],
+    "streams": [
+        {
+            "id": "garbage",
+            "label": "Household Trash",
+            "days_by_zone": {
+                "E1": [
+                    "Monday",
+                    "Thursday"
+                ],
+                "E2": [
+                    "Monday",
+                    "Thursday"
+                ],
+                "E3": [
+                    "Monday",
+                    "Thursday"
+                ],
+                "W3": [
+                    "Tuesday",
+                    "Friday"
+                ],
+                "W4": [
+                    "Tuesday",
+                    "Friday"
+                ],
+                "W5": [
+                    "Tuesday",
+                    "Friday"
+                ]
+            },
+            "on_holiday": "skip"
+        },
+        {
+            "id": "containers",
+            "label": "Bottles, Cans & Paper",
+            "days_by_zone": {
+                "E1": [
+                    "Monday"
+                ],
+                "E2": [
+                    "Tuesday"
+                ],
+                "E3": [
+                    "Wednesday"
+                ],
+                "W3": [
+                    "Wednesday"
+                ],
+                "W4": [
+                    "Thursday"
+                ],
+                "W5": [
+                    "Friday"
+                ]
+            },
+            "on_holiday": "next_day"
+        },
+        {
+            "id": "bulk",
+            "label": "Bulk Trash (up to 10 items)",
+            "days": [
+                "Wednesday"
+            ],
+            "nth_in_month_by_zone": {
+                "E1": [
+                    1
+                ],
+                "E2": [
+                    1
+                ],
+                "E3": [
+                    1
+                ],
+                "W3": [
+                    3
+                ],
+                "W4": [
+                    3
+                ],
+                "W5": [
+                    3
+                ]
+            },
+            "months": [
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11
+            ],
+            "on_holiday": "next_day"
+        },
+        {
+            "id": "yard",
+            "label": "Vegetative Waste",
+            "days_by_zone": {
+                "E1": [
+                    "Monday"
+                ],
+                "E2": [
+                    "Tuesday"
+                ],
+                "E3": [
+                    "Wednesday"
+                ],
+                "W3": [
+                    "Wednesday"
+                ],
+                "W4": [
+                    "Thursday"
+                ],
+                "W5": [
+                    "Friday"
+                ]
+            },
+            "first_date": "2026-04-06",
+            "on_holiday": "next_day",
+            "months": [
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+            ]
+        },
+        {
+            "id": "leaves",
+            "label": "Leaves",
+            "days_by_zone": {
+                "E1": [
+                    "Monday"
+                ],
+                "E2": [
+                    "Tuesday"
+                ],
+                "E3": [
+                    "Wednesday"
+                ],
+                "W3": [
+                    "Wednesday"
+                ],
+                "W4": [
+                    "Thursday"
+                ],
+                "W5": [
+                    "Friday"
+                ]
+            },
+            "first_date": "2026-10-13",
+            "on_holiday": "next_day",
+            "months": [
+                10,
+                11,
+                12,
+                1,
+                2,
+                3
+            ]
+        }
+    ],
+    "checked_through": "2027-12-31",
+    "contact": "Roselle DPW, 908-245-2920",
+    "notes": [
+        "Chestnut Street divides the borough for garbage and bulk: east of it Monday & Thursday and bulk on the 1st Wednesday, west of it Tuesday & Friday and bulk on the 3rd Wednesday. Recycling, leaves and vegetative waste go by ward: 1st Ward Monday through 5th Ward Friday.",
+        "Put everything at the curb the night before (recycling after 6 pm). Do not put anything out before a holiday or when bad weather is expected.",
+        "Recycling: glass bottles, aluminum and tin cans and #1 and #2 plastic bottles in an open container, no plastic bags. Bundle and tie paper and cardboard, or put it in an open container, 50 lb at most.",
+        "Bulk: 10 items at most, no bulk pickup in December, January or February. Wrap mattresses, box springs and toilets in plastic. No construction debris.",
+        "Leaves (mid-October to the end of March) and vegetative waste (early April to the end of October): 10 bags at most, brown paper bags or an open container of 35 gallons or less, never plastic bags.",
+        "Metal, aluminum and appliances are picked up on the last Thursday of the month; call the DPW first.",
+        "When a holiday falls on your recycling, bulk, leaf or vegetative waste day, the borough picks up the next day, but says the exact day is to be determined. Garbage is not moved: it waits for your next garbage day."
+    ],
+    "sources": [
+        "2026/2027 Sanitation/Recycling Schedule and 2026 holiday list (Roselle DPW): https://www.boroughofroselle.com/SKM_C300i26010810470.pdf and https://www.boroughofroselle.com/SKM_C300i26010810471.pdf",
+        "Bulk trash, vegetative waste, leaf pick-up 2026-2027 and recycling flyers: https://www.boroughofroselle.com/departments/public_works/index.php",
+        "Address table: data/reference/union_county_street_list_2025.csv (wards) and the US Census address ranges (side of Chestnut St), by tools/build_roselle.py",
+        "2027: the borough reuses its schedule, so the 2026 holidays are carried into 2027 (weekend holidays on the Friday before or the Monday after, as with July 3, 2026) and the leaf and vegetative waste seasons repeat by month"
+    ]
+}
