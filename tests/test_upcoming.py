@@ -90,7 +90,8 @@ class WebsiteUpcoming(unittest.TestCase):
         self.assertIn(b'data-page="home"', response.data)
         response.close()
         for page in ('calendar.html', 'which-bin.html', 'settings.html', 'app.js', 'app.css',
-                     'data/counties/union.json', 'data/which-bin/union.json'):
+                     'data/counties/union.json', 'data/which-bin/union.json',
+                     'data/counties/monmouth.json', 'data/which-bin/monmouth.json'):
             response = self.client.get('/' + page)
             self.assertEqual(response.status_code, 200, page)
             response.close()

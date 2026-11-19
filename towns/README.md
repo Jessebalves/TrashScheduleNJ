@@ -7,9 +7,16 @@ Every town the website covers has two files:
 | `towns/<town>.json` | The rules: pickup types, days, holidays, notes |
 | `data/<town>.csv` | The addresses: which zone each stretch of each street is in |
 
-A **zone** is whatever the town uses to decide pickup days. Elizabeth uses its six wards, Hillside its two districts, Kenilworth three garbage routes, Union an East and a West zone. Roselle splits two ways, garbage by the side of Chestnut St and recycling by ward, so its zones are both together (`E3` is east of Chestnut St in the 3rd Ward). A town with one schedule for everybody has a single zone.
+A **zone** is whatever the town uses to decide pickup days. Elizabeth uses its six wards, Hillside its two districts, Kenilworth three garbage routes, Union an East and a West zone. Roselle splits two ways, garbage by the side of Chestnut St and recycling by ward, so its zones are both together (`E3` is east of Chestnut St in the 3rd Ward). Aberdeen (Monmouth County) has two sections. A town with one schedule for everybody has a single zone.
 
 After changing either file, run the tests (`python3 -m unittest discover tests`) and then `sudo ./install.sh` to put the change on the server.
+
+## Adding a town: checklist
+
+1. Find the town's own schedule (calendar, guide, service-date list) and write the rules file.
+2. Collect the town's public statements for residents and put them in `notes` (the new design shows them under "From your town"): when to put things out, how to prepare recyclables, bulk and appliance rules and fees, yard waste, leaves and Christmas trees, drop-off yard hours, the holiday rule. Set `contact` to the office residents should call, and list every source with the date it was checked.
+3. Check every date the town publishes (each stream, holidays, moved pickups) against what the website shows, and put them in `tests/test_<town>.py`.
+4. Build `data/<town>.csv` (see "Where to get the addresses"), run the tests, then `sudo ./install.sh`.
 
 ## The rules file
 
@@ -79,6 +86,7 @@ One entry for each row of the table, in the order they should be shown.
 | `days` | Pickup days, the same for the whole town |
 | `days_by_zone` | Pickup days for each zone, use this instead of `days` |
 | `every_other_week_from` | Leave out for every week. For every other week, any one date that is a pickup day |
+| `every_other_week_from_by_zone` | The same for each zone, when zones take turns, like Aberdeen's two sections |
 | `first_date`, `last_date` | Optional. The stream only runs between these dates, like yard waste |
 | `months` | Optional. The stream only runs in these months (1 to 12) every year, like Roselle's bulk pickup, which stops in winter |
 | `nth_in_month` | Optional. Only these weeks of the month: `[1]` is the first of `days` in the month, `[1, 3]` the first and third, `[-1]` the last |
@@ -108,4 +116,5 @@ Street names can be written any way (`Elm Street`, `ELM ST`), they are tidied wh
 - A town that prints a street list for each zone, like Hillside, needs the county list plus that street list. `tools/build_hillside.py` is the example; it also cuts streets that are split between two zones.
 - A town whose street list is old or incomplete, like Union's 2015 route list, can use the Census map to fill the gaps: `tools/build_union.py` gives unlisted streets the zone of their neighbors and marks listed streets whose neighbors disagree, both as `Needs_Check`.
 - A town that splits on a street, like Roselle (east and west of Chestnut St), can use the Census map to put each house on its side of that street: `tools/build_roselle.py`.
+- A town outside Union County has no county street list. `tools/build_aberdeen.py` takes the house numbers from the Census address ranges inside the town's Census boundary, and the zones from streets checked in the town's own lookup (Recycle Coach), Census neighborhood places and the nearest checked streets.
 - A town that only publishes a map of its routes needs the map turned into a street list. `tools/build_kenilworth.py` does this for Kenilworth from US Census street data and is the example to copy.

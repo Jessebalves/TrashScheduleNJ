@@ -41,9 +41,20 @@
             "on_holiday": "next_day"
         }
     ],
-    "notes": [],
+    "checked_through": "2027-01-31",
+    "contact": "Elizabeth Recycling Division, 908-820-4150",
+    "notes": [
+        "Put your containers at the curb the night before, after 6:00 PM.",
+        "Wednesday is recycling day and alternates: Paper weeks take newspapers (tied or in brown paper bags), mixed office paper in a separate reusable container, and cardboard folded and tied or nested. Metal weeks take aluminum and tin cans, glass bottles and jars and plastic containers #1, #2 and #5, rinsed and mixed in one container. No plastic bags.",
+        "Bulk: up to three household items (couches, tables, chairs, mattresses, dressers, rugs) on your second garbage day, Thursday or Friday, never Monday or Tuesday. No doors, windows, TVs or construction material.",
+        "Metal and appliances, and leaves, grass, branches and brush, are picked up by appointment only: call 908-820-4150 before putting them out. Branches go in bundles of 4 feet and 75 lb at most.",
+        "TVs, monitors and computers go to the Recycling Center, 523 Trenton Ave (Mon-Fri 8 AM-6 PM, Sat and Sun to 4 PM). Two car tires may go out with Thursday or Friday garbage.",
+        "A pickup that falls on a holiday is picked up the next day.",
+        "Separating recyclables is the law, even with private service, and is enforced with summonses. Buildings with three or more units need an outside enclosure with garbage and recycling signs."
+    ],
     "sources": [
-        "Rules carried over unchanged from the first version of the website (index.js), which was written from the City of Elizabeth's printed schedule.",
+        "2026 Trash & Recycling Calendar (City of Elizabeth DPW, Recycling Division), checked 2026-11-19: https://www.elizabethnj.org/DocumentCenter/View/9644/City-of-Elizabeth-Recycling-2026-v6-1BLEEDS",
+        "Days and holidays were first carried over from the first version of the website (index.js); the 2026 calendar confirms them.",
         "Address table: Union County street list of 4/3/2017, wards as they were then."
     ]
 }

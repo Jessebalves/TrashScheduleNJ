@@ -130,8 +130,14 @@ def is_scheduled(stream, zone_id, date):
 
     #Every other week: count whole weeks from a date that is known to be a pickup
     #day. Counting from one fixed date keeps the pattern right across New Year.
-    if 'every_other_week_from' in stream:
-        start = sunday_of(parse_date(stream['every_other_week_from']))
+    #Aberdeen's two sections recycle on alternate weeks: one start date for each zone
+    start = stream.get('every_other_week_from')
+    if 'every_other_week_from_by_zone' in stream:
+        if zone_id not in stream['every_other_week_from_by_zone']:
+            return False
+        start = stream['every_other_week_from_by_zone'][zone_id]
+    if start is not None:
+        start = sunday_of(parse_date(start))
         weeks = (sunday_of(date) - start).days // 7
         if weeks % 2 != 0:
             return False

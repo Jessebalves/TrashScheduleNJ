@@ -1,0 +1,112 @@
+{
+    "id": "aberdeen",
+    "name": "Aberdeen",
+    "other_names": [
+        "Aberdeen Township",
+        "Township of Aberdeen",
+        "Aberdeen Twp",
+        "Cliffwood",
+        "Cliffwood Beach",
+        "Strathmore"
+    ],
+    "zip_codes": [
+        "07747",
+        "07721",
+        "07735"
+    ],
+    "zone_word": "Section",
+    "zones": {
+        "1": "Section I (Monday & Thursday)",
+        "2": "Section II (Tuesday & Friday)"
+    },
+    "street_names": {
+        "ROUTE 34": "STATE RTE 34",
+        "RT 34": "STATE RTE 34",
+        "NJ 34": "STATE RTE 34",
+        "NJ-34": "STATE RTE 34",
+        "STATE ROUTE 34": "STATE RTE 34",
+        "HIGHWAY 34": "STATE RTE 34",
+        "ROUTE 35": "STATE RTE 35",
+        "RT 35": "STATE RTE 35",
+        "NJ 35": "STATE RTE 35",
+        "NJ-35": "STATE RTE 35",
+        "STATE ROUTE 35": "STATE RTE 35",
+        "HIGHWAY 35": "STATE RTE 35"
+    },
+    "holidays": [
+        {
+            "name": "New Year's Day",
+            "month": 1,
+            "day": 1
+        },
+        {
+            "name": "Thanksgiving Day",
+            "month": 11,
+            "weekday": "Thursday",
+            "nth": 4
+        },
+        {
+            "name": "Christmas Day",
+            "month": 12,
+            "day": 25
+        }
+    ],
+    "streams": [
+        {
+            "id": "garbage",
+            "label": "Garbage",
+            "days_by_zone": {
+                "1": [
+                    "Monday",
+                    "Thursday"
+                ],
+                "2": [
+                    "Tuesday",
+                    "Friday"
+                ]
+            },
+            "on_holiday": "skip"
+        },
+        {
+            "id": "containers",
+            "label": "Recycling",
+            "days": [
+                "Wednesday"
+            ],
+            "every_other_week_from_by_zone": {
+                "1": "2026-01-07",
+                "2": "2026-01-14"
+            },
+            "on_holiday": "skip"
+        },
+        {
+            "id": "bulk",
+            "label": "Bulk Items (up to 2)",
+            "days_by_zone": {
+                "1": [
+                    "Thursday"
+                ],
+                "2": [
+                    "Friday"
+                ]
+            },
+            "on_holiday": "skip"
+        }
+    ],
+    "checked_through": "2026-12-31",
+    "contact": "Aberdeen Township, 732-583-4200",
+    "notes": [
+        "Condominium and apartment complexes are not collected by the township; ask your homeowners' association.",
+        "Put garbage out no earlier than 4 pm the night before and take the pails in as soon as you can after pickup.",
+        "Recycling goes in one container, no plastic bags: glass, cans, plastic bottles #1 and #2, newspaper, cardboard and mixed paper. Bundle or bag paper in paper bags.",
+        "Bulk: two items per pickup on your second garbage day; mattresses wrapped in plastic. No TVs or computers at the curb; take them to the Public Works yard, 147 Lenox Rd.",
+        "Brush and branches: Section I the weeks of April 20 and September 21, Section II the weeks of April 27 and September 28, out by Monday morning.",
+        "Leaves: by neighborhood, one week each from October 12 to December 7; see the township's Fall Leaf Pick-Up Schedule. Grass clippings are not picked up.",
+        "When New Year's Day, Thanksgiving or Christmas falls on your day, pickup is on your next scheduled day."
+    ],
+    "sources": [
+        "2026 Community Calendar, Trash & Recycling Pick-Up Schedule for Single-Family Residences: https://www.aberdeennj.org/DocumentCenter/View/3686",
+        "Trash / Recycling page (sections by neighborhood): https://aberdeennj.org/271/Trash-Recycling",
+        "Address table: US Census address ranges and boundaries, with streets checked in Recycle Coach (2026-11-19), by tools/build_aberdeen.py"
+    ]
+}

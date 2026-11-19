@@ -38,7 +38,8 @@ class WebsiteAnswers(unittest.TestCase):
         self.assertEqual(answer['zone'], {'id': '4', 'word': 'Ward', 'label': 'Ward 4'})
         self.assertEqual([s['label'] for s in answer['streams']], ['Paper', 'Metal', 'Garbage'])
         self.assertEqual(answer['streams'][2]['pickups'], ['Tuesday', 'Friday'])
-        self.assertEqual(answer['notes'], [])
+        #From the city's 2026 calendar, shown under "From your town"
+        self.assertIn('after 6:00 PM', answer['notes'][0])
 
     def test_old_one_line_address_still_works(self):
         status, answer = self.ask(key='142 elm st 07208')
@@ -74,7 +75,7 @@ class WebsiteAnswers(unittest.TestCase):
     def test_town_that_is_not_covered(self):
         status, answer = self.ask(house_number='10', street='Main St', town='Cranford', zip='07016')
         self.assertEqual(status, 404)
-        self.assertEqual(answer['error'], 'Cranford is not covered yet. The towns we cover are: Elizabeth, Hillside, Kenilworth, Roselle, Union.')
+        self.assertEqual(answer['error'], 'Cranford is not covered yet. The towns we cover are: Aberdeen, Elizabeth, Hillside, Kenilworth, Roselle, Union.')
 
     def test_address_that_is_not_found(self):
         status, answer = self.ask(house_number='10', street='No Such Street', town='Elizabeth')
@@ -95,7 +96,7 @@ class WebsiteAnswers(unittest.TestCase):
 
     def test_config_lists_the_towns(self):
         answer = self.client.get('/config').get_json()
-        self.assertEqual(answer['towns'], [{'id': 'elizabeth', 'name': 'Elizabeth'}, {'id': 'hillside', 'name': 'Hillside'},
+        self.assertEqual(answer['towns'], [{'id': 'aberdeen', 'name': 'Aberdeen'}, {'id': 'elizabeth', 'name': 'Elizabeth'}, {'id': 'hillside', 'name': 'Hillside'},
                                           {'id': 'kenilworth', 'name': 'Kenilworth'}, {'id': 'roselle', 'name': 'Roselle'},
                                           {'id': 'union', 'name': 'Union'}])
         self.assertEqual(answer['googleMapsKey'], os.environ.get('GOOGLE_MAPS_API_KEY', ''))

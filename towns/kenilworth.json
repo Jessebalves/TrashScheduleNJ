@@ -113,11 +113,17 @@
     "checked_through": "2026-12-31",
     "contact": "Kenilworth DPW, 908-276-5073",
     "notes": [
-        "Put everything at the curb after 5 pm the night before pickup.",
-        "Vegetative waste is not picked up during leaf collection, from late October to the end of the year."
+        "Put your containers at the curb after 5 pm the night before collection; items put out late miss that day's pickup. Weather can delay a route by a day or two, so leave your items out until they are collected, and do not put anything out after your street has been done.",
+        "Recycling is required by borough ordinance (fine up to $500) and is dual stream: cardboard and paper on one Tuesday, bottles, cans and plastics #1, #2 and #5 on the next. Bundle loose cardboard with string or tape, or put it in a larger box. Rinse containers; no frozen food trays, salad containers or yogurt cups. Use a covered 32-gallon container, never black bags, leaf bags or plastic bags.",
+        "Vegetative waste (branches in 3-foot bundles, grass, garden waste) goes out every Thursday in a 32-gallon container or brown paper bags, but not during leaf collection; it starts again on the first Thursday of January 2027.",
+        "Leaves: piles at the curb, in brown paper bags or in a covered 32-gallon container, never on storm drains, hydrants or street markings. The vacuum truck comes to the south side the weeks of Oct 26, Nov 9, Nov 30 and Dec 14, and to the north side the weeks of Nov 2, Nov 16, Dec 7 and Dec 21. From January 1, 2027 leaves must be in a container or paper bags. On the Boulevard and Michigan Ave, Union County collects leaves (908-789-3660).",
+        "Refrigerators, freezers and air conditioners are picked up on Fridays for a fee paid at the Borough Clerk, 567 Boulevard, by Thursday 1 pm; remove the doors. Other bulky items are collected for a fee (price list on the borough website); metal goes out free.",
+        "Christmas trees are picked up at the curb in January 2027, without lights, ornaments or plastic bags.",
+        "DPW yard drop-off (entrance on 14th St across from the American Legion): Fridays 7:30 am-2:30 pm and the second Saturday of the month 7:30 am-12 pm, with proof of residency. It takes recyclables, TVs and computers, scrap metal, plastic film, cooking and motor oil and vegetative waste.",
+        "On a holiday there is no collection; it is picked up on your next regular day."
     ],
     "sources": [
-        "2026 Information Guide DPW: https://kenilworthborough.com/DocumentCenter/View/1413/2026-Information-Guide-DPW",
+        "2026 Information Guide DPW (rules, Service Dates List, holidays; every 2026 date re-checked 2026-11-19): https://kenilworthborough.com/DocumentCenter/View/1413/2026-Information-Guide-DPW",
         "Recycling page: https://kenilworthborough.com/304/Recycling",
         "Garbage routes: the Sanitation Routes Map in the guide, turned into a street list by tools/build_kenilworth.py"
     ]
