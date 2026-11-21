@@ -16,6 +16,15 @@
         "dropoff":    {"name": "Not curbside",             "color": "#5A615D", "icon": "dropoff", "short": "Drop-off only"}
     },
     "towns": {
+        "garwood": {
+            "categories": {
+                "containers":      {"name": "Recycling", "color": "#1D5FBF"},
+                "yard":            {"name": "Grass & Brush"},
+                "leaves":          {"name": "Leaf Collection Week"},
+                "christmas_trees": {"name": "Christmas Trees", "color": "#0E5E5A", "icon": "leaf", "short": "Seasonal"},
+                "bulk":            {"name": "Bulk (by permit)"}
+            }
+        },
         "rahway": {
             "categories": {
                 "containers": {"name": "Recycling", "color": "#1D5FBF"},
