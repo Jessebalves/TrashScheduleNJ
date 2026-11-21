@@ -16,6 +16,12 @@
         "dropoff":    {"name": "Not curbside",             "color": "#5A615D", "icon": "dropoff", "short": "Drop-off only"}
     },
     "towns": {
+        "clark": {
+            "categories": {
+                "containers": {"name": "Recycling", "color": "#1D5FBF"},
+                "bulk":       {"name": "Bulky Pickup Week"}
+            }
+        },
         "westfield": {
             "categories": {
                 "containers": {"name": "Recycling", "color": "#1D5FBF"}

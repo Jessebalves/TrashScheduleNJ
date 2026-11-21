@@ -3,6 +3,7 @@
     "default_county": "union",
     "towns": {
         "aberdeen": "monmouth",
+        "clark": "union",
         "cranford": "union",
         "elizabeth": "union",
         "hillside": "union",

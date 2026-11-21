@@ -100,11 +100,14 @@ class AddressBook:
         #(town id, street name) -> list of (low, high, side, zip code, zone, needs check)
         self.streets = {}
         self.row_count = 0
+        #(town id, street name without spaces) -> street name: "MAE BELLE DR" is "MAEBELLE DR"
+        self.squashed = {}
 
     def add(self, town_id, street, low, high, side, zip_code, zone, needs_check=False):
         key = (town_id, normalize_street(street))
         row = (int(low), int(high), str(side).strip().upper(), normalize_zip(zip_code), str(zone).strip(), bool(needs_check))
         self.streets.setdefault(key, []).append(row)
+        self.squashed.setdefault((town_id, key[1].replace(' ', '')), key[1])
         self.row_count += 1
 
     def find(self, town_id, house_number, street, zip_code=''):
@@ -148,14 +151,22 @@ class AddressBook:
         "GROVE ST" in parts of the county list). Only used when find() found nothing.
 
         Without the direction first; with one only when exactly one direction has this house number.
+        Last, the same name written with or without spaces ("Mae Belle Dr" is "MAEBELLE DR" in
+        Clark's county list and Census).
         """
         words = normalize_street(street).split()
         if len(words) >= 3 and words[0] in DIRECTIONS.values():
-            return self.find(town_id, house_number, ' '.join(words[1:]), zip_code)
-        name = ' '.join(words)
-        exact = [found for found in (self._exact(self._rows(town_id, d + ' ' + name, zip_code), house_number)
-                                     for d in 'NSEW') if found]
-        return exact[0] if len(exact) == 1 else None
+            found = self.find(town_id, house_number, ' '.join(words[1:]), zip_code)
+        else:
+            name = ' '.join(words)
+            exact = [found for found in (self._exact(self._rows(town_id, d + ' ' + name, zip_code), house_number)
+                                         for d in 'NSEW') if found]
+            found = exact[0] if len(exact) == 1 else None
+        if found is None:
+            other = self.squashed.get((town_id, ''.join(words)))
+            if other and other != ' '.join(words):
+                found = self.find(town_id, house_number, other, zip_code)
+        return found
 
     def _rows(self, town_id, name, zip_code):
         """The rows of one street (an already normalized name), only those with a matching ZIP code."""
