@@ -1,0 +1,65 @@
+{
+    "id": "winfield",
+    "name": "Winfield",
+    "other_names": [
+        "Township of Winfield",
+        "Winfield Township",
+        "Winfield Park"
+    ],
+    "zip_codes": [
+        "07036"
+    ],
+    "zone_word": "Schedule",
+    "zones": {
+        "ALL": "One schedule for all of Winfield"
+    },
+    "holidays": [],
+    "streams": [
+        {
+            "id": "garbage",
+            "label": "Garbage",
+            "days": [
+                "Tuesday",
+                "Friday"
+            ],
+            "on_holiday": "skip"
+        },
+        {
+            "id": "containers",
+            "label": "Recycling",
+            "days": [
+                "Friday"
+            ],
+            "every_other_week_from": "2026-01-09",
+            "on_holiday": "skip"
+        },
+        {
+            "id": "bulk",
+            "label": "Bulky Waste",
+            "days": [
+                "Wednesday"
+            ],
+            "nth_in_month": [
+                -1
+            ],
+            "on_holiday": "skip"
+        }
+    ],
+    "checked_through": "2026-12-31",
+    "contact": "the Winfield Mutual Housing Management Office (after hours 908-486-5012) or the Township Office, 908-925-3850",
+    "notes": [
+        "Garbage (normal household waste only) is picked up every Tuesday and Friday.",
+        "Recycling is every other Friday, collected by Giordano: at the curb the night before or by 6-7 AM. Clean plastics #1, #2 and #5, glass, aluminum, cardboard boxes (flattened and tied), newspapers, magazines, soft-cover books and junk mail, loose in the bin. No Styrofoam, shredded paper or plastic bags of any kind. Giordano does not provide bins: use a blue bin of 32 to 64 gallons, or label another color \"RECYCLING\". Missed recycling: Giordano, 973-242-2250 ext. 2 (Monday-Friday 8:30 AM-3:00 PM).",
+        "Bulky waste is picked up on the last Wednesday of every month: furniture, appliances, sheetrock, wood, carpeting and bedding. Keep it reachable without lifting over parked cars; nothing over 36 inches long except appliances and furniture; tie loose items or put them in containers. Not taken: bulky waste in cardboard boxes or plastic bags, concrete, rocks, patio blocks, bricks, paint cans, car parts, tires, TVs and other electronics.",
+        "Refrigerators, freezers and air conditioners need a Freon sticker from the Management Office before they go to the curb.",
+        "Leaves and grass clippings must be in a can, bucket or bag, never swept or blown into the street (Township Ordinance 367, fines from $100).",
+        "No holiday changes to pickups are published, and Recycle Coach shows none: garbage stays on Tuesday and Friday in holiday weeks. If in doubt, ask the Management Office."
+    ],
+    "sources": [
+        "Winfield Mutual Housing Corporation, Services (garbage Tuesday and Friday, bulky waste the last Wednesday, recycling by 7 AM, Freon stickers), checked 2026-11-21: https://www.winfieldnj.org/services/",
+        "Township of Winfield, Recycling page with Giordano's 2025 Recycling Schedule (every other Friday, no holiday moves; 2026 continues its pattern, Recycle Coach has no recycling for Winfield): https://winfield-nj.org/recycling.html",
+        "Winfield in Recycle Coach, checked by hand 2026-11-21: garbage Tuesday and Friday at two addresses, bulky waste on November 25, no holiday changes",
+        "Township Ordinance 367, Containerized Yard Waste: https://winfield-nj.org/uploads/1/4/4/6/144661764/to_367_containerized_yard_waste.pdf",
+        "Address table: every street the US Census places inside the township's boundary (one schedule for the whole township)"
+    ]
+}

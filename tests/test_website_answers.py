@@ -135,10 +135,23 @@ class WebsiteAnswers(unittest.TestCase):
         status, answer = self.ask(house_number='32', street='Mae Belle Dr', town='Clark', zip='07066')
         self.assertEqual((status, answer['zone']['id']), (200, 'Z1W4'))
 
+    def test_winfield_unit_letters_and_the_shared_zip(self):
+        #Winfield's addresses carry a unit letter ("16A Seafoam Ave") and share ZIP 07036 with Linden
+        status, answer = self.ask(house_number='16A', street='Seafoam Ave', town='Winfield', zip='07036')
+        self.assertEqual((status, answer['town']['id']), (200, 'winfield'))
+        #Google may give the post office town: a street Linden does not have is tried in Winfield
+        status, answer = self.ask(house_number='10', street='Atlantic Dr', town='Linden', zip='07036')
+        self.assertEqual((status, answer['town']['id']), (200, 'winfield'))
+        #With only the ZIP code, Linden's streets are still found in Linden
+        status, answer = self.ask(house_number='709', street='Roselle St', zip='07036')
+        self.assertEqual((status, answer['town']['id']), (200, 'linden'))
+        status, answer = self.ask(house_number='22B', street='Pacific Dr', zip='07036')
+        self.assertEqual((status, answer['town']['id']), (200, 'winfield'))
+
     def test_town_that_is_not_covered(self):
         status, answer = self.ask(house_number='10', street='Main St', town='Summit', zip='07901')
         self.assertEqual(status, 404)
-        self.assertEqual(answer['error'], 'Summit is not covered yet. The towns we cover are: Aberdeen, Clark, Cranford, Elizabeth, Garwood, Hillside, Kenilworth, Linden, Rahway, Roselle, Roselle Park, Union, Westfield.')
+        self.assertEqual(answer['error'], 'Summit is not covered yet. The towns we cover are: Aberdeen, Clark, Cranford, Elizabeth, Garwood, Hillside, Kenilworth, Linden, Rahway, Roselle, Roselle Park, Union, Westfield, Winfield.')
 
     def test_address_that_is_not_found(self):
         status, answer = self.ask(house_number='10', street='No Such Street', town='Elizabeth')
@@ -147,7 +160,7 @@ class WebsiteAnswers(unittest.TestCase):
 
     def test_bad_requests_get_a_message_not_a_crash(self):
         for body in ({}, {'key': 'x'}, {'key': 'abc elm st 07208'}, {'key': '142 elm st 0720'},
-                     {'house_number': '12B', 'street': 'Elm St', 'town': 'Elizabeth'},
+                     {'house_number': '12BC', 'street': 'Elm St', 'town': 'Elizabeth'},
                      {'house_number': '12', 'street': '', 'town': 'Elizabeth'},
                      {'house_number': '12', 'street': 'Elm St', 'town': 'Elizabeth', 'zip': 'abc'},
                      {'house_number': '142', 'street': 'Elm St', 'town': 'Elizabeth', 'date': 'tomorrow'}):
@@ -161,7 +174,8 @@ class WebsiteAnswers(unittest.TestCase):
         answer = self.client.get('/config').get_json()
         self.assertEqual(answer['towns'], [{'id': 'aberdeen', 'name': 'Aberdeen'}, {'id': 'clark', 'name': 'Clark'}, {'id': 'cranford', 'name': 'Cranford'}, {'id': 'elizabeth', 'name': 'Elizabeth'}, {'id': 'garwood', 'name': 'Garwood'}, {'id': 'hillside', 'name': 'Hillside'},
                                           {'id': 'kenilworth', 'name': 'Kenilworth'}, {'id': 'linden', 'name': 'Linden'}, {'id': 'rahway', 'name': 'Rahway'}, {'id': 'roselle', 'name': 'Roselle'}, {'id': 'roselle_park', 'name': 'Roselle Park'},
-                                          {'id': 'union', 'name': 'Union'}, {'id': 'westfield', 'name': 'Westfield'}])
+                                          {'id': 'union', 'name': 'Union'}, {'id': 'westfield', 'name': 'Westfield'},
+                                          {'id': 'winfield', 'name': 'Winfield'}])
         self.assertEqual(answer['googleMapsKey'], os.environ.get('GOOGLE_MAPS_API_KEY', ''))
 
 
