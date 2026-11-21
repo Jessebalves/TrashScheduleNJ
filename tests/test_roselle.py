@@ -137,6 +137,48 @@ class RoselleAddresses(unittest.TestCase):
         self.assertEqual(self.zone(519, 'Chestnut St'), ('E3', True))
         self.assertEqual(self.zone(520, 'Chestnut St'), ('W3', True))
 
+    def split(self, number, street, location=None):
+        """(zone, needs check, street matched, how) for an address that may lack its E or W."""
+        town = pickup_schedule.load_towns(os.path.join(TOP, 'towns'))['roselle']
+        found = self.book.find_on_split_street('roselle', number, street, '07203', town['direction_split'], location)
+        return found and (found['zone'], found['needs_check'], found['street'], found['how'])
+
+    def test_avenue_without_e_or_w_found_by_the_house_number(self):
+        #145 is only on E 7th Ave, 147 only on W 7th Ave
+        self.assertEqual(self.split(145, '7th Ave'), ('E3', False, 'E 7TH AVE', 'number'))
+        self.assertEqual(self.split(147, '7th Ave'), ('W3', False, 'W 7TH AVE', 'number'))
+        #West 5th Ave is "5th Ave" in the county list: 124 is only on E 5th Ave, 120 only on the west part
+        self.assertEqual(self.split(124, 'Fifth Avenue'), ('E3', False, 'E 5TH AVE', 'number'))
+        self.assertEqual(self.split(120, '5th Ave'), ('W3', False, '5TH AVE', 'number'))
+
+    def test_avenue_without_e_or_w_found_by_the_map_location(self):
+        #152 is on both parts. Points on the 100 blocks, from the Census map
+        west, east = (40.6524, -74.2634), (40.6528, -74.2603)
+        self.assertEqual(self.split(152, '7th Ave', west), ('W3', False, 'W 7TH AVE', 'location'))
+        self.assertEqual(self.split(152, '7th Ave', east), ('E3', False, 'E 7TH AVE', 'location'))
+        self.assertEqual(self.split(437, '5th Ave', (40.6547, -74.2520)), ('E2', False, 'E 5TH AVE', 'location'))
+        #Right next to Chestnut St (at 7th Ave) it is checked
+        self.assertEqual(self.split(152, '7th Ave', (40.65261, -74.26180)), ('E3', True, 'E 7TH AVE', 'location'))
+
+    def test_avenue_without_e_or_w_and_no_location_is_west_and_checked(self):
+        self.assertEqual(self.split(152, '7th Ave'), ('W3', True, 'W 7TH AVE', 'default'))
+        self.assertEqual(self.split(437, '5th Ave'), ('W5', True, '5TH AVE', 'default'))
+        #Not on either part: the nearest west stretch
+        self.assertEqual(self.split(150, '7th Ave'), ('W3', True, 'W 7TH AVE', 'default'))
+
+    def test_e_or_w_given_is_used(self):
+        self.assertEqual(self.split(152, 'E 7th Ave'), ('E3', False, 'E 7TH AVE', 'given'))
+        self.assertEqual(self.split(152, 'West 7th Avenue'), ('W3', False, 'W 7TH AVE', 'given'))
+        #"W 5th Ave" is "5TH AVE" in the table
+        self.assertEqual(self.split(127, 'W 5th Ave'), ('W3', False, '5TH AVE', 'given'))
+        self.assertEqual(self.split(127, 'E 5th Ave'), ('E3', False, 'E 5TH AVE', 'given'))
+        #The location does not overrule an E or W that was given
+        self.assertEqual(self.split(152, 'W 7th Ave', (40.6528, -74.2603)), ('W3', False, 'W 7TH AVE', 'given'))
+
+    def test_streets_without_an_east_and_west_part_are_left_to_find(self):
+        self.assertIsNone(self.split(519, 'Chestnut St'))
+        self.assertIsNone(self.split(111, 'E Ninety St'))
+
     def test_every_zone_is_in_the_rules_file(self):
         town = pickup_schedule.load_towns(os.path.join(TOP, 'towns'))['roselle']
         zones = {row[4] for rows in self.book.streets.values() for row in rows}

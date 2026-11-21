@@ -178,7 +178,20 @@ def handle_data():
 
     #Some streets go by two names, the town file says which one the table uses
     street = town.get('street_names', {}).get(normalize_street(street), street)
-    found = addresses.find(town['id'], int(house_number), street, zip_code)
+    #A street with an East and a West part (Roselle's avenues). Google often leaves the
+    #E or W out, so the page also sends the map location Google gave for the address.
+    location = None
+    if isinstance(data.get('location'), dict):
+        try:
+            location = (float(data['location']['lat']), float(data['location']['lng']))
+        except (KeyError, TypeError, ValueError):
+            location = None
+        if location and not (-90 <= location[0] <= 90 and -180 <= location[1] <= 180):
+            location = None
+    found = addresses.find_on_split_street(town['id'], int(house_number), street, zip_code,
+                                           town.get('direction_split'), location)
+    if found is None:
+        found = addresses.find(town['id'], int(house_number), street, zip_code)
     if found is None:
         return problem("We could not find that address in %s. Check the house number, street name and ZIP code." % town['name'], 404)
 
@@ -204,7 +217,12 @@ def handle_data():
 
     notes = list(town.get('notes', []))
     contact = town.get('contact', 'your town')
-    if found['needs_check']:
+    if found.get('how') == 'default':
+        divider = town['direction_split'].get('divider', 'the dividing street')
+        notes.insert(0, "Your street has an East and a West part and the address did not say which, "
+                        "so we used the West part (west of %s). If you live east of %s, look up the address "
+                        "with an E in front of the street name. Please confirm your days with %s." % (divider, divider, contact))
+    elif found['needs_check']:
         notes.insert(0, "Your address is on or near the border between two pickup areas, so this is our best match. Please confirm your days with %s." % contact)
     if 'checked_through' in town and shown_date > schedule.parse_date(town['checked_through']):
         notes.insert(0, "We have not checked %s's schedule past %s yet. Please confirm your days with %s." % (
@@ -224,6 +242,9 @@ def handle_data():
     #The full address as found, so the new design can show "Kenilworth, NJ 07033" even
     #when the visitor left the ZIP code out. Every town covered is in New Jersey.
     answer['address'] = {'zip': found['zip'] or zip_code, 'state': 'NJ'}
+    #When the E or W was worked out, the street with it ("W 7th Ave"), so the page saves that
+    if found.get('how') in ('number', 'location', 'default', 'nearest') and found['street'][:2] in ('E ', 'W '):
+        answer['address']['street'] = found['street'][0] + ' ' + street
     answer['zone'] = {'id': found['zone'], 'word': town['zone_word'], 'label': town['zones'].get(found['zone'], found['zone'])}
     answer['notes'] = notes
     return jsonify(answer)

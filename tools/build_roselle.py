@@ -28,6 +28,12 @@ This is a developer tool, it is not used by the running website. It needs the
 `pyshp` package and the Census file named in tools/build_kenilworth.py:
 
     python3 tools/build_roselle.py <addrfeat folder>/tl_2025_34039_addrfeat
+
+With --chestnut-line it only prints the line of Chestnut St as [lat, lng] points,
+north to south, for "direction_split" in towns/roselle.json (the website uses it to
+tell E from W when Google leaves the E or W out of an avenue):
+
+    python3 tools/build_roselle.py --chestnut-line <addrfeat folder>/tl_2025_34039_addrfeat
 """
 import collections
 import csv
@@ -217,12 +223,16 @@ def place_row(name, low, high, side, ward, district, census, line, street_sides,
 
 
 def main():
-    if len(sys.argv) != 2:
+    only_line = sys.argv[1:2] == ['--chestnut-line']
+    if len(sys.argv) != (3 if only_line else 2):
         sys.exit(__doc__)
-    county = read_county()
-    census, line = read_census(sys.argv[1])
+    census, line = read_census(sys.argv[-1])
     if len(line) < 10:
         sys.exit('Chestnut St was not found on the Census map')
+    if only_line:
+        print(',\n'.join('[%s, %s]' % (round(y, 6), round(x / LON_SCALE, 6)) for x, y in line))
+        return
+    county = read_county()
 
     #Every side each street is seen on, to know which streets cross Chestnut St
     street_sides = {name: {side_of_chestnut(r[3], line)[0] for r in found} for name, found in census.items()}

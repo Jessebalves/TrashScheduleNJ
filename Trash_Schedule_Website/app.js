@@ -166,12 +166,17 @@ function getConfig(){
     return configPromise;
 }
 
-//address is {house_number, street, town, zip}; upcoming is how many pickups to list
-async function lookUp(address, upcoming){
+//address is {house_number, street, town, zip}; upcoming is how many pickups to list.
+//location ({lat, lng}, from Google) tells the server E from W when Google leaves it out
+//of a street name (Roselle's "152 7th Ave")
+async function lookUp(address, upcoming, location){
     const body = {
         house_number: address.house_number, street: address.street,
         town: address.town || "", zip: address.zip || "", upcoming: upcoming || 4
     };
+    if(location){
+        body.location = location;
+    }
     try{
         const answer = await fetchJSON("/data", {
             method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body)
@@ -517,6 +522,8 @@ function buildAddressForm(panel, options){
     const error = $('[role="alert"]', panel);
     const submit = $('button[type="submit"]', panel);
     const fields = { house: $("#f-house", panel), street: $("#f-street", panel), town: $("#f-town", panel), zip: $("#f-zip", panel) };
+    //The address last picked from Google search and its map location
+    let picked = null;
 
     //The form always adds an address; saved ones are picked from the drop-down instead
     getConfig().then(config => {
@@ -551,9 +558,13 @@ function buildAddressForm(panel, options){
             search.addEventListener("gmp-select", async event => {
                 try{
                     const place = event.placePrediction.toPlace();
-                    await place.fetchFields({ fields: ["addressComponents"] });
+                    await place.fetchFields({ fields: ["addressComponents", "location"] });
                     fields.house.value = addressPart(place, "street_number", false);
                     fields.street.value = addressPart(place, "route", true);
+                    picked = place.location ? {
+                        house: fields.house.value, street: fields.street.value,
+                        location: { lat: place.location.lat(), lng: place.location.lng() }
+                    } : null;
                     fields.zip.value = addressPart(place, "postal_code", false);
                     const town = addressPart(place, "locality", false) || addressPart(place, "sublocality_level_1", false);
                     const option = Array.from(fields.town.options).find(o => o.textContent === town);
@@ -599,6 +610,9 @@ function buildAddressForm(panel, options){
 
     form.addEventListener("submit", async event => {
         event.preventDefault();
+        //Google's location only belongs to the address it came with, not to one typed over it
+        const location = picked && picked.house === fields.house.value && picked.street === fields.street.value
+            ? picked.location : null;
         error.textContent = "";
         const address = {
             house_number: fields.house.value.trim(),
@@ -614,7 +628,7 @@ function buildAddressForm(panel, options){
         }
         submit.disabled = true;
         submit.textContent = "Looking it up…";
-        const answer = await lookUp(address, options.upcoming);
+        const answer = await lookUp(address, options.upcoming, location);
         submit.disabled = false;
         submit.textContent = "Show my schedule";
         if(!answer.ok){
@@ -624,6 +638,10 @@ function buildAddressForm(panel, options){
         }
         address.townId = answer.data.town.id;
         address.town = answer.data.town.name;
+        //"W 7th Ave" when the server worked out the E or W the address left out
+        if(answer.data.address && answer.data.address.street){
+            address.street = answer.data.address.street;
+        }
         if(answer.data.address && answer.data.address.zip){
             address.zip = answer.data.address.zip;
             address.state = answer.data.address.state || "NJ";

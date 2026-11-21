@@ -10,6 +10,7 @@ ward (1 to 6), in Kenilworth it is the garbage route (MON_THU, TUE_FRI, WED_SAT)
 
 Nothing in this file talks to MySQL or to Flask, so it can be tested on its own.
 """
+import math
 
 #Every way of writing a street type is turned into one spelling, so that
 #"Terrace", "terr." and "TER" all match. The same table is applied to the
@@ -42,6 +43,9 @@ NUMBER_WORDS = {
     'NINTH': '9TH', 'TENTH': '10TH', 'ELEVENTH': '11TH', 'TWELFTH': '12TH',
 }
 
+
+#Meters in one degree of latitude
+METERS_PER_DEGREE = 111000
 
 #On a street that is split between zones, a house number that is not in the
 #table is only guessed when it is this close to one that is
@@ -107,21 +111,15 @@ class AddressBook:
                          number is not in the table and its street is split between zones
             zip          the ZIP code of the stretch of street that matched ('' if the table has none)
         """
-        rows = self.streets.get((town_id, normalize_street(street)))
+        rows = self._rows(town_id, normalize_street(street), zip_code)
         if not rows:
             return None
 
-        zip_code = normalize_zip(zip_code)
-        if zip_code:
-            #A ZIP code that was given has to match. Rows without one match any.
-            rows = [row for row in rows if not row[3] or row[3] == zip_code]
-            if not rows:
-                return None
+        exact = self._exact(rows, house_number)
+        if exact:
+            return exact
 
         side = 'E' if house_number % 2 == 0 else 'O'
-        for low, high, row_side, row_zip, zone, needs_check in rows:
-            if low <= house_number <= high and row_side in (side, 'B'):
-                return {'zone': zone, 'needs_check': needs_check, 'zip': row_zip}
 
         #The house number is not in the table. Lists of house numbers always have
         #gaps, so use the nearest stretch of the same street and say it is a guess.
@@ -137,3 +135,92 @@ class AddressBook:
         #When the whole street is in one zone the nearest stretch is a safe answer
         sure = whole_street_is_one_zone and not any(row[5] for row in rows)
         return {'zone': nearest[4], 'needs_check': not sure, 'zip': nearest[3]}
+
+    def _rows(self, town_id, name, zip_code):
+        """The rows of one street (an already normalized name), only those with a matching ZIP code."""
+        rows = self.streets.get((town_id, name), [])
+        zip_code = normalize_zip(zip_code)
+        if zip_code:
+            #A ZIP code that was given has to match. Rows without one match any.
+            rows = [row for row in rows if not row[3] or row[3] == zip_code]
+        return rows
+
+    @staticmethod
+    def _exact(rows, house_number):
+        """The answer when the house number itself is in the table, else None."""
+        side = 'E' if house_number % 2 == 0 else 'O'
+        for low, high, row_side, row_zip, zone, needs_check in rows:
+            if low <= house_number <= high and row_side in (side, 'B'):
+                return {'zone': zone, 'needs_check': needs_check, 'zip': row_zip}
+        return None
+
+    def find_on_split_street(self, town_id, house_number, street, zip_code='', split=None, location=None):
+        """Look up an address on a street that has an East and a West part (Roselle's avenues).
+
+        split is the town's "direction_split" setting: the line of the street that divides
+        East from West ([lat, lng] points, north to south) and the side to use when nothing
+        else tells ("no_direction"). On such streets the table has "E 7TH AVE" and either
+        "W 7TH AVE" or the bare "5TH AVE" (the county list writes some west parts that way).
+
+        Google often leaves the E or W out ("152 7th Ave"). The side is then, in order:
+          1. the only side where this house number is in the table,
+          2. the side of the dividing line the address's map location (lat, lng) is on,
+          3. split["no_direction"] (West in Roselle), marked to check.
+
+        Returns None when the street is not split this way, otherwise find()'s answer plus
+            street   the street name in the table that matched ("W 7TH AVE")
+            how      'given' (the address said E or W), 'number', 'location', 'default'
+                     or 'nearest' (the default side has no stretch near the number)
+        """
+        if not split:
+            return None
+        words = normalize_street(street).split()
+        given = None
+        if len(words) >= 3 and words[0] in ('E', 'W'):
+            given, words = words[0], words[1:]
+        name = ' '.join(words)
+        names = {'E': ['E ' + name], 'W': ['W ' + name, name]}
+        names = {side: [n for n in found if self._rows(town_id, n, zip_code)] for side, found in names.items()}
+        if not (names['E'] and names['W']):
+            return None
+
+        def answer(side, how, needs_check=False):
+            #The house number itself first, then the nearest stretch of the street
+            for look in (lambda n: self._exact(self._rows(town_id, n, zip_code), house_number),
+                         lambda n: self.find(town_id, house_number, n, zip_code)):
+                for n in names[side]:
+                    found = look(n)
+                    if found:
+                        found.update(street=n, how=how, needs_check=found['needs_check'] or needs_check)
+                        return found
+            return None
+
+        if given:
+            return answer(given, 'given')
+        on_sides = [side for side in 'EW' if any(self._exact(self._rows(town_id, n, zip_code), house_number)
+                                                  for n in names[side])]
+        if len(on_sides) == 1:
+            return answer(on_sides[0], 'number')
+        if location and split.get('line'):
+            side, meters = side_of_line(location[0], location[1], split['line'])
+            return answer(side, 'location', meters < split.get('near_line_meters', 0))
+        default = split.get('no_direction', 'W')
+        #Only when that side has no stretch near this house number
+        return answer(default, 'default', True) or answer('E' if default == 'W' else 'W', 'nearest', True)
+
+
+def side_of_line(lat, lng, line):
+    """('E' or 'W', meters away): which side of a line running north to south a point is on.
+
+    line is a list of [lat, lng] points from north to south. Past either end the
+    nearest end piece of the line is extended. Good enough within a town.
+    """
+    scale = math.cos(math.radians(lat))
+    for a, b in zip(line, line[1:]):
+        if b[0] <= lat <= a[0]:
+            break
+    else:
+        a, b = (line[0], line[1]) if lat > line[0][0] else (line[-2], line[-1])
+    t = (lat - a[0]) / (b[0] - a[0]) if b[0] != a[0] else 0
+    line_lng = a[1] + (b[1] - a[1]) * t
+    return ('E' if lng > line_lng else 'W'), abs(lng - line_lng) * scale * METERS_PER_DEGREE

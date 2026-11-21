@@ -72,10 +72,44 @@ class WebsiteAnswers(unittest.TestCase):
         status, answer = self.ask(house_number='20', street='Epping Dr', town='Kenilworth', date='2027-02-01')
         self.assertIn('have not checked', answer['notes'][0])
 
+    def test_roselle_avenue_without_e_or_w(self):
+        #Google gave "152 7th Ave", a house number on both E and W 7th Ave
+        address = dict(house_number='152', street='7th Ave', town='Roselle', zip='07203', date='2026-11-16')
+        status, answer = self.ask(location={'lat': 40.6528, 'lng': -74.2603}, **address)
+        self.assertEqual((status, answer['zone']['id'], answer['address']['street']), (200, 'E3', 'E 7th Ave'))
+        self.assertEqual(answer['streams'][0]['pickups'], ['Monday', 'Thursday'])
+        self.assertNotIn('East and a West part', ' '.join(answer['notes']))
+        status, answer = self.ask(location={'lat': 40.6524, 'lng': -74.2634}, **address)
+        self.assertEqual((answer['zone']['id'], answer['address']['street']), ('W3', 'W 7th Ave'))
+        #Typed in, or a location that is no use: the west part, with a note
+        for location in (None, {'lat': 'x', 'lng': 1}, {'lat': 400, 'lng': 0}, 'here'):
+            status, answer = self.ask(location=location, **address)
+            self.assertEqual((status, answer['zone']['id'], answer['address']['street']), (200, 'W3', 'W 7th Ave'))
+            self.assertIn('East and a West part', answer['notes'][0])
+        status, answer = self.ask(key='152 7th Ave 07203')
+        self.assertEqual(answer['zone']['id'], 'W3')
+        #With the E or W, as before
+        status, answer = self.ask(house_number='152', street='E 7th Ave', town='Roselle')
+        self.assertNotIn('East and a West part', ' '.join(answer['notes']))
+        self.assertEqual((answer['zone']['id'], answer['address'].get('street')), ('E3', None))
+        #West 5th Ave is "5th Ave" in the county list
+        status, answer = self.ask(key='127 W 5th Ave 07203')
+        self.assertEqual((status, answer['zone']['id']), (200, 'W3'))
+
+    def test_roselle_park_is_not_roselle(self):
+        #Google's "322 W Clay Ave, Roselle Park, NJ 07204": west of Chestnut St, Monday & Thursday
+        status, answer = self.ask(house_number='322', street='W Clay Ave', town='Roselle Park', zip='07204', date='2026-11-16')
+        self.assertEqual((status, answer['town']['id'], answer['zone']['id']), (200, 'roselle_park', 'W'))
+        self.assertEqual(answer['streams'][0]['pickups'], ['Monday', 'Thursday'])
+        status, answer = self.ask(key='322 W Clay Ave 07204')
+        self.assertEqual(answer['town']['id'], 'roselle_park')
+        status, answer = self.ask(house_number='322', street='W Clay Ave', town='Roselle', zip='07203')
+        self.assertEqual(status, 404)
+
     def test_town_that_is_not_covered(self):
         status, answer = self.ask(house_number='10', street='Main St', town='Cranford', zip='07016')
         self.assertEqual(status, 404)
-        self.assertEqual(answer['error'], 'Cranford is not covered yet. The towns we cover are: Aberdeen, Elizabeth, Hillside, Kenilworth, Linden, Roselle, Union.')
+        self.assertEqual(answer['error'], 'Cranford is not covered yet. The towns we cover are: Aberdeen, Elizabeth, Hillside, Kenilworth, Linden, Roselle, Roselle Park, Union.')
 
     def test_address_that_is_not_found(self):
         status, answer = self.ask(house_number='10', street='No Such Street', town='Elizabeth')
@@ -97,7 +131,7 @@ class WebsiteAnswers(unittest.TestCase):
     def test_config_lists_the_towns(self):
         answer = self.client.get('/config').get_json()
         self.assertEqual(answer['towns'], [{'id': 'aberdeen', 'name': 'Aberdeen'}, {'id': 'elizabeth', 'name': 'Elizabeth'}, {'id': 'hillside', 'name': 'Hillside'},
-                                          {'id': 'kenilworth', 'name': 'Kenilworth'}, {'id': 'linden', 'name': 'Linden'}, {'id': 'roselle', 'name': 'Roselle'},
+                                          {'id': 'kenilworth', 'name': 'Kenilworth'}, {'id': 'linden', 'name': 'Linden'}, {'id': 'roselle', 'name': 'Roselle'}, {'id': 'roselle_park', 'name': 'Roselle Park'},
                                           {'id': 'union', 'name': 'Union'}])
         self.assertEqual(answer['googleMapsKey'], os.environ.get('GOOGLE_MAPS_API_KEY', ''))
 

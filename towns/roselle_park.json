@@ -1,0 +1,251 @@
+{
+    "id": "roselle_park",
+    "name": "Roselle Park",
+    "other_names": [
+        "Roselle Park Borough",
+        "Borough of Roselle Park"
+    ],
+    "zip_codes": [
+        "07204"
+    ],
+    "zone_word": "Zone",
+    "zones": {
+        "E": "East of Chestnut St (garbage Tuesday & Friday)",
+        "W": "West of Chestnut St (garbage Monday & Thursday)",
+        "CE": "Chestnut St from Westfield Ave to Grant Ave, east side (garbage Monday, Tuesday, Thursday & Friday)",
+        "CW": "Chestnut St from Westfield Ave to Grant Ave, west side (garbage Monday, Tuesday, Thursday & Friday)"
+    },
+    "direction_split": {
+        "comment": "The avenues are E and W of Chestnut St, as in Roselle. When the address has no E or W: the side that has the house number, else the side of Chestnut St of Google's map location, else West (marked to check). See find_on_split_street in address_lookup.py. The line is the same Chestnut St line as in towns/roselle.json.",
+        "divider": "Chestnut St",
+        "no_direction": "W",
+        "near_line_meters": 15,
+        "line": [
+            [40.691942, -74.272901],
+            [40.691731, -74.272645],
+            [40.691446, -74.272189],
+            [40.690855, -74.271246],
+            [40.690837, -74.271219],
+            [40.690827, -74.271202],
+            [40.690725, -74.271064],
+            [40.69056, -74.270903],
+            [40.690465, -74.270841],
+            [40.689354, -74.270709],
+            [40.689236, -74.27071],
+            [40.689164, -74.270711],
+            [40.689115, -74.270711],
+            [40.68898, -74.270712],
+            [40.688449, -74.270704],
+            [40.688148, -74.270589],
+            [40.688072, -74.270528],
+            [40.687993, -74.27045],
+            [40.687805, -74.270249],
+            [40.687676, -74.270121],
+            [40.687633, -74.270078],
+            [40.687535, -74.269993],
+            [40.68739, -74.269894],
+            [40.687127, -74.269732],
+            [40.686617, -74.269423],
+            [40.686604, -74.26942],
+            [40.686323, -74.269349],
+            [40.686174, -74.269313],
+            [40.685933, -74.269266],
+            [40.68562, -74.269256],
+            [40.68513, -74.269201],
+            [40.684749, -74.269164],
+            [40.684408, -74.269108],
+            [40.683724, -74.269001],
+            [40.683327, -74.268939],
+            [40.683041, -74.268895],
+            [40.68267, -74.268837],
+            [40.682406, -74.268788],
+            [40.680443, -74.268429],
+            [40.679772, -74.268305],
+            [40.679515, -74.268258],
+            [40.678834, -74.268133],
+            [40.678142, -74.268006],
+            [40.677354, -74.267862],
+            [40.677254, -74.267691],
+            [40.67678, -74.267509],
+            [40.674737, -74.267029],
+            [40.672554, -74.266515],
+            [40.671872, -74.266354],
+            [40.671556, -74.266284],
+            [40.670299, -74.265987],
+            [40.669065, -74.2657],
+            [40.667828, -74.265411],
+            [40.667712, -74.265384],
+            [40.667479, -74.26533],
+            [40.666621, -74.26513],
+            [40.666584, -74.265122],
+            [40.666549, -74.265113],
+            [40.66534, -74.264834],
+            [40.664097, -74.264542],
+            [40.663255, -74.264347],
+            [40.662806, -74.264241],
+            [40.662316, -74.264128],
+            [40.661756, -74.263997],
+            [40.660097, -74.263577],
+            [40.658833, -74.263294],
+            [40.657863, -74.26308],
+            [40.657592, -74.263016],
+            [40.656364, -74.262725],
+            [40.655129, -74.262432],
+            [40.653832, -74.262125],
+            [40.652611, -74.261835],
+            [40.651378, -74.261547],
+            [40.650435, -74.261329],
+            [40.650142, -74.261276],
+            [40.649449, -74.261077],
+            [40.648914, -74.260979],
+            [40.648795, -74.260945],
+            [40.648231, -74.260811],
+            [40.647665, -74.260684],
+            [40.647568, -74.260655],
+            [40.647012, -74.260532],
+            [40.646316, -74.260369],
+            [40.645653, -74.260221],
+            [40.644953, -74.260063],
+            [40.643227, -74.25966],
+            [40.643159, -74.259651],
+            [40.642606, -74.259601]
+        ]
+    },
+    "holidays": [
+        {
+            "name": "New Year's Day",
+            "month": 1,
+            "day": 1
+        },
+        {
+            "name": "Memorial Day",
+            "month": 5,
+            "weekday": "Monday",
+            "nth": -1
+        },
+        {
+            "name": "Labor Day",
+            "month": 9,
+            "weekday": "Monday",
+            "nth": 1
+        },
+        {
+            "name": "Thanksgiving Day",
+            "month": 11,
+            "weekday": "Thursday",
+            "nth": 4
+        },
+        {
+            "name": "Christmas Day",
+            "month": 12,
+            "day": 25
+        }
+    ],
+    "streams": [
+        {
+            "id": "garbage",
+            "label": "Garbage",
+            "days_by_zone": {
+                "E": [
+                    "Tuesday",
+                    "Friday"
+                ],
+                "W": [
+                    "Monday",
+                    "Thursday"
+                ],
+                "CE": [
+                    "Monday",
+                    "Tuesday",
+                    "Thursday",
+                    "Friday"
+                ],
+                "CW": [
+                    "Monday",
+                    "Tuesday",
+                    "Thursday",
+                    "Friday"
+                ]
+            },
+            "on_holiday": "skip"
+        },
+        {
+            "id": "paper",
+            "label": "Paper Products",
+            "days": [
+                "Wednesday"
+            ],
+            "every_other_week_from": "2026-01-07",
+            "on_holiday": "next_day"
+        },
+        {
+            "id": "containers",
+            "label": "Bottles, Cans & Plastics",
+            "days": [
+                "Wednesday"
+            ],
+            "every_other_week_from": "2026-01-14",
+            "on_holiday": "next_day"
+        },
+        {
+            "id": "yard",
+            "label": "Vegetative Waste",
+            "days_by_zone": {
+                "E": [
+                    "Thursday"
+                ],
+                "CE": [
+                    "Thursday"
+                ],
+                "W": [
+                    "Friday"
+                ],
+                "CW": [
+                    "Friday"
+                ]
+            },
+            "months": [
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12
+            ],
+            "on_holiday": "skip"
+        },
+        {
+            "id": "bulk",
+            "label": "Bulk Items (up to 3)",
+            "comment": "The last Thursday (west) and last Friday (east) of each month, with the calendar's exceptions: April west 4/23, November 11/19 and 11/20, December 12/17 and 12/18",
+            "dates_by_zone": {
+                "E": ["2026-01-30", "2026-02-27", "2026-03-27", "2026-04-24", "2026-05-29", "2026-06-26", "2026-07-31", "2026-08-28", "2026-09-25", "2026-10-30", "2026-11-20", "2026-12-18"],
+                "CE": ["2026-01-30", "2026-02-27", "2026-03-27", "2026-04-24", "2026-05-29", "2026-06-26", "2026-07-31", "2026-08-28", "2026-09-25", "2026-10-30", "2026-11-20", "2026-12-18"],
+                "W": ["2026-01-29", "2026-02-26", "2026-03-26", "2026-04-23", "2026-05-28", "2026-06-25", "2026-07-30", "2026-08-27", "2026-09-24", "2026-10-29", "2026-11-19", "2026-12-17"],
+                "CW": ["2026-01-29", "2026-02-26", "2026-03-26", "2026-04-23", "2026-05-28", "2026-06-25", "2026-07-30", "2026-08-27", "2026-09-24", "2026-10-29", "2026-11-19", "2026-12-17"]
+            }
+        }
+    ],
+    "checked_through": "2026-12-31",
+    "contact": "Roselle Park DPW, 908-245-7676",
+    "notes": [
+        "Chestnut Street divides the borough: garbage east of it is Tuesday & Friday, west of it Monday & Thursday. Chestnut St itself from Westfield Ave to Grant Ave is picked up Monday, Tuesday, Thursday and Friday.",
+        "Recycling is every Wednesday for the whole borough, alternating between commingled bottles, cans & plastics and commingled paper products.",
+        "Put garbage, recycling and vegetative waste at the curb after 7 PM the evening before pickup; for Monday pickups, any time after 3 PM the afternoon before. Bulk waste goes out after 12 PM the day before.",
+        "Use containers of 32 gallons or less with handles, 50 lb at most when full. No plastic bags for bulk waste, recycling or vegetative waste.",
+        "Bulk: the last Friday of the month on the east side and the last Thursday on the west side (a few months differ, see the calendar), up to 3 items, for one- to four-family homes. Not bulk: carpeting, electronics, appliances, paint, ashes, dirt, tree trunks, stumps, branches, brush or leaves. Buildings with five or more units should call the DPW.",
+        "E-waste, appliances (white goods) and extra \"a la carte\" bulk items are picked up for a fee by appointment: call the DPW at 908-245-7676 (for example couch $30, mattress or box spring $20, refrigerator $20, washer or dryer $10).",
+        "Vegetative waste is picked up weekly from April 1 to December 31: Thursday on the east side, Friday on the west side. Free leaf bags are given out at the Borough Clerk's Office (110 E Westfield Ave, Mon-Fri 8:30 AM-4:30 PM) while they last.",
+        "When garbage or vegetative waste falls on a holiday, it is picked up on the next scheduled day. Recycling moves to the next calendar day.",
+        "The DPW does not take motor oil or any household hazardous waste: use Union County's programs (ucnj.org/recycling)."
+    ],
+    "sources": [
+        "2026 Curbside Collection Calendar (v. 12-18-2025), checked 2026-11-21: https://www.rosellepark.gov/DocumentCenter/View/334/2026-Collection-Calendar-v-12-18-2025 (from https://www.rosellepark.gov/207/Recycling-Bulk-Waste-Calendar)",
+        "Recycling & Bulk Waste Collection FAQ and fee schedules, checked 2026-11-21: https://www.rosellepark.gov/295/Recycling-Bulk-Waste-Collection and https://www.rosellepark.gov/169/Public-Works",
+        "Lawn bag distribution program (posted 2026-10-29): https://www.rosellepark.gov/CivicAlerts.aspx?AID=81",
+        "Address table: data/reference/union_county_street_list_2025.csv and the US Census address ranges (side of Chestnut St), by tools/build_roselle_park.py"
+    ]
+}
