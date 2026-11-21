@@ -1,0 +1,188 @@
+{
+    "_about": "Which bin search for Monmouth County. category is a category id from counties/monmouth.json; towns.<town id> gives a different category for one town.",
+    "sample": false,
+    "_source": "Aberdeen Township Recycling Flyer (https://www.aberdeennj.org/DocumentCenter/View/296) and the Trash & Recycling page of its 2026 Community Calendar.",
+    "items": [
+        {
+            "name": "Newspaper",
+            "aliases": [
+                "newspapers",
+                "magazine",
+                "magazines",
+                "junk mail",
+                "mail",
+                "office paper"
+            ],
+            "category": "containers"
+        },
+        {
+            "name": "Cardboard box",
+            "aliases": [
+                "cardboard",
+                "box",
+                "amazon box",
+                "paperboard",
+                "cereal box"
+            ],
+            "category": "containers"
+        },
+        {
+            "name": "Plastic bottle (#1 or #2)",
+            "aliases": [
+                "water bottle",
+                "soda bottle",
+                "milk jug",
+                "detergent bottle",
+                "shampoo bottle",
+                "plastic bottle"
+            ],
+            "category": "containers"
+        },
+        {
+            "name": "Glass bottle or jar",
+            "aliases": [
+                "jar",
+                "glass",
+                "glass bottle"
+            ],
+            "category": "containers"
+        },
+        {
+            "name": "Can",
+            "aliases": [
+                "soda can",
+                "aluminum can",
+                "soup can",
+                "tin can"
+            ],
+            "category": "containers"
+        },
+        {
+            "name": "Pizza box",
+            "aliases": [
+                "pizza",
+                "pizza box"
+            ],
+            "category": "garbage"
+        },
+        {
+            "name": "Plastic bag",
+            "aliases": [
+                "plastic bags",
+                "shopping bag"
+            ],
+            "category": "garbage"
+        },
+        {
+            "name": "Styrofoam",
+            "aliases": [
+                "foam",
+                "packing peanuts"
+            ],
+            "category": "garbage"
+        },
+        {
+            "name": "Takeout container",
+            "aliases": [
+                "takeout",
+                "to-go container",
+                "clamshell"
+            ],
+            "category": "garbage"
+        },
+        {
+            "name": "Waxed or coated carton",
+            "aliases": [
+                "juice box",
+                "milk carton",
+                "drink carton"
+            ],
+            "category": "garbage"
+        },
+        {
+            "name": "Plates, cups and utensils",
+            "aliases": [
+                "paper plate",
+                "plastic cup",
+                "plastic fork"
+            ],
+            "category": "garbage"
+        },
+        {
+            "name": "Shredded paper",
+            "aliases": [
+                "shredded"
+            ],
+            "category": "garbage"
+        },
+        {
+            "name": "Pots, pans and dishes",
+            "aliases": [
+                "pot",
+                "pan",
+                "dinnerware",
+                "dishes"
+            ],
+            "category": "garbage"
+        },
+        {
+            "name": "Toys",
+            "aliases": [
+                "toy"
+            ],
+            "category": "garbage"
+        },
+        {
+            "name": "Food scraps",
+            "aliases": [
+                "food",
+                "leftovers"
+            ],
+            "category": "garbage"
+        },
+        {
+            "name": "Furniture",
+            "aliases": [
+                "couch",
+                "chair",
+                "table",
+                "carpet",
+                "mattress"
+            ],
+            "category": "bulk"
+        },
+        {
+            "name": "TV or computer",
+            "aliases": [
+                "tv",
+                "television",
+                "computer",
+                "laptop",
+                "electronics",
+                "microwave"
+            ],
+            "category": "dropoff"
+        },
+        {
+            "name": "Grass clippings",
+            "aliases": [
+                "grass"
+            ],
+            "category": "dropoff"
+        },
+        {
+            "name": "Battery",
+            "aliases": [
+                "batteries"
+            ],
+            "category": "dropoff"
+        },
+        {
+            "name": "Paint can",
+            "aliases": [
+                "paint"
+            ],
+            "category": "dropoff"
+        }
+    ]
+}

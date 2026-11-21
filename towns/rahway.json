@@ -1,0 +1,130 @@
+{
+    "id": "rahway",
+    "name": "Rahway",
+    "other_names": [
+        "City of Rahway",
+        "Rahway City"
+    ],
+    "zip_codes": [
+        "07065"
+    ],
+    "zone_word": "Section",
+    "zones": {
+        "A": "Section A (garbage Monday & Thursday)",
+        "B": "Section B (garbage Tuesday & Friday)"
+    },
+    "holidays": [
+        {
+            "name": "New Year's Day",
+            "month": 1,
+            "day": 1
+        },
+        {
+            "name": "Martin Luther King Jr. Day",
+            "month": 1,
+            "weekday": "Monday",
+            "nth": 3
+        },
+        {
+            "name": "Memorial Day",
+            "month": 5,
+            "weekday": "Monday",
+            "nth": -1
+        },
+        {
+            "name": "Independence Day (observed)",
+            "date": "2026-07-03"
+        },
+        {
+            "name": "Labor Day",
+            "month": 9,
+            "weekday": "Monday",
+            "nth": 1
+        },
+        {
+            "name": "Thanksgiving Day",
+            "month": 11,
+            "weekday": "Thursday",
+            "nth": 4
+        },
+        {
+            "name": "Christmas Day",
+            "month": 12,
+            "day": 25
+        }
+    ],
+    "streams": [
+        {
+            "id": "garbage",
+            "label": "Garbage",
+            "days_by_zone": {
+                "A": [
+                    "Monday",
+                    "Thursday"
+                ],
+                "B": [
+                    "Tuesday",
+                    "Friday"
+                ]
+            },
+            "on_holiday": "skip"
+        },
+        {
+            "id": "containers",
+            "label": "Recycling",
+            "days": [
+                "Wednesday"
+            ],
+            "every_other_week_from_by_zone": {
+                "A": "2026-01-14",
+                "B": "2026-01-07"
+            },
+            "on_holiday": "next_day"
+        },
+        {
+            "id": "bulk",
+            "label": "Bulky Waste",
+            "days_by_zone": {
+                "A": [
+                    "Thursday"
+                ],
+                "B": [
+                    "Friday"
+                ]
+            },
+            "on_holiday": "skip"
+        },
+        {
+            "id": "yard",
+            "label": "Yard Waste",
+            "days_by_zone": {
+                "A": [
+                    "Monday"
+                ],
+                "B": [
+                    "Tuesday"
+                ]
+            },
+            "first_date": "2026-04-06",
+            "last_date": "2026-11-03",
+            "on_holiday": "skip"
+        }
+    ],
+    "checked_through": "2026-12-31",
+    "contact": "Rahway DPW, 732-827-2159",
+    "notes": [
+        "Section A has garbage on Monday and Thursday, Section B on Tuesday and Friday, every week of the year. Put garbage out the night before.",
+        "Garbage containers must be under 44 gallons and 50 lb, with solid handles, no wheels and a lid (or drainage holes), in good condition. Material in improper containers is not collected. Mattresses must be bagged.",
+        "Recycling is every other Wednesday (Sections A and B on alternate weeks). Paper products (books, magazines, junk mail, cardboard, newspaper) go in one container; bottles, cans and plastic containers in a separate one. Recycling mixed with garbage is not collected.",
+        "Bulky waste (furniture, lumber, carpeting) goes out on your second garbage day of the week: Thursday in Section A, Friday in Section B.",
+        "Yard waste is picked up April 6 to November 3, 2026, on your first garbage day of the week (Monday in A, Tuesday in B), separate from garbage: reusable containers of 44 gallons or less or paper bags, under 50 lb, never plastic bags. Tie branches in bundles 4 feet long.",
+        "Leaves are collected November 4 to December 31, 2026, while crews are in your area (leaf hotline 732-827-2063). Do not put leaf piles in the road before November 2, and keep branches out of them. Free leaf bags at the DPW with a valid ID.",
+        "On the 7 holidays (New Year's Day, Martin Luther King Jr. Day, Memorial Day, July 3, Labor Day, Thanksgiving, Christmas) there is no garbage, bulky or yard waste pickup that day; it waits for your next regular day.",
+        "Electronics, white goods (appliances) and scrap metal are picked up by appointment: call the DPW at 732-827-2159, also for missed collections. Household special waste: Union County, 908-654-9889. Used motor oil: Main Street Fire Department, Saturdays 8:30 AM-4:30 PM."
+    ],
+    "sources": [
+        "2026 Residential Garbage & Recycling Program (mailer), checked 2026-11-21: https://www.rahwaynj.gov/DocumentCenter/View/3454/COR_DPW_2026_RecycleSchedule_V2-DIGITAL",
+        "Garbage & Recycling Division and its pages (recycling, bulky waste, yard waste, white goods, motor oil): https://www.cityofrahway.org/213/Garbage-Recycling-Division ; the web page says yard waste starts April 1, the mailer April 6 (mailer used)",
+        "Address table: the county street list's Rahway rows placed on the mailer's section map lined up with the US Census streets, by tools/build_rahway.py"
+    ]
+}

@@ -7,6 +7,7 @@ every week or every other week, and what happens on a holiday.
 
 Nothing in this file talks to MySQL or to Flask, so it can be tested on its own.
 """
+import calendar
 import datetime
 import json
 import os
@@ -98,6 +99,13 @@ def holiday_name(town, date):
 
 def is_scheduled(stream, zone_id, date):
     """Is this stream normally picked up on this date, before holidays are looked at?"""
+    #Some streams have no pattern and are a list of dates, like Linden's grass and leaf
+    #weeks and its four bulk days. The dates are the real pickup days, holidays included.
+    if 'dates_by_zone' in stream:
+        return date.isoformat() in stream['dates_by_zone'].get(zone_id, [])
+    if 'dates' in stream:
+        return date.isoformat() in stream['dates']
+
     if 'days_by_zone' in stream:
         days = stream['days_by_zone'].get(zone_id, [])
     else:
@@ -110,35 +118,69 @@ def is_scheduled(stream, zone_id, date):
         return False
     if 'last_date' in stream and date > parse_date(stream['last_date']):
         return False
+    #Some streams skip months every year, like Roselle's bulk pickup in winter
+    if 'months' in stream and date.month not in stream['months']:
+        return False
+
+    #Some streams run on one week of the month only, like Roselle's bulk pickup on the
+    #first or third Wednesday. 1 is the first one of the month, -1 the last one.
+    if 'nth_in_month_by_zone' in stream:
+        nth = stream['nth_in_month_by_zone'].get(zone_id, [])
+    else:
+        nth = stream.get('nth_in_month')
+    if nth is not None:
+        from_start = (date.day - 1) // 7 + 1
+        days_in_month = calendar.monthrange(date.year, date.month)[1]
+        from_end = -((days_in_month - date.day) // 7 + 1)
+        if from_start not in nth and from_end not in nth:
+            return False
 
     #Every other week: count whole weeks from a date that is known to be a pickup
     #day. Counting from one fixed date keeps the pattern right across New Year.
-    if 'every_other_week_from' in stream:
-        start = sunday_of(parse_date(stream['every_other_week_from']))
+    #Aberdeen's two sections recycle on alternate weeks: one start date for each zone
+    start = stream.get('every_other_week_from')
+    if 'every_other_week_from_by_zone' in stream:
+        if zone_id not in stream['every_other_week_from_by_zone']:
+            return False
+        start = stream['every_other_week_from_by_zone'][zone_id]
+    if start is not None:
+        start = sunday_of(parse_date(start))
         weeks = (sunday_of(date) - start).days // 7
         if weeks % 2 != 0:
             return False
     return True
 
 
-def resolve_pickup(town, stream, date):
+def resolve_pickup(town, stream, date, zone_id=None):
     """Where a regular pickup on `date` really happens, after moved dates and holidays.
 
     Returns (actual_date, why):
         (date, None)                     a normal pickup
         (other_date, "moved")            the town moved this one pickup (moved_dates)
-        (other_date, <holiday name>)     on_holiday "next_day": moved past the holiday
+        (other_date, <holiday name>)     moved_dates for a holiday, or on_holiday "next_day"
         (None, <holiday name>)           on_holiday "skip": no pickup this time
     """
-    moved_to = stream.get('moved_dates', {}).get(date.isoformat())
-    if moved_to is not None:
-        return parse_date(moved_to), 'moved'
     holiday = holiday_name(town, date)
+    moved_to = stream.get('moved_dates', {}).get(date.isoformat())
+    #Linden moves a holiday's pickups differently in each district, some a day earlier
+    if moved_to is None and 'moved_dates_by_zone' in stream:
+        moved_to = stream['moved_dates_by_zone'].get(zone_id, {}).get(date.isoformat())
+        if moved_to is not None and holiday is None:
+            #These moves are all caused by a holiday in the same week: a Monday holiday
+            #pushes Tuesday to Wednesday, Good Friday pulls Thursday back to Wednesday
+            for n in range(7):
+                other = sunday_of(date) + datetime.timedelta(days=n)
+                if holiday_name(town, other):
+                    holiday = holiday_name(town, other)
+                    break
+    if moved_to is not None:
+        return parse_date(moved_to), holiday or 'moved'
     if holiday is None:
         return date, None
     if stream.get('on_holiday') == 'next_day':
         moved = date + datetime.timedelta(days=1)
-        while holiday_name(town, moved) is not None:
+        #Past any holiday right after it, and never onto a Sunday (no town collects then)
+        while holiday_name(town, moved) is not None or day_name(moved) == 'Sunday':
             moved += datetime.timedelta(days=1)
         return moved, holiday
     return None, holiday
@@ -168,7 +210,7 @@ def week_schedule(town, zone_id, today):
             date = week_start + datetime.timedelta(days=n)
             if not is_scheduled(stream, zone_id, date):
                 continue
-            moved, why = resolve_pickup(town, stream, date)
+            moved, why = resolve_pickup(town, stream, date, zone_id)
             if why is None:
                 pickups.add(date)
             #A town sometimes moves a single pickup, the town file lists those
@@ -229,7 +271,7 @@ def upcoming(town, zone_id, today, count=4, max_days=182):
         for stream in town['streams']:
             if not is_scheduled(stream, zone_id, date):
                 continue
-            actual, why = resolve_pickup(town, stream, date)
+            actual, why = resolve_pickup(town, stream, date, zone_id)
             if actual is not None and today <= actual <= last:
                 streams = by_date.setdefault(actual, [])
                 streams.append({'id': stream['id'], 'label': stream['label'], 'moved': why is not None})

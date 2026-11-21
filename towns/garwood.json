@@ -1,0 +1,172 @@
+{
+    "id": "garwood",
+    "name": "Garwood",
+    "other_names": [
+        "Borough of Garwood",
+        "Garwood Borough"
+    ],
+    "zip_codes": [
+        "07027"
+    ],
+    "zone_word": "Side",
+    "zones": {
+        "N": "North Side (garbage Tuesday & Friday)",
+        "S": "South Side (garbage Monday & Thursday)"
+    },
+    "holidays": [
+        {
+            "name": "New Year's Day",
+            "month": 1,
+            "day": 1
+        },
+        {
+            "name": "Presidents' Day",
+            "month": 2,
+            "weekday": "Monday",
+            "nth": 3
+        },
+        {
+            "name": "Good Friday",
+            "date": "2026-04-03"
+        },
+        {
+            "name": "Memorial Day",
+            "month": 5,
+            "weekday": "Monday",
+            "nth": -1
+        },
+        {
+            "name": "Juneteenth",
+            "month": 6,
+            "day": 19
+        },
+        {
+            "name": "Independence Day (observed)",
+            "date": "2026-07-03"
+        },
+        {
+            "name": "Labor Day",
+            "month": 9,
+            "weekday": "Monday",
+            "nth": 1
+        },
+        {
+            "name": "Election Day",
+            "date": "2026-11-03"
+        },
+        {
+            "name": "Thanksgiving Day",
+            "month": 11,
+            "weekday": "Thursday",
+            "nth": 4
+        },
+        {
+            "name": "the day after Thanksgiving",
+            "date": "2026-11-27"
+        },
+        {
+            "name": "Christmas Eve",
+            "date": "2026-12-24"
+        },
+        {
+            "name": "Christmas Day",
+            "month": 12,
+            "day": 25
+        },
+        {
+            "name": "New Year's Eve",
+            "date": "2026-12-31"
+        }
+    ],
+    "streams": [
+        {
+            "id": "garbage",
+            "label": "Garbage",
+            "days_by_zone": {
+                "N": [
+                    "Tuesday",
+                    "Friday"
+                ],
+                "S": [
+                    "Monday",
+                    "Thursday"
+                ]
+            },
+            "moved_dates_by_zone": {
+                "N": {
+                    "2026-11-03": "2026-11-04"
+                },
+                "S": {
+                    "2026-02-16": "2026-02-17"
+                }
+            },
+            "on_holiday": "skip"
+        },
+        {
+            "id": "containers",
+            "label": "Recycling",
+            "days": [
+                "Wednesday"
+            ],
+            "every_other_week_from_by_zone": {
+                "N": "2026-01-14",
+                "S": "2026-01-07"
+            },
+            "on_holiday": "skip"
+        },
+        {
+            "id": "yard",
+            "label": "Grass & Brush",
+            "days": [
+                "Wednesday"
+            ],
+            "first_date": "2026-04-01",
+            "last_date": "2026-10-28",
+            "on_holiday": "skip"
+        },
+        {
+            "id": "leaves",
+            "label": "Leaf Collection Week",
+            "dates_by_zone": {
+                "N": ["2026-11-02", "2026-11-16", "2026-11-30", "2026-12-16"],
+                "S": ["2026-11-09", "2026-11-23", "2026-12-07", "2026-12-16"]
+            }
+        },
+        {
+            "id": "christmas_trees",
+            "label": "Christmas Trees",
+            "days": [
+                "Wednesday"
+            ],
+            "months": [
+                1
+            ],
+            "on_holiday": "skip"
+        },
+        {
+            "id": "bulk",
+            "label": "Bulk (by permit)",
+            "dates": ["2026-04-06", "2026-06-15", "2026-08-17", "2026-10-19"]
+        }
+    ],
+    "checked_through": "2026-12-31",
+    "contact": "Garwood DPW (Borough Hall), 908-789-0710",
+    "notes": [
+        "North Side (north of the railroad, plus all of Willow Ave, New St and the dead ends of Myrtle Ave off New St) has garbage on Tuesday and Friday; South Side on Monday and Thursday.",
+        "Garbage goes in a covered, watertight container of 35 gallons or less, at the curb after 6:00 PM the night before pickup. Garbage with recyclables, brush, leaves, grass or non-household waste in it is not picked up. Take containers back from the curb by 7:00 PM on pickup day.",
+        "Recycling is every other Wednesday, the two sides on alternate weeks (North Side from January 14, South Side from January 7), collected by Grand Sanitation: 908-222-1566 for a missed pickup. Garwood's Recycle Coach app lists what goes in the bin.",
+        "Grass and brush are picked up every Wednesday from April 1 to October 28, never in the recycling can.",
+        "Leaves are collected by side, in biodegradable bags only (bags at the DPW building): North Side the weeks of November 2-6, November 16-20 and November 30-December 4; South Side November 9-13, November 23-27 and December 7-11; the final pickup for both sides is December 16.",
+        "Christmas trees are picked up every Wednesday in January.",
+        "Appliances (white goods) go out on your garbage day: water heaters, dehumidifiers, dishwashers, stoves, refrigerators and freezers (doors removed), washers, dryers, microwaves, toaster ovens, grills (no propane tanks), air conditioners, heavy gym equipment, lawn mowers and snow blowers (oil and gas drained).",
+        "Bulk pickup is by permit only, on April 6, June 15, August 17 and October 19, 2026: $115 at the Clerk's Office, due two weeks before the pickup, up to 750 lb. Mattresses, box springs and pillows must be wrapped in plastic. Not taken: appliances, tires, yard waste, dirt, concrete, paint, hazardous waste, household garbage or recyclables.",
+        "Drop-off recycling behind the DPW building at the end of Willow Ave, 10 AM-2 PM on January 10, March 7, May 9, July 11, September 12 and November 7: electronics, plastic bags and film, concrete, brick and motor oil. Union County takes TVs and monitors too: 908-654-9889.",
+        "Holidays in 2026: no garbage pickup on New Year's Day, Good Friday, Memorial Day, Juneteenth, July 3, Labor Day, Thanksgiving, the day after, Christmas Eve, Christmas and New Year's Eve; it waits for your next garbage day. On Presidents' Day the South Side's pickup moves to Tuesday, February 17; on Election Day the North Side's moves to Wednesday, November 4."
+    ],
+    "sources": [
+        "2026 Schedule for Department of Public Works & Municipal Services (calendar of both sides, pages 2-4), checked 2026-11-21: https://garwoodnj.govoffice3.com/vertical/Sites/%7B7F1088A0-CEC9-4505-80EE-1DF1BF7DFFBD%7D/uploads/2026_DPW_Schedule_of_Services.pdf",
+        "Schedule of Services page (containers, set-out time, Grand Sanitation): https://garwood.org/garbage ; Bulk Permit page: https://garwood.org/bulkpermit ; Public Works: https://garwood.org/dpw",
+        "Borough Code: North Side Tuesday & Friday, South Side Monday & Thursday; containers off the curb by 7:00 PM (https://ecode360.com/10089075, read from search results; the page blocks automated reading)",
+        "Address table: the county street list's Garwood rows placed on their side of the railroad with the US Census streets, the election district deciding where the two disagree, by tools/build_garwood.py; 18 addresses checked in Recycle Coach on 2026-11-21"
+    ]
+}

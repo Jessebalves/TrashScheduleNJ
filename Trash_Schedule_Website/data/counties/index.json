@@ -2,9 +2,19 @@
     "_about": "Which county each town is in. The id is the town id from towns/<town>.json. The county file is counties/<county>.json and the Which bin list is which-bin/<county>.json.",
     "default_county": "union",
     "towns": {
+        "aberdeen": "monmouth",
+        "clark": "union",
+        "cranford": "union",
         "elizabeth": "union",
+        "garwood": "union",
         "hillside": "union",
         "kenilworth": "union",
-        "union": "union"
+        "linden": "union",
+        "rahway": "union",
+        "roselle": "union",
+        "roselle_park": "union",
+        "union": "union",
+        "westfield": "union",
+        "winfield": "union"
     }
 }

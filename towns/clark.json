@@ -1,0 +1,126 @@
+{
+    "id": "clark",
+    "name": "Clark",
+    "other_names": [
+        "Clark Township",
+        "Township of Clark"
+    ],
+    "zip_codes": [
+        "07066"
+    ],
+    "zone_word": "Zone",
+    "zones": {
+        "Z1W1": "Recycling Zone 1 (every other Wednesday), Ward 1 (bulky pickup week 1)",
+        "Z1W2": "Recycling Zone 1 (every other Wednesday), Ward 2 (bulky pickup week 2)",
+        "Z1W3": "Recycling Zone 1 (every other Wednesday), Ward 3 (bulky pickup week 3)",
+        "Z1W4": "Recycling Zone 1 (every other Wednesday), Ward 4 (bulky pickup week 4)",
+        "Z2W3": "Recycling Zone 2 (every other Wednesday), Ward 3 (bulky pickup week 3)",
+        "Z2W4": "Recycling Zone 2 (every other Wednesday), Ward 4 (bulky pickup week 4)"
+    },
+    "holidays": [],
+    "streams": [
+        {
+            "id": "containers",
+            "label": "Recycling",
+            "days": [
+                "Wednesday"
+            ],
+            "every_other_week_from_by_zone": {
+                "Z1W1": "2026-01-14",
+                "Z1W2": "2026-01-14",
+                "Z1W3": "2026-01-14",
+                "Z1W4": "2026-01-14",
+                "Z2W3": "2026-01-07",
+                "Z2W4": "2026-01-07"
+            },
+            "on_holiday": "next_day"
+        },
+        {
+            "id": "bulk",
+            "label": "Bulky Pickup Week",
+            "comment": "The township picks up bulky items during the ward's week; the date is the Monday the week starts (Tuesday 5/26 after Memorial Day)",
+            "dates_by_zone": {
+                "Z1W1": [
+                    "2026-03-02",
+                    "2026-04-06",
+                    "2026-05-04",
+                    "2026-06-01",
+                    "2026-07-06",
+                    "2026-08-03",
+                    "2026-09-07",
+                    "2026-10-05"
+                ],
+                "Z1W2": [
+                    "2026-03-09",
+                    "2026-04-13",
+                    "2026-05-11",
+                    "2026-06-08",
+                    "2026-07-13",
+                    "2026-08-10",
+                    "2026-09-14",
+                    "2026-10-12"
+                ],
+                "Z1W3": [
+                    "2026-03-16",
+                    "2026-04-20",
+                    "2026-05-18",
+                    "2026-06-15",
+                    "2026-07-20",
+                    "2026-08-17",
+                    "2026-09-21",
+                    "2026-10-19"
+                ],
+                "Z1W4": [
+                    "2026-03-23",
+                    "2026-04-27",
+                    "2026-05-26",
+                    "2026-06-22",
+                    "2026-07-27",
+                    "2026-08-24",
+                    "2026-09-28",
+                    "2026-10-26"
+                ],
+                "Z2W3": [
+                    "2026-03-16",
+                    "2026-04-20",
+                    "2026-05-18",
+                    "2026-06-15",
+                    "2026-07-20",
+                    "2026-08-17",
+                    "2026-09-21",
+                    "2026-10-19"
+                ],
+                "Z2W4": [
+                    "2026-03-23",
+                    "2026-04-27",
+                    "2026-05-26",
+                    "2026-06-22",
+                    "2026-07-27",
+                    "2026-08-24",
+                    "2026-09-28",
+                    "2026-10-26"
+                ]
+            }
+        }
+    ],
+    "checked_through": "2026-12-31",
+    "contact": "Clark DPW, 732-428-8402",
+    "important_notes": [
+        "Clark does not pick up household trash. You need a private hauler for your trash, and your hauler sets your trash days. The township picks up recycling and bulky items."
+    ],
+    "notes": [
+        "Private trash haulers that serve Clark: A & S Sanitation Services 908-889-4262, Jerry's (Springfield) 973-376-3222, Republic Services (Midco) 908-561-8380, Interstate Waste Services 908-222-1566, Waste Management 800-633-9096.",
+        "Recycling is picked up every other Wednesday, Zone 1 and Zone 2 on alternate weeks. Glass, aluminum, tin, plastic containers, paper, cardboard and juice and milk cartons all go in one bin (the township provides bins); rinse containers and remove all caps and lids. Break extra cardboard down and stack it in one box or tie it in a bundle next to the bin. Never used pizza boxes, Styrofoam or plastic bags.",
+        "Changes for weather or equipment problems are posted on the township's Facebook and Instagram pages and sent out as News Flashes.",
+        "Bulky items are picked up one week a month from March to October, by ward: Ward 1 the first week, Ward 2 the second, Ward 3 the third, Ward 4 the fourth. Put items out only on the Saturday or Sunday before your ward's week, between the curb and the sidewalk, in boxes, bags or containers. No appointment needed. Items put out too early break a township ordinance.",
+        "Not taken as bulky items: mattresses, box springs, appliances and metal, tires, auto parts, remodeling or demolition debris (no toilets, tubs or sinks), flooring, concrete, dirt, rocks, logs, railroad ties, propane tanks, paint cans. Appliances and scrap metal are picked up by request on the township website.",
+        "Spring clean-up (March 23 to April 27, 2026): leaves, lawn debris and branches cut to 4 feet at most, 1 foot from the curb. Leaves (end of October to mid-December): 1 foot from the curb or in paper leaf bags, no branches. Christmas trees: real trees only, at the curb from early January, picked up by the end of January, with no decorations, lights, bags or stands.",
+        "Motor oil can be dropped at the DPW garage behind the police department (315 Westfield Ave), Monday to Friday 9 AM-1 PM. Clark residents can buy a permit for Westfield's Conservation Center (yard waste and drop-off recycling)."
+    ],
+    "sources": [
+        "No township trash pickup and the haulers: https://www.ourclark.com/176/Trash-Haulers (checked 2026-11-21)",
+        "2026 recycling schedule (updated 12/30/2025): https://www.ourclark.com/175/Recycling-Schedule",
+        "2026 bulky pickup schedule: https://www.ourclark.com/173/Bulky-Pickup ; other DPW services: https://www.ourclark.com/172/Other-DPW-Services ; DPW: https://www.ourclark.com/171/Public-Works",
+        "Recycling zones and wards: the township's online map (Recycling Zones and Ward Boundaries layers), saved in data/reference/clark_zones_wards_2026.geojson; addresses from the county street list on the US Census map, by tools/build_clark.py"
+    ]
+}

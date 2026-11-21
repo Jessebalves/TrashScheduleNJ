@@ -1,0 +1,175 @@
+{
+    "id": "westfield",
+    "name": "Westfield",
+    "other_names": [
+        "Town of Westfield",
+        "Westfield Town"
+    ],
+    "zip_codes": [
+        "07090"
+    ],
+    "zone_word": "Recycling zone",
+    "zones": {
+        "1": "Zone 1, Monday (every other week)",
+        "2": "Zone 2, Tuesday (every other week)",
+        "3": "Zone 3, Wednesday (every other week)",
+        "4": "Zone 4, Thursday (every other week)",
+        "5": "Zone 5, Friday (every other week)",
+        "6": "Zone 6, Monday (every other week)",
+        "7": "Zone 7, Tuesday (every other week)",
+        "8": "Zone 8, Wednesday (every other week)",
+        "9": "Zone 9, Thursday (every other week)",
+        "10": "Zone 10, Friday (every other week)"
+    },
+    "street_names": {
+        "VILLAGE GRN": "VILLAGE GREEN",
+        "WATCHUNG FRK": "WATCHUNG FORK",
+        "NORGATE": "NORGATE RD",
+        "OAK TREE PASS": "OAKTREE PASS",
+        "HAWTHORN DR": "HAWTHORNE DR",
+        "MOUNTAIN AVE E": "MOUNTAIN AVE",
+        "BOYNTON AVENUE": "BOYNTON AVE",
+        "GROVE ST": "W GROVE ST"
+    },
+    "holidays": [
+        {
+            "name": "New Year's Day",
+            "month": 1,
+            "day": 1
+        },
+        {
+            "name": "Memorial Day",
+            "month": 5,
+            "weekday": "Monday",
+            "nth": -1
+        },
+        {
+            "name": "Labor Day",
+            "month": 9,
+            "weekday": "Monday",
+            "nth": 1
+        },
+        {
+            "name": "Thanksgiving Day",
+            "month": 11,
+            "weekday": "Thursday",
+            "nth": 4
+        },
+        {
+            "name": "Christmas Day",
+            "month": 12,
+            "day": 25
+        }
+    ],
+    "streams": [
+        {
+            "id": "containers",
+            "label": "Recycling",
+            "days_by_zone": {
+                "1": [
+                    "Monday"
+                ],
+                "2": [
+                    "Tuesday"
+                ],
+                "3": [
+                    "Wednesday"
+                ],
+                "4": [
+                    "Thursday"
+                ],
+                "5": [
+                    "Friday"
+                ],
+                "6": [
+                    "Monday"
+                ],
+                "7": [
+                    "Tuesday"
+                ],
+                "8": [
+                    "Wednesday"
+                ],
+                "9": [
+                    "Thursday"
+                ],
+                "10": [
+                    "Friday"
+                ]
+            },
+            "every_other_week_from_by_zone": {
+                "1": "2026-01-12",
+                "2": "2026-01-12",
+                "3": "2026-01-12",
+                "4": "2026-01-12",
+                "5": "2026-01-12",
+                "6": "2026-01-05",
+                "7": "2026-01-05",
+                "8": "2026-01-05",
+                "9": "2026-01-05",
+                "10": "2026-01-05"
+            },
+            "comment": "In a holiday week the holiday's zone and every later zone that week move one day later (the 2026 schedule's footnotes).",
+            "moved_dates_by_zone": {
+                "1": {
+                    "2026-09-07": "2026-09-08"
+                },
+                "2": {
+                    "2026-09-08": "2026-09-09"
+                },
+                "3": {
+                    "2026-09-09": "2026-09-10"
+                },
+                "4": {
+                    "2026-01-01": "2026-01-02",
+                    "2026-09-10": "2026-09-11"
+                },
+                "5": {
+                    "2026-01-02": "2026-01-03",
+                    "2026-09-11": "2026-09-12"
+                },
+                "6": {
+                    "2026-05-25": "2026-05-26"
+                },
+                "7": {
+                    "2026-05-26": "2026-05-27"
+                },
+                "8": {
+                    "2026-05-27": "2026-05-28"
+                },
+                "9": {
+                    "2026-05-28": "2026-05-29",
+                    "2026-11-26": "2026-11-27"
+                },
+                "10": {
+                    "2026-05-29": "2026-05-30",
+                    "2026-11-27": "2026-11-28",
+                    "2026-12-25": "2026-12-26"
+                }
+            },
+            "on_holiday": "next_day"
+        }
+    ],
+    "checked_through": "2026-12-31",
+    "contact": "Westfield DPW, 908-789-4040",
+    "important_notes": [
+        "Westfield does not pick up household trash. You need a private hauler for your trash, and your hauler sets your trash days. The town only picks up recycling."
+    ],
+    "notes": [
+        "Recycling is picked up every other week by Interstate Waste Services: Zones 1-5 (north of the railroad) one week and Zones 6-10 (south of it) the next, each zone on its own weekday.",
+        "Put your recycling at the curb by 6 AM on your pickup day, and not before 6 PM the evening before. In an apartment or condo, ask your building superintendent or property manager where it goes.",
+        "Accepted, all mixed in one reusable container: aluminum and tin cans, glass bottles and jars, plastic containers #1 and #2 only, newspapers, magazines, catalogs, junk mail, envelopes, computer and office paper, books (remove hardcover binders), telephone books, dry cardboard and chipboard, milk and juice cartons. Rinse bottles, jars, cans and cartons; paper must be dry and clean.",
+        "Not accepted: plastic bags of any kind, plastics #3-#7, Styrofoam, shredded paper, aerosol cans, batteries, light bulbs, ceramics, mirrors, window glass, Pyrex, plastic cups, plates and wrap, used paper towels.",
+        "When a holiday falls on a pickup day, that zone is picked up the next day and the zones after it that week each move one day later.",
+        "Report a missed pickup to Interstate Waste Services: westfieldrecycles@interstatewaste.com or 908-222-1566, option 8.",
+        "Leaves are collected by the same ten zones, in two passes. Rake them into narrow rows along the curb with a gap at the gutter, at least 10 feet from storm drains, with no other debris. In 2026 the last day to put leaves at the curb is Friday, December 4; collection is expected to end December 12. Up to 10 free biodegradable leaf bags per household at the Conservation Center (bring proof of residency).",
+        "Conservation Center, 1300 Lamberts Mill Rd: recycling drop-off is free for residents (also #5 plastics, electronics, scrap metal, Styrofoam, plastic film, food waste, clothing). Grass and brush need a yearly permit ($60, sold online only); bulk items need a one-time permit ($40-$80 by vehicle, $35 per mattress or box spring). Christmas trees are taken January through March. Fall hours (to December 20): Mon-Fri 9 AM-2:30 PM, Sat-Sun 9 AM-3 PM; closed December 21 to January 1."
+    ],
+    "sources": [
+        "2026 Curbside Recycling Schedule and Information (mailer, 12-11-2025), checked 2026-11-21: https://www.westfieldnj.gov/DocumentCenter/View/9697/Recycling-Schedule-2026 and https://www.westfieldnj.gov/189/Recycling-Schedule (its footnote numbers are one off; the mailer's are right)",
+        "No town trash pickup: Westfield's code requires every generator to contract a private collector (https://ecode360.com/33920815); the town's recycling pages cover recycling only",
+        "Accepted materials: https://www.westfieldnj.gov/485/Acceptable-Non-Acceptable-Materials ; Curbside program: https://www.westfieldnj.gov/187/Curbside-Recycling-Program",
+        "Leaf Collection: https://www.westfieldnj.gov/296/Leaf-Collection ; Conservation Center: https://www.westfieldnj.gov/conservation ; DPW: https://dpw.westfieldnj.gov/",
+        "Address table: the county street list's Westfield rows placed on the Engineering Dept's Recycling Collection Zones map (https://www.westfieldnj.gov/DocumentCenter/View/1759) lined up with the US Census streets, with the zone lines the mailer names (Prospect St, Dudley Ave, N Euclid Ave, E Broad St, S Chestnut St, Rahway Ave, Shackamaxon Dr, Grove St, Montauk Dr, Summit Ave, Clover St, Roger Ave), by tools/build_westfield.py"
+    ]
+}

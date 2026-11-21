@@ -151,6 +151,15 @@ Our system uses Flask on the backend. The easiest way to help is to add your tow
 <!--*Credits to individuals or resources that helped you during the project.*-->
 - elizabethnj.org : https://www.elizabethnj.org/288/Garbage-and-Recycling-Calendar
 - Borough of Kenilworth, 2026 Information Guide DPW : https://kenilworthborough.com/188/Public-Works
+- Aberdeen Township, 2026 Community Calendar (Trash & Recycling Pick-Up Schedule) : https://aberdeennj.org/271/Trash-Recycling
+- Borough of Roselle, 2026/2027 Sanitation/Recycling Schedule (DPW) : https://www.boroughofroselle.com/departments/public_works/index.php
+- Borough of Roselle Park, 2026 Curbside Collection Calendar (DPW) : https://www.rosellepark.gov/207/Recycling-Bulk-Waste-Calendar
+- Township of Cranford, 2026 Curbside Recycling Calendar and Zones (DPW, Giordano) : https://www.cranfordnj.org/2413/Curbside-Recycling
+- Town of Westfield, 2026 Curbside Recycling Schedule and Recycling Collection Zones map : https://www.westfieldnj.gov/189/Recycling-Schedule
+- Township of Clark, 2026 Recycling Schedule, Bulky Pickup and the township's zone and ward map : https://www.ourclark.com/175/Recycling-Schedule
+- City of Rahway, 2026 Residential Garbage & Recycling Program (DPW mailer and section map) : https://www.rahwaynj.gov/DocumentCenter/View/3454/COR_DPW_2026_RecycleSchedule_V2-DIGITAL
+- Borough of Garwood, 2026 Schedule for Department of Public Works & Municipal Services : https://garwood.org/garbage
+- Township of Winfield (Recycling page, Giordano's recycling schedule) and Winfield Mutual Housing Corporation (Services) : https://winfield-nj.org/recycling.html , https://www.winfieldnj.org/services/
 - Union County Board of Elections, "Find your Ward and District" street list : https://ucnj.org/boe/where-do-i-vote/
 - US Census Bureau, TIGER/Line address ranges and town boundaries : https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html
 ---

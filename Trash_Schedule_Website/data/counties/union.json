@@ -16,6 +16,43 @@
         "dropoff":    {"name": "Not curbside",             "color": "#5A615D", "icon": "dropoff", "short": "Drop-off only"}
     },
     "towns": {
+        "winfield": {
+            "categories": {
+                "containers": {"name": "Recycling", "color": "#1D5FBF"},
+                "bulk":       {"name": "Bulky Waste"}
+            }
+        },
+        "garwood": {
+            "categories": {
+                "containers":      {"name": "Recycling", "color": "#1D5FBF"},
+                "yard":            {"name": "Grass & Brush"},
+                "leaves":          {"name": "Leaf Collection Week"},
+                "christmas_trees": {"name": "Christmas Trees", "color": "#0E5E5A", "icon": "leaf", "short": "Seasonal"},
+                "bulk":            {"name": "Bulk (by permit)"}
+            }
+        },
+        "rahway": {
+            "categories": {
+                "containers": {"name": "Recycling", "color": "#1D5FBF"},
+                "bulk":       {"name": "Bulky Waste"}
+            }
+        },
+        "clark": {
+            "categories": {
+                "containers": {"name": "Recycling", "color": "#1D5FBF"},
+                "bulk":       {"name": "Bulky Pickup Week"}
+            }
+        },
+        "westfield": {
+            "categories": {
+                "containers": {"name": "Recycling", "color": "#1D5FBF"}
+            }
+        },
+        "cranford": {
+            "categories": {
+                "containers": {"name": "Recycling", "color": "#1D5FBF"}
+            }
+        },
         "hillside": {
             "categories": {
                 "paper":      {"name": "Newspaper & Cardboard"},
@@ -26,6 +63,22 @@
             "categories": {
                 "paper": {"name": "Cardboard & Paper"},
                 "yard":  {"name": "Vegetative Waste"}
+            }
+        },
+        "linden": {
+            "categories": {
+                "containers":      {"name": "Bottles & Cans", "color": "#1D5FBF"},
+                "paper":           {"name": "Paper & Cardboard"},
+                "bulk":            {"name": "Bulk Trash & Yard Waste"},
+                "yard":            {"name": "Grass"},
+                "leaves":          {"name": "Bagged Leaves"},
+                "christmas_trees": {"name": "Christmas Trees", "color": "#0E5E5A", "icon": "leaf", "short": "Seasonal"}
+            }
+        },
+        "roselle": {
+            "categories": {
+                "containers": {"name": "Bottles, Cans & Paper"},
+                "yard":       {"name": "Vegetative Waste"}
             }
         },
         "union": {

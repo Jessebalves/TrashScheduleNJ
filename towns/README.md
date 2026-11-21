@@ -7,9 +7,16 @@ Every town the website covers has two files:
 | `towns/<town>.json` | The rules: pickup types, days, holidays, notes |
 | `data/<town>.csv` | The addresses: which zone each stretch of each street is in |
 
-A **zone** is whatever the town uses to decide pickup days. Elizabeth uses its six wards, Hillside its two districts, Kenilworth three garbage routes, Union an East and a West zone. A town with one schedule for everybody has a single zone.
+A **zone** is whatever the town uses to decide pickup days. Elizabeth uses its six wards, Hillside its two districts, Kenilworth three garbage routes, Union an East and a West zone. Roselle splits two ways, garbage by the side of Chestnut St and recycling by ward, so its zones are both together (`E3` is east of Chestnut St in the 3rd Ward). Roselle Park splits by the side of Chestnut St too (`E`, `W`), and Chestnut St's business strip has its own zones (`CE`, `CW`). Cranford only collects recycling (its trash is private), in four sections: North and South Side, Monday and Tuesday, every other week. Westfield too collects only recycling, in ten zones (1-5 north of the railroad, 6-10 south), every other week. Clark too collects no trash: recycling in two zones every other Wednesday and bulky items one week a month by ward, so its zones are both together (`Z1W3` is recycling Zone 1 in Ward 3). Rahway's city crews collect everything in two sections: A (garbage Monday and Thursday) and B (Tuesday and Friday), with recycling every other Wednesday. Garwood's DPW splits the borough by the railroad: North Side (garbage Tuesday and Friday, plus Willow Ave, New St and part of Myrtle Ave south of the tracks) and South Side (Monday and Thursday). Aberdeen (Monmouth County) has two sections. Linden has ten DPW collection districts, which are not its wards. A town with one schedule for everybody has a single zone. Winfield is one of them (`ALL`): the township is one housing cooperative, and its address file is simply every street the Census puts inside the township.
 
 After changing either file, run the tests (`python3 -m unittest discover tests`) and then `sudo ./install.sh` to put the change on the server.
+
+## Adding a town: checklist
+
+1. Find the town's own schedule (calendar, guide, service-date list) and write the rules file.
+2. Collect the town's public statements for residents and put them in `notes` (the new design shows them under "From your town"): when to put things out, how to prepare recyclables, bulk and appliance rules and fees, yard waste, leaves and Christmas trees, drop-off yard hours, the holiday rule. Set `contact` to the office residents should call, and list every source with the date it was checked.
+3. Check every date the town publishes (each stream, holidays, moved pickups) against what the website shows, and put them in `tests/test_<town>.py`.
+4. Build `data/<town>.csv` (see "Where to get the addresses"), run the tests, then `sudo ./install.sh`.
 
 ## The rules file
 
@@ -35,6 +42,7 @@ After changing either file, run the tests (`python3 -m unittest discover tests`)
 - `zip_codes` are only used to guess the town when no town name was given.
 - `zone_word` and `zones` are what the visitor is shown ("Garbage route: Monday & Thursday").
 - `street_names` (optional) is for a street that goes by two names: the name on the left is looked up as the name on the right.
+- `important_notes` (optional) are shown first and in bold under "From your town", like Cranford's "Cranford does not pick up household trash".
 - `checked_through` (optional) is the last date the rules were checked against the town's own calendar. After it, the website tells visitors to confirm their days with `contact`.
 
 ### Holidays
@@ -79,9 +87,16 @@ One entry for each row of the table, in the order they should be shown.
 | `days` | Pickup days, the same for the whole town |
 | `days_by_zone` | Pickup days for each zone, use this instead of `days` |
 | `every_other_week_from` | Leave out for every week. For every other week, any one date that is a pickup day |
+| `every_other_week_from_by_zone` | The same for each zone, when zones take turns, like Aberdeen's two sections |
 | `first_date`, `last_date` | Optional. The stream only runs between these dates, like yard waste |
+| `months` | Optional. The stream only runs in these months (1 to 12) every year, like Roselle's bulk pickup, which stops in winter |
+| `nth_in_month` | Optional. Only these weeks of the month: `[1]` is the first of `days` in the month, `[1, 3]` the first and third, `[-1]` the last |
+| `nth_in_month_by_zone` | The same for each zone, use this instead of `nth_in_month` |
 | `moved_dates` | Optional. Single pickups the town moved to another date |
-| `on_holiday` | `"next_day"`: the pickup moves to the day after. `"skip"`: no pickup, it waits for the next regular day |
+| `moved_dates_by_zone` | The same for each zone, when a holiday moves pickups differently in each zone, like Linden (some a day earlier, some a day later). The visitor is told which holiday of that week caused it |
+| `dates` | A list of the exact pickup dates, instead of `days`, for a stream with no pattern, like Linden's grass and leaf weeks. Holidays are not looked at: the dates are the real ones |
+| `dates_by_zone` | The same for each zone, like Linden's four bulk days a year |
+| `on_holiday` | `"next_day"`: the pickup moves to the day after (past any holiday right after it, and never to a Sunday). `"skip"`: no pickup, it waits for the next regular day |
 
 ## The address file
 
@@ -104,4 +119,11 @@ Street names can be written any way (`Elm Street`, `ELM ST`), they are tidied wh
 - `data/reference/union_county_street_list_2025.csv` has every street in all 21 Union County towns with its ward and election district. It was made from the Board of Elections' "Find your Ward and District" PDF with `tools/county_pdf_to_csv.py`. For a town that collects by ward, or that has one schedule for everybody, this list is all that is needed.
 - A town that prints a street list for each zone, like Hillside, needs the county list plus that street list. `tools/build_hillside.py` is the example; it also cuts streets that are split between two zones.
 - A town whose street list is old or incomplete, like Union's 2015 route list, can use the Census map to fill the gaps: `tools/build_union.py` gives unlisted streets the zone of their neighbors and marks listed streets whose neighbors disagree, both as `Needs_Check`.
+- A town that splits on a street, like Roselle (east and west of Chestnut St), can use the Census map to put each house on its side of that street: `tools/build_roselle.py` (and `tools/build_roselle_park.py`, which uses the same line).
+- A town outside Union County has no county street list. `tools/build_aberdeen.py` takes the house numbers from the Census address ranges inside the town's Census boundary, and the zones from streets checked in the town's own lookup (Recycle Coach), Census neighborhood places and the nearest checked streets.
+- Westfield's zones are only on a CAD map hatched with colored dots: `tools/build_westfield.py` lines the map's street lines up with the Census streets and places each house by the dots around it, and by its side of the streets the town names as zone lines.
+- Rahway's two sections are outlines on its mailer's map: `tools/build_rahway.py` reads them out of the PDF and lines them up with the Census streets, the same way as Linden. The gap between the outlines is drawn wider than the dividing streets, so houses on those streets get their section from rules checked in Recycle Coach (`SIDE_RULES`), and the build stops if any Recycle Coach answer listed in the tool no longer matches.
+- Garwood splits on the railroad: `tools/build_garwood.py` puts each house on its side of the Census railroad line (EDGES file), with the county list's election districts as a second opinion that wins where they disagree (Recycle Coach agreed with the districts every time).
+- Clark publishes its zones and wards as layers of an online (ArcGIS) map: they are saved in `data/reference/clark_zones_wards_2026.geojson` and `tools/build_clark.py` looks each house up in them.
+- A town whose zones are only on a map with filled areas, like Linden's DPW collection districts, can use the map itself: `tools/build_linden.py` reads the colored areas out of the PDF, lines the map up with the Census streets by the street names printed on it, and gives each side of each block the zone it is in.
 - A town that only publishes a map of its routes needs the map turned into a street list. `tools/build_kenilworth.py` does this for Kenilworth from US Census street data and is the example to copy.
