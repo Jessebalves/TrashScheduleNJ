@@ -193,6 +193,8 @@ def handle_data():
     if found is None:
         found = addresses.find(town['id'], int(house_number), street, zip_code)
     if found is None:
+        found = addresses.find_other_spelling(town['id'], int(house_number), street, zip_code)
+    if found is None:
         return problem("We could not find that address in %s. Check the house number, street name and ZIP code." % town['name'], 404)
 
     #The page may ask for another date to look at a different week

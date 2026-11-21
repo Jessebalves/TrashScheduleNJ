@@ -143,6 +143,20 @@ class AddressBook:
         sure = whole_street_is_one_zone and not any(row[5] for row in rows)
         return {'zone': nearest[4], 'needs_check': not sure, 'zip': nearest[3]}
 
+    def find_other_spelling(self, town_id, house_number, street, zip_code=''):
+        """find() for a street the table writes with or without its N/S/E/W ("W Grove St" is
+        "GROVE ST" in parts of the county list). Only used when find() found nothing.
+
+        Without the direction first; with one only when exactly one direction has this house number.
+        """
+        words = normalize_street(street).split()
+        if len(words) >= 3 and words[0] in DIRECTIONS.values():
+            return self.find(town_id, house_number, ' '.join(words[1:]), zip_code)
+        name = ' '.join(words)
+        exact = [found for found in (self._exact(self._rows(town_id, d + ' ' + name, zip_code), house_number)
+                                     for d in 'NSEW') if found]
+        return exact[0] if len(exact) == 1 else None
+
     def _rows(self, town_id, name, zip_code):
         """The rows of one street (an already normalized name), only those with a matching ZIP code."""
         rows = self.streets.get((town_id, name), [])
