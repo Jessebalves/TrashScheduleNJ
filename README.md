@@ -156,6 +156,7 @@ Our system uses Flask on the backend. The easiest way to help is to add your tow
 - Township of Cranford, 2026 Curbside Recycling Calendar and Zones (DPW, Giordano) : https://www.cranfordnj.org/2413/Curbside-Recycling
 - Town of Westfield, 2026 Curbside Recycling Schedule and Recycling Collection Zones map : https://www.westfieldnj.gov/189/Recycling-Schedule
 - Township of Clark, 2026 Recycling Schedule, Bulky Pickup and the township's zone and ward map : https://www.ourclark.com/175/Recycling-Schedule
+- City of Rahway, 2026 Residential Garbage & Recycling Program (DPW mailer and section map) : https://www.rahwaynj.gov/DocumentCenter/View/3454/COR_DPW_2026_RecycleSchedule_V2-DIGITAL
 - Union County Board of Elections, "Find your Ward and District" street list : https://ucnj.org/boe/where-do-i-vote/
 - US Census Bureau, TIGER/Line address ranges and town boundaries : https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html
 ---
