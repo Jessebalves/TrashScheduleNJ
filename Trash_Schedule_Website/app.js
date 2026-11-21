@@ -877,7 +877,8 @@ function renderNotes(el, answer){
         return;
     }
     el.innerHTML = '<h2 class="card-title">From your town</h2><ul class="notes-list">'
-        + answer.notes.map(n => '<li>' + esc(n) + '</li>').join("") + '</ul>';
+        + answer.notes.map(n => (answer.important_notes || []).includes(n)
+            ? '<li class="note-important"><strong>' + esc(n) + '</strong></li>' : '<li>' + esc(n) + '</li>').join("") + '</ul>';
     el.hidden = false;
 }
 

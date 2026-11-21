@@ -215,17 +215,19 @@ def handle_data():
             return problem("We can only show weeks up to a year away.")
         shown_date = today + datetime.timedelta(weeks=weeks_away)
 
-    notes = list(town.get('notes', []))
+    #Notes the page shows in bold, first ("Cranford does not pick up household trash")
+    important = list(town.get('important_notes', []))
+    notes = important + list(town.get('notes', []))
     contact = town.get('contact', 'your town')
     if found.get('how') == 'default':
         divider = town['direction_split'].get('divider', 'the dividing street')
-        notes.insert(0, "Your street has an East and a West part and the address did not say which, "
+        notes.insert(len(important), "Your street has an East and a West part and the address did not say which, "
                         "so we used the West part (west of %s). If you live east of %s, look up the address "
                         "with an E in front of the street name. Please confirm your days with %s." % (divider, divider, contact))
     elif found['needs_check']:
-        notes.insert(0, "Your address is on or near the border between two pickup areas, so this is our best match. Please confirm your days with %s." % contact)
+        notes.insert(len(important), "Your address is on or near the border between two pickup areas, so this is our best match. Please confirm your days with %s." % contact)
     if 'checked_through' in town and shown_date > schedule.parse_date(town['checked_through']):
-        notes.insert(0, "We have not checked %s's schedule past %s yet. Please confirm your days with %s." % (
+        notes.insert(len(important), "We have not checked %s's schedule past %s yet. Please confirm your days with %s." % (
             town['name'], town['checked_through'][:4], contact))
 
     #The new design also asks how many of the next pickups to list (1 to 60, 4 if not given)
@@ -247,6 +249,7 @@ def handle_data():
         answer['address']['street'] = found['street'][0] + ' ' + street
     answer['zone'] = {'id': found['zone'], 'word': town['zone_word'], 'label': town['zones'].get(found['zone'], found['zone'])}
     answer['notes'] = notes
+    answer['important_notes'] = important
     return jsonify(answer)
 
 

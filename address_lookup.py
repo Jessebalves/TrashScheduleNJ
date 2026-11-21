@@ -63,7 +63,14 @@ def normalize_street(name):
     #"North Ave" and "South St" keep their names
     if len(words) >= 3:
         words[0] = DIRECTIONS.get(words[0], words[0])
-    words[-1] = STREET_TYPES.get(words[-1], words[-1])
+    #A direction after the street type, as Cranford writes them: "South Avenue West" and
+    #"S Ave W" are the same street
+    if len(words) >= 3 and words[-1] in DIRECTIONS and words[-2] in STREET_TYPES:
+        words[-1] = DIRECTIONS[words[-1]]
+    if len(words) >= 3 and words[-1] in DIRECTIONS.values() and words[-2] in STREET_TYPES:
+        words[-2] = STREET_TYPES[words[-2]]
+    else:
+        words[-1] = STREET_TYPES.get(words[-1], words[-1])
     #"St Georges Ave" and "Saint Georges Ave" (Census), "Mc Kinley St" and "McKinley St"
     #(Google): a name never starts with "Street", so a first ST is Saint
     first = 1 if len(words) >= 3 and words[0] in DIRECTIONS.values() else 0

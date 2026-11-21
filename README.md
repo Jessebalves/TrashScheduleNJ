@@ -153,6 +153,7 @@ Our system uses Flask on the backend. The easiest way to help is to add your tow
 - Aberdeen Township, 2026 Community Calendar (Trash & Recycling Pick-Up Schedule) : https://aberdeennj.org/271/Trash-Recycling
 - Borough of Roselle, 2026/2027 Sanitation/Recycling Schedule (DPW) : https://www.boroughofroselle.com/departments/public_works/index.php
 - Borough of Roselle Park, 2026 Curbside Collection Calendar (DPW) : https://www.rosellepark.gov/207/Recycling-Bulk-Waste-Calendar
+- Township of Cranford, 2026 Curbside Recycling Calendar and Zones (DPW, Giordano) : https://www.cranfordnj.org/2413/Curbside-Recycling
 - Union County Board of Elections, "Find your Ward and District" street list : https://ucnj.org/boe/where-do-i-vote/
 - US Census Bureau, TIGER/Line address ranges and town boundaries : https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html
 ---

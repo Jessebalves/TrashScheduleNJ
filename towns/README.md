@@ -7,7 +7,7 @@ Every town the website covers has two files:
 | `towns/<town>.json` | The rules: pickup types, days, holidays, notes |
 | `data/<town>.csv` | The addresses: which zone each stretch of each street is in |
 
-A **zone** is whatever the town uses to decide pickup days. Elizabeth uses its six wards, Hillside its two districts, Kenilworth three garbage routes, Union an East and a West zone. Roselle splits two ways, garbage by the side of Chestnut St and recycling by ward, so its zones are both together (`E3` is east of Chestnut St in the 3rd Ward). Roselle Park splits by the side of Chestnut St too (`E`, `W`), and Chestnut St's business strip has its own zones (`CE`, `CW`). Aberdeen (Monmouth County) has two sections. Linden has ten DPW collection districts, which are not its wards. A town with one schedule for everybody has a single zone.
+A **zone** is whatever the town uses to decide pickup days. Elizabeth uses its six wards, Hillside its two districts, Kenilworth three garbage routes, Union an East and a West zone. Roselle splits two ways, garbage by the side of Chestnut St and recycling by ward, so its zones are both together (`E3` is east of Chestnut St in the 3rd Ward). Roselle Park splits by the side of Chestnut St too (`E`, `W`), and Chestnut St's business strip has its own zones (`CE`, `CW`). Cranford only collects recycling (its trash is private), in four sections: North and South Side, Monday and Tuesday, every other week. Aberdeen (Monmouth County) has two sections. Linden has ten DPW collection districts, which are not its wards. A town with one schedule for everybody has a single zone.
 
 After changing either file, run the tests (`python3 -m unittest discover tests`) and then `sudo ./install.sh` to put the change on the server.
 
@@ -42,6 +42,7 @@ After changing either file, run the tests (`python3 -m unittest discover tests`)
 - `zip_codes` are only used to guess the town when no town name was given.
 - `zone_word` and `zones` are what the visitor is shown ("Garbage route: Monday & Thursday").
 - `street_names` (optional) is for a street that goes by two names: the name on the left is looked up as the name on the right.
+- `important_notes` (optional) are shown first and in bold under "From your town", like Cranford's "Cranford does not pick up household trash".
 - `checked_through` (optional) is the last date the rules were checked against the town's own calendar. After it, the website tells visitors to confirm their days with `contact`.
 
 ### Holidays

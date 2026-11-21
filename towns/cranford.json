@@ -1,0 +1,137 @@
+{
+    "id": "cranford",
+    "name": "Cranford",
+    "other_names": [
+        "Cranford Township",
+        "Township of Cranford"
+    ],
+    "zip_codes": [
+        "07016"
+    ],
+    "zone_word": "Recycling section",
+    "zones": {
+        "NM": "North Side, Monday (every other week)",
+        "NT": "North Side, Tuesday (every other week)",
+        "SM": "South Side, Monday (every other week)",
+        "ST": "South Side, Tuesday (every other week)"
+    },
+    "street_names": {
+        "CHIPPEWA WAY": "CHIPPAWA WAY",
+        "HEATHERMEAD PL": "HEATHERMEADE PL",
+        "HENRICH ST": "HEINRICH ST",
+        "LA CORTE TER": "LACORTE TER",
+        "LA SALLE AVE": "LASALLE AVE",
+        "MACARTHUR ST": "MACARTHUR AVE",
+        "RALIEGH AVE": "RALEIGH AVE",
+        "WOODSHOLE RD": "WOODS HOLE RD",
+        "EDWARD PL": "EDWARD ST",
+        "BALMIERE RD N": "N BALMIERE RD",
+        "BALMIERE RD S": "S BALMIERE RD",
+        "LENHOME DR N": "N LENHOME DR",
+        "LENHOME DR S": "S LENHOME DR",
+        "E LINCOLN AVE": "LINCOLN AVE E",
+        "W LINCOLN AVE": "LINCOLN AVE W",
+        "WEST END PL": "W END PL",
+        "PARKWAY VILLAGE": "PARKWAY VLG"
+    },
+    "holidays": [
+        {
+            "name": "New Year's Day",
+            "month": 1,
+            "day": 1
+        },
+        {
+            "name": "Memorial Day",
+            "month": 5,
+            "weekday": "Monday",
+            "nth": -1
+        },
+        {
+            "name": "Independence Day",
+            "month": 7,
+            "day": 4
+        },
+        {
+            "name": "Labor Day",
+            "month": 9,
+            "weekday": "Monday",
+            "nth": 1
+        },
+        {
+            "name": "Thanksgiving Day",
+            "month": 11,
+            "weekday": "Thursday",
+            "nth": 4
+        },
+        {
+            "name": "Christmas Day",
+            "month": 12,
+            "day": 25
+        }
+    ],
+    "streams": [
+        {
+            "id": "containers",
+            "label": "Recycling",
+            "days_by_zone": {
+                "NM": [
+                    "Monday"
+                ],
+                "NT": [
+                    "Tuesday"
+                ],
+                "SM": [
+                    "Monday"
+                ],
+                "ST": [
+                    "Tuesday"
+                ]
+            },
+            "every_other_week_from_by_zone": {
+                "NM": "2026-01-05",
+                "NT": "2026-01-05",
+                "SM": "2026-01-12",
+                "ST": "2026-01-12"
+            },
+            "comment": "Giordano is closed on holidays; on the 2026 calendar a Monday holiday moves that Monday's pickup to the Friday. February 23-24 was moved to February 27-28 for a storm.",
+            "moved_dates_by_zone": {
+                "NM": {
+                    "2026-05-25": "2026-05-29"
+                },
+                "SM": {
+                    "2026-02-23": "2026-02-27",
+                    "2026-09-07": "2026-09-11"
+                },
+                "ST": {
+                    "2026-02-24": "2026-02-28"
+                }
+            },
+            "on_holiday": "skip"
+        }
+    ],
+    "checked_through": "2026-12-31",
+    "contact": "Cranford DPW, 908-709-7217",
+    "important_notes": [
+        "Cranford does not pick up household trash. You need a private hauler for your trash, and your hauler sets your trash days. The township only picks up recycling."
+    ],
+    "notes": [
+        "Recycling is picked up every other week by Giordano Company: North Side and South Side take turns, each on its own Monday or Tuesday.",
+        "Accepted: clean plastics #1, #2 and #5, glass, aluminum, cardboard boxes (flattened and tied), newspapers, magazines, soft-cover books and junk mail. Packaging paper must be cut to legal size.",
+        "Not accepted: plastic bags of any kind, plastic storage containers, plastic planters, Styrofoam and packing peanuts, shredded paper, latex gloves and masks, plastic garbage pails.",
+        "Put your recycling at the curb the night before or by 6 AM on pickup day, in a blue bin of 32 to 64 gallons (label any other color \"RECYCLING\"). Giordano does not provide bins; recycling stickers are at the Municipal Building, Community Center and DPW Roundhouse.",
+        "Giordano is closed on holidays. In 2026 a Monday holiday moves that Monday's pickup to the Friday of the same week.",
+        "Report a missed pickup within 24 hours to Giordano, 973-242-2250 ext. 2 (Mon-Fri 8:30 AM-3 PM). Weather and service updates: ext. 1 or gogreengiordano.com.",
+        "Leaves: the DPW picks them up in four leaf zones, announcing each round on the township website and social media. Rake leaves to the gutter line (not into the street or storm drains), with no branches, grass or pumpkins; bagged leaves only in paper bags. The final sweep starts December 14; do not rake leaves to the curb after December 13. Union County collects on county roads (Springfield, Centennial and Walnut Aves, Raritan Rd, Kenilworth Blvd, South Ave).",
+        "Christmas trees are picked up from December 28, 2026 to January 18, 2027, with no bags, lights or decorations (no wreaths or garland). They can also be dropped at the Conservation Center for free.",
+        "The township does not take bulk items. Call a hauler, or use Westfield's bulk drop-off for Cranford residents ($60 a carload).",
+        "Conservation Center, Birchwood Ave between Orange Ave and Cranford Ave: Wednesday 9:20 AM-3:20 PM, Saturday and Sunday 9:20 AM-3:50 PM (closed Sundays in January and February). Grass, brush and branches need a yearly permit ($85); leaves, recycling, metal and electronics are free."
+    ],
+    "sources": [
+        "2026 Curbside Recycling Calendar (Giordano), checked 2026-11-21: https://www.cranfordnj.org/DocumentCenter/View/1324/2026_cranford_calendar_updated_12102025",
+        "2026 Curbside Recycling Zones and Street Names, checked 2026-11-21: https://www.cranfordnj.org/DocumentCenter/View/1325/2026-Curbside-Recycling-Zones-and-Street-Names (typed into data/reference/cranford_2026_sections.csv)",
+        "Curbside Recycling (no township trash pickup, accepted items, missed pickups): https://www.cranfordnj.org/2413/Curbside-Recycling",
+        "Storm move February 2026: https://www.cranfordnj.org/CivicAlerts.aspx?AID=40",
+        "Leaf Collection and Christmas trees: https://www.cranfordnj.org/2850/Leaf-Collection ; Bulk Waste: https://www.cranfordnj.org/2416/Bulk-Waste ; Conservation Center: https://www.cranfordnj.org/2415/Conservation-Center ; Public Works: https://www.cranfordnj.org/2058/Public-Works",
+        "Address table: the county street list's Cranford rows, sections from the township's list, split streets cut at cross streets from the US Census address ranges, by tools/build_cranford.py"
+    ]
+}

@@ -106,10 +106,25 @@ class WebsiteAnswers(unittest.TestCase):
         status, answer = self.ask(house_number='322', street='W Clay Ave', town='Roselle', zip='07203')
         self.assertEqual(status, 404)
 
+    def test_cranford_recycling_only_with_a_bold_note(self):
+        status, answer = self.ask(house_number='20', street='Hollywood Ave', town='Cranford', zip='07016', date='2026-11-16')
+        self.assertEqual((status, answer['zone']['id']), (200, 'ST'))
+        self.assertEqual([s['id'] for s in answer['streams']], ['containers'])
+        self.assertEqual(answer['streams'][0]['pickups'], ['Tuesday'])
+        #The private hauler note comes first and is marked to be shown in bold
+        self.assertEqual(answer['notes'][0], answer['important_notes'][0])
+        self.assertIn('private hauler', answer['important_notes'][0])
+        status, answer = self.ask(house_number='20', street='Hollywood Ave', town='Cranford', date='2027-02-01')
+        self.assertIn('private hauler', answer['notes'][0])
+        self.assertIn('have not checked', answer['notes'][1])
+        #Other towns have none
+        status, answer = self.ask(house_number='142', street='Elm St', town='Elizabeth')
+        self.assertEqual(answer['important_notes'], [])
+
     def test_town_that_is_not_covered(self):
-        status, answer = self.ask(house_number='10', street='Main St', town='Cranford', zip='07016')
+        status, answer = self.ask(house_number='10', street='Main St', town='Westfield', zip='07090')
         self.assertEqual(status, 404)
-        self.assertEqual(answer['error'], 'Cranford is not covered yet. The towns we cover are: Aberdeen, Elizabeth, Hillside, Kenilworth, Linden, Roselle, Roselle Park, Union.')
+        self.assertEqual(answer['error'], 'Westfield is not covered yet. The towns we cover are: Aberdeen, Cranford, Elizabeth, Hillside, Kenilworth, Linden, Roselle, Roselle Park, Union.')
 
     def test_address_that_is_not_found(self):
         status, answer = self.ask(house_number='10', street='No Such Street', town='Elizabeth')
@@ -130,7 +145,7 @@ class WebsiteAnswers(unittest.TestCase):
 
     def test_config_lists_the_towns(self):
         answer = self.client.get('/config').get_json()
-        self.assertEqual(answer['towns'], [{'id': 'aberdeen', 'name': 'Aberdeen'}, {'id': 'elizabeth', 'name': 'Elizabeth'}, {'id': 'hillside', 'name': 'Hillside'},
+        self.assertEqual(answer['towns'], [{'id': 'aberdeen', 'name': 'Aberdeen'}, {'id': 'cranford', 'name': 'Cranford'}, {'id': 'elizabeth', 'name': 'Elizabeth'}, {'id': 'hillside', 'name': 'Hillside'},
                                           {'id': 'kenilworth', 'name': 'Kenilworth'}, {'id': 'linden', 'name': 'Linden'}, {'id': 'roselle', 'name': 'Roselle'}, {'id': 'roselle_park', 'name': 'Roselle Park'},
                                           {'id': 'union', 'name': 'Union'}])
         self.assertEqual(answer['googleMapsKey'], os.environ.get('GOOGLE_MAPS_API_KEY', ''))
