@@ -59,6 +59,7 @@ Flask tutorial (Python backend) : https://www.geeksforgeeks.org/flask-tutorial/-
 
 ## Visuals
 <!--*Insert images or gifs showing your project in action. Consider before/after shots, workflows, or demos.*-->
+<img width="1440" height="779" alt="Screenshot 2026-11-21 at 8 50 53 AM" src="https://github.com/user-attachments/assets/7c2e0dd8-aaa8-4038-a34b-aa1a948fe373" />
 <img width="1096" height="612" alt="traaaash" src="https://github.com/user-attachments/assets/2d44d0b0-54e4-42f0-a29c-56a12c24d355" />
 
 
