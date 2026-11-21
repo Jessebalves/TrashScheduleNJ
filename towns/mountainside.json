@@ -1,0 +1,51 @@
+{
+    "id": "mountainside",
+    "name": "Mountainside",
+    "other_names": [
+        "Borough of Mountainside",
+        "Mountainside Borough"
+    ],
+    "zip_codes": [
+        "07092"
+    ],
+    "zone_word": "Schedule",
+    "zones": {
+        "ALL": "One schedule for all of Mountainside"
+    },
+    "holidays": [],
+    "streams": [
+        {
+            "id": "containers",
+            "label": "Recycling",
+            "days": [
+                "Wednesday"
+            ],
+            "every_other_week_from": "2026-01-14",
+            "on_holiday": "skip"
+        }
+    ],
+    "checked_through": "2027-01-31",
+    "reminders": [
+        {
+            "from": "2027-09-01",
+            "message": "The borough's recycling contract (F. Basso Jr. Rubbish Removal, Resolution 139-2025) runs to January 2028. Confirm Mountainside has extended or replaced its public recycling pickup, then update towns/mountainside.json and this reminder."
+        }
+    ],
+    "contact": "Mountainside DPW, 908-232-2409",
+    "important_notes": [
+        "Mountainside does not pick up household trash: the borough's contractor picks up recycling, and the DPW picks up leaves. Hire a private hauler for your trash; your hauler sets your trash days."
+    ],
+    "notes": [
+        "Recycling is picked up every other Wednesday, the same week for the whole borough. Plastic bottles and containers #1 and #2, mixed paper (newspaper, magazines, junk mail, catalogs, phone books), aluminum and steel cans and lids, glass bottles and jars, cardboard (corrugated, cereal boxes, clean pizza boxes) and milk, juice and food cartons all go in one container. No plastic bags, Styrofoam, dishware, drinking glasses or mirrors, greasy pizza boxes, shredded paper, pots and pans, small appliances or other plastic ware.",
+        "Leaves are picked up from November 2 to December 11, 2026, in brown biodegradable paper bags at the curb (loose or bagged on county roads). Never put bags on or over a storm drain. Pickups may run late because of limits at the disposal site.",
+        "There is no borough bulk or yard waste pickup. Mountainside residents can buy a non-resident permit for the Westfield Conservation Center, which takes certain recyclables, bulk waste and yard debris (westfieldnj.gov/270/Conservation-Center).",
+        "Scrap metal and appliances (doors off refrigerators and freezers, fluids drained from mowers) go free to Union County's monthly drop-offs, April to November, 9 AM-noon: the first Thursday and third Saturday of the month at Rahway River Park (3 Parkway Drive, Rahway) or the Emergency Services Complex (151 Kenilworth Blvd, Cranford). Union County also holds household hazardous waste, shredding and electronics events: 908-654-9890, ucnj.org/recycling.",
+        "Report illegal dumping to the police at 908-232-8100."
+    ],
+    "sources": [
+        "Borough of Mountainside, Recycling page (2026 recycling Wednesdays through January 27, 2027; accepted and not accepted items; Union County scrap metal flyer), checked 2026-11-21: https://www.mountainside-nj.com/department/public-works/recycling/",
+        "2026 Leaf Pickup Program (November 2 - December 11): https://www.mountainside-nj.com/news/posts/2026-leaf-pickup-information/ ; Public Works (DPW 908-232-2409, Westfield Conservation Center shared service): https://www.mountainside-nj.com/department/public-works/",
+        "Trash, checked 2026-11-21: no borough page mentions household trash pickup, Recycle Coach shows no garbage for Mountainside, the borough's collection contract is for recycling only (F. Basso Jr. Rubbish Removal, extended to January 2028, Resolution 139-2025, as reported in council summaries), and private haulers (Republic Services and others) advertise curbside trash service in Mountainside",
+        "Address table: the county street list's Mountainside rows, one schedule for the whole borough"
+    ]
+}

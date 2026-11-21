@@ -28,6 +28,8 @@ def load_towns():
     towns.clear()
     towns.update(schedule.load_towns(os.path.join(HERE, 'towns')))
     print("Towns loaded:", ', '.join(town['name'] for town in towns.values()))
+    for name, message in schedule.due_reminders(towns, datetime.datetime.now(NEW_JERSEY).date()):
+        print("REMINDER (%s): %s" % (name, message))
 
 
 def add_row(municipality, street, low, high, side, zip_code, zone, needs_check):

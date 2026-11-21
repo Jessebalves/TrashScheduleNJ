@@ -159,6 +159,7 @@ Our system uses Flask on the backend. The easiest way to help is to add your tow
 - City of Rahway, 2026 Residential Garbage & Recycling Program (DPW mailer and section map) : https://www.rahwaynj.gov/DocumentCenter/View/3454/COR_DPW_2026_RecycleSchedule_V2-DIGITAL
 - Borough of Garwood, 2026 Schedule for Department of Public Works & Municipal Services : https://garwood.org/garbage
 - Township of Winfield (Recycling page, Giordano's recycling schedule) and Winfield Mutual Housing Corporation (Services) : https://winfield-nj.org/recycling.html , https://www.winfieldnj.org/services/
+- Borough of Mountainside, 2026 Recycling Dates and Leaf Pickup Program : https://www.mountainside-nj.com/department/public-works/recycling/
 - Union County Board of Elections, "Find your Ward and District" street list : https://ucnj.org/boe/where-do-i-vote/
 - US Census Bureau, TIGER/Line address ranges and town boundaries : https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html
 ---

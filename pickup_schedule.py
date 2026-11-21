@@ -60,6 +60,21 @@ def find_town(towns, name='', zip_code=''):
     return matches[0] if len(matches) == 1 else None
 
 
+def due_reminders(towns, today):
+    """Reminders for the site's maintainers that are due on `today`: a list of (town name, message).
+
+    A town file can hold {"reminders": [{"from": "2027-09-01", "message": "..."}]} for something
+    to check again later, like a contract that runs out. Visitors never see them; install.sh,
+    the server's start-up log and the tests print them from the "from" date on.
+    """
+    due = []
+    for town in towns.values():
+        for reminder in town.get('reminders', []):
+            if today >= parse_date(reminder['from']):
+                due.append((town['name'], reminder['message']))
+    return due
+
+
 def holidays_in_year(town, year):
     """Return the town's holidays for one year as a dictionary of date -> name.
 

@@ -268,4 +268,11 @@ else
     echo "Google Maps address search: off (no key). To turn it on: sudo GOOGLE_MAPS_API_KEY='...' ./install.sh"
 fi
 
+#Things a town file asks the maintainers to check again from a given date (towns/README.md)
+reminders="$(cd "$APP_DIR" && "$VENV_DIR/bin/python" -c '
+import datetime, pickup_schedule as s
+for name, message in s.due_reminders(s.load_towns("towns"), datetime.date.today()):
+    print("REMINDER (%s): %s" % (name, message))' || true)"
+[ -n "$reminders" ] && printf '\n%s\n' "$reminders"
+
 printf '\nTrashScheduleNJ is installed and running (%s).\n' "$scheme"

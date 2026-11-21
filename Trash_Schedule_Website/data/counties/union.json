@@ -16,6 +16,11 @@
         "dropoff":    {"name": "Not curbside",             "color": "#5A615D", "icon": "dropoff", "short": "Drop-off only"}
     },
     "towns": {
+        "mountainside": {
+            "categories": {
+                "containers": {"name": "Recycling", "color": "#1D5FBF"}
+            }
+        },
         "winfield": {
             "categories": {
                 "containers": {"name": "Recycling", "color": "#1D5FBF"},
