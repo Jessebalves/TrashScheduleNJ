@@ -1,0 +1,107 @@
+{
+    "id": "springfield",
+    "name": "Springfield",
+    "other_names": [
+        "Township of Springfield",
+        "Springfield Township"
+    ],
+    "zip_codes": [
+        "07081"
+    ],
+    "zone_word": "Side",
+    "zones": {
+        "N": "North side of Mountain Ave (trash Friday; Tuesday & Friday in summer)",
+        "S": "South side of Mountain Ave (trash Thursday; Monday & Thursday in summer)"
+    },
+    "holidays": [
+        {
+            "name": "New Year's Day",
+            "month": 1,
+            "day": 1
+        },
+        {
+            "name": "Thanksgiving Day",
+            "month": 11,
+            "weekday": "Thursday",
+            "nth": 4
+        },
+        {
+            "name": "Christmas Day",
+            "month": 12,
+            "day": 25
+        }
+    ],
+    "streams": [
+        {
+            "id": "garbage",
+            "label": "Trash",
+            "days_by_zone": {
+                "N": [
+                    "Friday"
+                ],
+                "S": [
+                    "Thursday"
+                ]
+            },
+            "seasons": [
+                {
+                    "first_date": "2026-05-26",
+                    "last_date": "2026-09-04",
+                    "days_by_zone": {
+                        "N": [
+                            "Tuesday",
+                            "Friday"
+                        ],
+                        "S": [
+                            "Monday",
+                            "Thursday"
+                        ]
+                    }
+                }
+            ],
+            "on_holiday": "next_day"
+        },
+        {
+            "id": "containers",
+            "label": "Recycling",
+            "days_by_zone": {
+                "N": [
+                    "Friday"
+                ],
+                "S": [
+                    "Thursday"
+                ]
+            },
+            "on_holiday": "next_day"
+        },
+        {
+            "id": "bulk",
+            "label": "Bulk Waste",
+            "dates": [
+                "2026-03-18",
+                "2026-06-10",
+                "2026-09-16",
+                "2026-12-09"
+            ]
+        }
+    ],
+    "checked_through": "2026-12-31",
+    "contact": "Springfield DPW, 973-912-8483",
+    "notes": [
+        "Trash is picked up by Regional Industries (included in your taxes): Thursday on the south side of Mountain Ave, Friday on the north side; from May 26 to September 4, Monday and Thursday on the south side and Tuesday and Friday on the north side. A pickup that falls on a holiday (New Year's Day, Thanksgiving, Christmas) is made the next day. Missed pickup: Regional Industries, 908-436-1966.",
+        "Recycling is weekly, single stream, by Giordano: put the bin out the night before or by 6 AM. Clean plastics #1, #2 and #5, glass, aluminum, cardboard boxes (flattened and tied), newspapers, magazines, soft-cover books and junk mail, all in one bin. No packing peanuts, Styrofoam, shredded paper or plastic bags of any kind; recycling in plastic bags is not collected. Giordano does not provide bins: use a blue bin of 32 to 64 gallons, or label another color \"RECYCLING\". On a holiday, recycling moves to the next day. Missed recycling: Giordano, 973-242-2250 ext. 2 (Monday-Friday 8:30 AM-3:00 PM).",
+        "Bulk waste is picked up on March 18, June 10, September 16 and December 9, 2026: put it out the Tuesday evening before; it is collected over the next two days. No construction debris, electronics or branches, and nothing over 3 x 3 x 12 feet.",
+        "Christmas trees are picked up at the curb through January (no artificial trees, stands, lights, decorations, wire or plastic bags).",
+        "Spring cleanup: in April, DPW crews pick up branches up to 4 inches across, leaves and grass in paper bags or cans; loose debris in the road is not picked up.",
+        "Leaves: November 1 to December 31, 2026. On township roads you may put leaves in the street from October 23, at least 10 feet from a storm drain; only leaves and grass, no branches. Union County picks up leaves on county roads (908-789-3660).",
+        "Recycling Convenience Center at the Springfield Municipal Pool, 44 Morrison Road, open all year (staff Monday, Wednesday and Friday 7:30-11:30 AM): electronics, branches under 4 inches in the proper bin, leaves, grass and soft yard waste, and clean white Styrofoam (no food foam). Free mulch for residents.",
+        "Household hazardous waste, paper shredding (March 21, June 13, October 17 at the pool, 9 AM-1 PM) and county drop-offs: Union County Recycling, 908-654-9889. Dry out latex paint and put it in your trash with the lid off."
+    ],
+    "sources": [
+        "Township of Springfield, 2026 DPW Services Brochure (May 2026 edition; the January one had summer May 27 - August 29), checked 2026-11-21: https://springfield-nj.us/wp-content/uploads/2026/05/2026-DPW-Services-Brochure.pdf ; its make-up Saturday for Thanksgiving trash differs from Recycle Coach (next day, Friday November 27), which is used",
+        "Public Works page (bulk dates, Christmas trees until January 31, leaves from October 23): https://springfield-nj.us/departments/public-works/",
+        "Recycling days: the brochure says to check the website, which does not give them; Thursday (south) and Friday (north) like trash is an assumption, from its holiday note that Thursday's recycling moves to Friday",
+        "Recycle Coach, checked by hand 2026-11-21: 17 addresses on both sides of Mountain Ave (tests/test_springfield.py); Thanksgiving trash on the south side moves to Friday",
+        "Address table: the county street list's Springfield rows put on their side of the Mountain Ave line with the US Census streets, by tools/build_springfield.py"
+    ]
+}

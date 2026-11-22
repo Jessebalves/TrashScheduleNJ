@@ -125,6 +125,10 @@ def is_scheduled(stream, zone_id, date):
         days = stream['days_by_zone'].get(zone_id, [])
     else:
         days = stream['days']
+    #Other days for part of the year, like Springfield's twice-a-week summer trash
+    for season in stream.get('seasons', []):
+        if parse_date(season['first_date']) <= date <= parse_date(season['last_date']):
+            days = season['days_by_zone'].get(zone_id, []) if 'days_by_zone' in season else season['days']
     if day_name(date) not in days:
         return False
 

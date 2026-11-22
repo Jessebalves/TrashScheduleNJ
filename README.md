@@ -160,6 +160,7 @@ Our system uses Flask on the backend. The easiest way to help is to add your tow
 - Borough of Garwood, 2026 Schedule for Department of Public Works & Municipal Services : https://garwood.org/garbage
 - Township of Winfield (Recycling page, Giordano's recycling schedule) and Winfield Mutual Housing Corporation (Services) : https://winfield-nj.org/recycling.html , https://www.winfieldnj.org/services/
 - Borough of Mountainside, 2026 Recycling Dates and Leaf Pickup Program : https://www.mountainside-nj.com/department/public-works/recycling/
+- Township of Springfield, 2026 DPW Services Brochure and Public Works page : https://springfield-nj.us/departments/public-works/
 - Union County Board of Elections, "Find your Ward and District" street list : https://ucnj.org/boe/where-do-i-vote/
 - US Census Bureau, TIGER/Line address ranges and town boundaries : https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html
 ---

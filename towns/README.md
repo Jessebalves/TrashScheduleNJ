@@ -89,6 +89,7 @@ One entry for each row of the table, in the order they should be shown.
 | `days_by_zone` | Pickup days for each zone, use this instead of `days` |
 | `every_other_week_from` | Leave out for every week. For every other week, any one date that is a pickup day |
 | `every_other_week_from_by_zone` | The same for each zone, when zones take turns, like Aberdeen's two sections |
+| `seasons` | Optional. Other days between two dates: `[{"first_date": "2026-05-26", "last_date": "2026-09-04", "days_by_zone": {...}}]` (or `days`), like Springfield's twice-a-week summer trash |
 | `first_date`, `last_date` | Optional. The stream only runs between these dates, like yard waste |
 | `months` | Optional. The stream only runs in these months (1 to 12) every year, like Roselle's bulk pickup, which stops in winter |
 | `nth_in_month` | Optional. Only these weeks of the month: `[1]` is the first of `days` in the month, `[1, 3]` the first and third, `[-1]` the last |
